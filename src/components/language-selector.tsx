@@ -25,7 +25,7 @@ export function LanguageSelector({ variant = "light" }: { variant?: "light" | "d
         <span className="text-base leading-none">{current.flag}</span>
         <span className="tracking-wider">{current.label}</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-52">
+      <DropdownMenuContent align="end" className="max-h-[60vh] w-56 overflow-y-auto">
         <DropdownMenuLabel className="text-xs uppercase tracking-wider text-muted-foreground">
           {t("lang.label")}
         </DropdownMenuLabel>
