@@ -890,10 +890,10 @@ export const SCALE_FACTORS: Record<ScaleMode, number> = {
   industrial: 100,
 };
 
-export function scaleIngredient(qty: string, mode: ScaleMode): string {
+export type MeasurementSystem = "metric" | "imperial";
+
+export function scaleIngredient(qty: string, mode: ScaleMode, system: MeasurementSystem = "metric"): string {
   const factor = SCALE_FACTORS[mode];
-  if (factor === 1) return qty;
-  // Match leading number with optional decimal, then unit (letters)
   const m = qty.match(/^([\d.]+)\s*([a-zA-Z°%]*)\s*(.*)$/);
   if (!m) return qty;
   const num = parseFloat(m[1]);
@@ -902,16 +902,31 @@ export function scaleIngredient(qty: string, mode: ScaleMode): string {
   const rest = m[3];
   let scaled = num * factor;
   let outUnit = unit;
-  // Industrial tier: convert g → kg, ml → L
-  if (mode === "industrial") {
-    if (unit === "g" && scaled >= 1000) {
-      scaled = scaled / 1000;
-      outUnit = "kg";
-    } else if (unit === "ml" && scaled >= 1000) {
-      scaled = scaled / 1000;
-      outUnit = "L";
+
+  // Industrial tier metric rollup: g → kg, ml → L
+  if (mode === "industrial" && system === "metric") {
+    if (unit === "g" && scaled >= 1000) { scaled = scaled / 1000; outUnit = "kg"; }
+    else if (unit === "ml" && scaled >= 1000) { scaled = scaled / 1000; outUnit = "L"; }
+  }
+
+  // Imperial (US) conversions
+  if (system === "imperial") {
+    if (unit === "g") {
+      const oz = scaled / 28.3495;
+      if (oz >= 16) { scaled = oz / 16; outUnit = "lb"; }
+      else { scaled = oz; outUnit = "oz"; }
+    } else if (unit === "kg") {
+      scaled = scaled * 2.20462; outUnit = "lb";
+    } else if (unit === "ml") {
+      scaled = scaled / 29.5735; outUnit = "fl oz";
+    } else if (unit === "L") {
+      scaled = scaled * 1.05669; outUnit = "qt";
+    } else if (unit === "°C") {
+      scaled = scaled * 9 / 5 + 32; outUnit = "°F";
     }
   }
+
+  if (factor === 1 && system === "metric") return qty;
   const display =
     Number.isInteger(scaled) ? scaled.toString() : scaled.toFixed(scaled < 10 ? 2 : 1);
   return `${display}${outUnit ? " " + outUnit : ""}${rest ? " " + rest : ""}`.trim();
