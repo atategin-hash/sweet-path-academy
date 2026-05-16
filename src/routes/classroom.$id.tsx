@@ -174,11 +174,11 @@ function ClassroomPage() {
               </div>
 
               <div className="max-h-[32rem] overflow-y-auto">
-                {course.modules.map((mod, mIdx) => {
+                {course.modules.map((mod: Course["modules"][number], mIdx: number) => {
                   // compute the absolute index offset for lessons in earlier modules
                   const offset = course.modules
                     .slice(0, mIdx)
-                    .reduce((sum, m) => sum + m.lessons.length, 0);
+                    .reduce((sum: number, m: Course["modules"][number]) => sum + m.lessons.length, 0);
 
                   return (
                     <div key={mod.id}>
@@ -189,7 +189,7 @@ function ClassroomPage() {
                         <p className="text-sm font-medium text-foreground">{mod.title}</p>
                       </div>
                       <ol>
-                        {mod.lessons.map((lesson, lIdx) => {
+                        {mod.lessons.map((lesson: Course["modules"][number]["lessons"][number], lIdx: number) => {
                           const absIdx = offset + lIdx;
                           const isActive = absIdx === activeIdx;
                           const isDone = completed.has(absIdx);
