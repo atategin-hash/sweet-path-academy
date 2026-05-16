@@ -73,18 +73,20 @@ function smartReply(prompt: string, tier: Tier): string {
 }
 
 export function AIChatbot() {
+  const { t, lang, region } = useI18n();
   const [open, setOpen] = useState(false);
   const [tier, setTier] = useState<Tier>("home");
-  const [messages, setMessages] = useState<Msg[]>([
-    {
-      role: "assistant",
-      text:
-        "Merhaba! Ben MaisonCrumb AI Pasta Asistanı 🧁. Üretim seviyenize göre size yardım edebilirim — alttaki hızlı sorulardan birini seçin ya da kendi sorunuzu yazın.",
-    },
-  ]);
+  const welcome = t("chatbot.welcome");
+  const QUICK_PROMPTS = [t("chatbot.q1"), t("chatbot.q2"), t("chatbot.q3"), t("chatbot.q4")];
+  const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", text: welcome }]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Reset greeting when language changes
+  useEffect(() => {
+    setMessages([{ role: "assistant", text: t("chatbot.welcome") }]);
+  }, [lang, t]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
