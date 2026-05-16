@@ -108,12 +108,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { StoreProvider } from "@/lib/store";
+import { CartDrawer } from "@/components/cart-drawer";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <StoreProvider>
+        <Outlet />
+        <CartDrawer />
+      </StoreProvider>
     </QueryClientProvider>
   );
 }
