@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { getCourse, type Course } from "@/lib/courses";
-import { Clock, BookOpen, BarChart3, PlayCircle, CheckCircle2, ShoppingBag } from "lucide-react";
+import { Clock, BookOpen, BarChart3, PlayCircle, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/courses/$slug")({
+export const Route = createFileRoute("/course/$id")({
   loader: ({ params }): { course: Course } => {
-    const course = getCourse(params.slug);
+    const course = getCourse(params.id);
     if (!course) throw notFound();
     return { course };
   },
@@ -54,11 +54,15 @@ function CoursePage() {
                 height={640}
                 className="aspect-[5/4] w-full object-cover"
               />
-              <button className="absolute inset-0 flex items-center justify-center bg-foreground/20 opacity-0 transition-opacity hover:opacity-100">
+              <Link
+                to="/classroom/$id"
+                params={{ id: course.slug }}
+                className="absolute inset-0 flex items-center justify-center bg-foreground/20 opacity-0 transition-opacity hover:opacity-100"
+              >
                 <span className="flex items-center gap-2 rounded-full bg-background/95 px-6 py-3 text-sm font-medium text-foreground">
                   <PlayCircle className="h-5 w-5 text-primary" /> Play preview
                 </span>
-              </button>
+              </Link>
             </div>
 
             <div className="mt-10">
@@ -67,7 +71,10 @@ function CoursePage() {
             </div>
 
             <div className="mt-10">
-              <h2 className="font-serif text-3xl text-foreground">Syllabus</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="font-serif text-3xl text-foreground">Curriculum</h2>
+                <span className="text-sm text-muted-foreground">{course.syllabus.length} lessons</span>
+              </div>
               <ul className="mt-6 divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/60 bg-card">
                 {course.syllabus.map((lesson: Course["syllabus"][number], i: number) => (
                   <li key={lesson.title} className="flex items-center gap-4 p-5">
@@ -101,12 +108,21 @@ function CoursePage() {
                 <span className="text-sm text-muted-foreground">/ lifetime access</span>
               </div>
 
-              <button className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5">
-                <ShoppingBag className="h-4 w-4" /> Purchase course
-              </button>
-              <button className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-background text-sm font-medium text-foreground transition-colors hover:bg-accent">
+              <Link
+                to="/classroom/$id"
+                params={{ id: course.slug }}
+                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+              >
+                <ShoppingBag className="h-4 w-4" /> Enroll Now
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/classroom/$id"
+                params={{ id: course.slug }}
+                className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-background text-sm font-medium text-foreground transition-colors hover:bg-accent"
+              >
                 <PlayCircle className="h-4 w-4 text-primary" /> Watch free preview
-              </button>
+              </Link>
 
               <dl className="mt-8 space-y-3 border-t border-border/60 pt-6 text-sm">
                 <Stat icon={<Clock className="h-4 w-4" />} label="Total runtime" value={course.duration} />

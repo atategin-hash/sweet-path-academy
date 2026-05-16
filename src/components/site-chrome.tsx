@@ -1,11 +1,21 @@
-import { Link } from "@tanstack/react-router";
-import { Cake } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Cake, Menu, X } from "lucide-react";
+import { useState } from "react";
+
+const navLinks = [
+  { to: "/" as const, label: "Home", exact: true },
+  { to: "/courses" as const, label: "Courses" },
+  { to: "/dashboard" as const, label: "Dashboard" },
+];
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <Cake className="h-5 w-5" />
           </span>
@@ -13,24 +23,66 @@ export function SiteHeader() {
             Maison<span className="text-primary">Crumb</span>
           </span>
         </Link>
+
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <Link to="/" activeOptions={{ exact: true }} activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">
-            Home
-          </Link>
-          <Link to="/courses" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">
-            Courses
-          </Link>
-          <Link to="/about" activeProps={{ className: "text-foreground" }} className="transition-colors hover:text-foreground">
-            About
-          </Link>
+          {navLinks.map((l) => (
+            <Link
+              key={l.to}
+              to={l.to}
+              activeOptions={l.exact ? { exact: true } : undefined}
+              activeProps={{ className: "text-foreground font-medium" }}
+              className="transition-colors hover:text-foreground"
+            >
+              {l.label}
+            </Link>
+          ))}
         </nav>
-        <Link
-          to="/courses"
-          className="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
-        >
-          Start baking
-        </Link>
+
+        <div className="flex items-center gap-3">
+          <Link
+            to="/courses"
+            className="hidden h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5 md:inline-flex"
+          >
+            Start baking
+          </Link>
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <div className="border-t border-border/60 bg-background md:hidden">
+          <nav className="container mx-auto flex flex-col gap-1 px-6 py-4">
+            {navLinks.map((l) => {
+              const active = l.exact ? pathname === l.to : pathname.startsWith(l.to);
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-lg px-3 py-3 text-sm transition-colors ${
+                    active ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent/50"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
+            <Link
+              to="/courses"
+              onClick={() => setOpen(false)}
+              className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground"
+            >
+              Start baking
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -54,7 +106,7 @@ export function SiteFooter() {
           <p className="font-medium text-foreground">Explore</p>
           <ul className="mt-3 space-y-2 text-muted-foreground">
             <li><Link to="/courses" className="hover:text-foreground">All courses</Link></li>
-            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
+            <li><Link to="/dashboard" className="hover:text-foreground">Dashboard</Link></li>
           </ul>
         </div>
         <div className="text-sm">
