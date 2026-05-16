@@ -766,7 +766,7 @@ const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
   },
 };
 
-const CONTENT_GLOSSARY: Record<Lang, Array<[RegExp, string]>> = {
+const CONTENT_GLOSSARY: Partial<Record<Lang, Array<[RegExp, string]>>> = {
   en: [],
   tr: [
     [/\bAll-purpose flour\b/gi, "Çok amaçlı un"], [/\bBread flour\b/gi, "Ekmek unu"], [/\bSelf-raising flour\b/gi, "Kendinden kabaran un"], [/\bCake flour\b/gi, "Kek unu"], [/\bAlmond flour\b/gi, "Badem unu"],
