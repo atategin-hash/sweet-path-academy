@@ -159,7 +159,7 @@ function ClassroomPage() {
                 <iframe
                   key={active.id}
                   src={embedSrc}
-                  title={active.title}
+                  title={tx(active.title)}
                   className="h-full w-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -170,7 +170,7 @@ function ClassroomPage() {
                   className="group relative block h-full w-full"
                   aria-label="Play lesson"
                 >
-                  <img src={course.image} alt={active.title} className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-95" />
+                  <img src={course.image} alt={tx(active.title)} className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-95" />
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/70 via-black/20 to-black/40">
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/95 shadow-[0_8px_40px_-4px_oklch(0.7_0.15_50/0.6)] ring-4 ring-white/20 transition-transform group-hover:scale-105">
                       <Play className="ml-1 h-8 w-8 text-primary-foreground" fill="currentColor" />
@@ -430,12 +430,12 @@ function RecipePanel({
         <div className="flex flex-wrap gap-3 text-xs text-white/60">
           {r.servings && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Users className="h-3.5 w-3.5 text-primary" /> {t("recipe.servings")}: {r.servings}
+              <Users className="h-3.5 w-3.5 text-primary" /> {t("recipe.servings")}: {tx(r.servings)}
             </span>
           )}
           {r.time && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Timer className="h-3.5 w-3.5 text-primary" /> {t("recipe.time")}: {r.time}
+              <Timer className="h-3.5 w-3.5 text-primary" /> {t("recipe.time")}: {tx(r.time)}
             </span>
           )}
         </div>
@@ -544,6 +544,7 @@ function AudioPicker({
   onChange: (l: Lang) => void;
   label: string;
 }) {
+  const { t } = useI18n();
   const current = LANGUAGES.find((l) => l.code === value)!;
   return (
     <DropdownMenu>
@@ -552,7 +553,7 @@ function AudioPicker({
         <span className="text-sm leading-none">{current.flag}</span>
         <span className="hidden sm:inline">{current.native}</span>
         <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[9px] uppercase text-primary">
-          {value === ORIGINAL_AUDIO ? "Original" : "AI"}
+          {value === ORIGINAL_AUDIO ? t("common.original") : t("common.ai")}
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
@@ -569,7 +570,7 @@ function AudioPicker({
             <span className="text-lg leading-none">{l.flag}</span>
             <span className="flex-1 text-sm">{l.native}</span>
             <span className="text-[10px] uppercase text-muted-foreground">
-              {l.code === ORIGINAL_AUDIO ? "Original" : "AI Dubbed"}
+              {l.code === ORIGINAL_AUDIO ? t("common.original") : t("common.aiDubbed")}
             </span>
           </DropdownMenuItem>
         ))}
