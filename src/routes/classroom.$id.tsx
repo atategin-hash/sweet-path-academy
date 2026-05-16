@@ -300,10 +300,10 @@ function ClassroomPage() {
           <aside className="lg:sticky lg:top-20 lg:self-start">
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur">
               <div className="border-b border-white/10 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-primary">Curriculum</p>
-                <p className="mt-1 font-serif text-lg text-white">{course.title}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-primary">{t("classroom.curriculum")}</p>
+                <p className="mt-1 font-serif text-lg text-white">{tx(course.title)}</p>
                 <div className="mt-3 flex items-center justify-between text-xs text-white/60">
-                  <span>{completed.size} of {lessons.length} lessons</span>
+                  <span>{completed.size} {t("common.of")} {lessons.length} {t("common.lessons")}</span>
                   <span className="font-medium text-white">{pct}%</span>
                 </div>
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -319,8 +319,8 @@ function ClassroomPage() {
                   return (
                     <div key={mod.id}>
                       <div className="sticky top-0 border-b border-white/10 bg-[oklch(0.14_0.01_60)]/90 px-5 py-2.5 backdrop-blur">
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">Module {mIdx + 1}</p>
-                        <p className="text-sm font-medium text-white">{mod.title}</p>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/40">{t("common.module")} {mIdx + 1}</p>
+                        <p className="text-sm font-medium text-white">{tx(mod.title)}</p>
                       </div>
                       <ol>
                         {mod.lessons.map((lesson: Course["modules"][number]["lessons"][number], lIdx: number) => {
@@ -354,7 +354,7 @@ function ClassroomPage() {
                                 </span>
                                 <div className="min-w-0 flex-1">
                                   <p className={`truncate text-sm ${isActive ? "text-white" : isDone ? "text-white/60" : "text-white/85"}`}>
-                                    {lesson.title}
+                                    {tx(lesson.title)}
                                   </p>
                                   <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-white/40">
                                     <Clock className="h-3 w-3" /> {lesson.duration}
@@ -379,7 +379,7 @@ function ClassroomPage() {
               params={{ id: course.id }}
               className="mt-4 block rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
-              View full course details →
+              {t("course.fullDetails")} →
             </Link>
           </aside>
         </div>
