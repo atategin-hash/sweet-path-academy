@@ -1,5 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getCourse, flatLessons, type Course } from "@/lib/courses";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
+import {
+  getCourse,
+  flatLessons,
+  scaleIngredient,
+  TIER_META,
+  type Course,
+  type ScaleMode,
+} from "@/lib/courses";
 import { useMemo, useState } from "react";
 import {
   Play,
@@ -15,10 +24,18 @@ import {
   ChefHat,
   Timer,
   Users,
+  Home,
+  Store,
+  Factory,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+const classroomSearch = z.object({
+  lesson: fallback(z.string(), "").default(""),
+});
+
 export const Route = createFileRoute("/classroom/$id")({
+  validateSearch: zodValidator(classroomSearch),
   loader: ({ params }): { course: Course } => {
     const course = getCourse(params.id);
     if (!course) throw notFound();
@@ -42,8 +59,14 @@ export const Route = createFileRoute("/classroom/$id")({
 
 function ClassroomPage() {
   const { course } = Route.useLoaderData();
+  const { lesson: lessonParam } = Route.useSearch();
   const lessons = useMemo(() => flatLessons(course), [course]);
-  const [activeIdx, setActiveIdx] = useState(0);
+  const initialIdx = useMemo(() => {
+    if (!lessonParam) return 0;
+    const i = lessons.findIndex((l) => l.id === lessonParam);
+    return i >= 0 ? i : 0;
+  }, [lessons, lessonParam]);
+  const [activeIdx, setActiveIdx] = useState(initialIdx);
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const [started, setStarted] = useState(false);
   const active = lessons[activeIdx];
@@ -194,7 +217,7 @@ function ClassroomPage() {
                 </TabsContent>
 
                 <TabsContent value="recipes" className="mt-6">
-                  <RecipePanel lesson={active} />
+                  <RecipePanel lesson={active} defaultMode={course.tier} />
                 </TabsContent>
 
                 <TabsContent value="discussion" className="mt-6 space-y-4">
@@ -315,8 +338,21 @@ function ClassroomPage() {
   );
 }
 
-function RecipePanel({ lesson }: { lesson: ReturnType<typeof flatLessons>[number] }) {
+const SCALE_TABS: { id: ScaleMode; label: string; Icon: typeof Home; hint: string }[] = [
+  { id: "home", label: TIER_META.home.label, Icon: Home, hint: "1× recipe" },
+  { id: "business", label: TIER_META.business.label, Icon: Store, hint: "10× batch" },
+  { id: "industrial", label: TIER_META.industrial.label, Icon: Factory, hint: "100× · kg" },
+];
+
+function RecipePanel({
+  lesson,
+  defaultMode,
+}: {
+  lesson: ReturnType<typeof flatLessons>[number];
+  defaultMode: ScaleMode;
+}) {
   const r = lesson.recipe;
+  const [mode, setMode] = useState<ScaleMode>(defaultMode);
   if (!r) {
     return (
       <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center text-sm text-white/60">
@@ -345,13 +381,48 @@ function RecipePanel({ lesson }: { lesson: ReturnType<typeof flatLessons>[number
         </div>
       </div>
 
+      {/* Tier scaling selector */}
+      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
+        <p className="px-2 pb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
+          Scale for production
+        </p>
+        <div className="grid grid-cols-3 gap-1.5">
+          {SCALE_TABS.map((t) => {
+            const active = mode === t.id;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setMode(t.id)}
+                className={`flex flex-col items-start gap-0.5 rounded-xl px-3 py-2.5 text-left text-xs transition-all ${
+                  active
+                    ? "bg-primary text-primary-foreground shadow-[0_4px_20px_-4px_oklch(0.7_0.15_50/0.6)]"
+                    : "bg-white/[0.02] text-white/70 hover:bg-white/[0.06]"
+                }`}
+              >
+                <span className="inline-flex items-center gap-1.5 font-medium">
+                  <t.Icon className="h-3.5 w-3.5" />
+                  {t.label}
+                </span>
+                <span className={`text-[10px] ${active ? "text-primary-foreground/80" : "text-white/40"}`}>
+                  {t.hint}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div>
-        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">Ingredients</h4>
+        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">
+          Ingredients <span className="text-white/30">· {SCALE_TABS.find((t) => t.id === mode)?.hint}</span>
+        </h4>
         <ul className="grid gap-2 text-sm sm:grid-cols-2">
           {r.ingredients.map((ing, i) => (
-            <li key={i} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5">
+            <li key={i} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 transition-all">
               <span className="text-white/85">{ing.item}</span>
-              <span className="flex-shrink-0 font-medium text-primary">{ing.qty}</span>
+              <span className="flex-shrink-0 font-medium text-primary tabular-nums">
+                {scaleIngredient(ing.qty, mode)}
+              </span>
             </li>
           ))}
         </ul>

@@ -1,15 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, BookOpen, Star } from "lucide-react";
-import { type Course, totalLessons } from "@/lib/courses";
+import { Clock, BookOpen, Star, Flame, Home, Store, Factory } from "lucide-react";
+import { type Course, totalLessons, TIER_META } from "@/lib/courses";
+
+const TIER_ICON = {
+  home: Home,
+  business: Store,
+  industrial: Factory,
+} as const;
 
 export function CourseCard({ course }: { course: Course }) {
+  const TierIcon = TIER_ICON[course.tier];
   return (
     <Link
       to="/course/$id"
       params={{ id: course.id }}
       className="group relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-warm)]"
     >
-      <div className="aspect-[5/4] overflow-hidden">
+      <div className="relative aspect-[5/4] overflow-hidden">
         <img
           src={course.image}
           alt={course.title}
@@ -18,6 +25,17 @@ export function CourseCard({ course }: { course: Course }) {
           height={640}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
+        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
+          <span className="inline-flex items-center gap-1 rounded-full bg-background/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-sm backdrop-blur">
+            <TierIcon className="h-3 w-3 text-primary" />
+            {TIER_META[course.tier].short}
+          </span>
+          {course.trending && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary-foreground shadow-sm">
+              <Flame className="h-3 w-3" /> Trending
+            </span>
+          )}
+        </div>
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-primary">

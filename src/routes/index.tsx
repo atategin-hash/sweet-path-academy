@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { CourseCard } from "@/components/course-card";
+import { CatalogSearch } from "@/components/catalog-search";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
@@ -55,6 +56,13 @@ function HomePage() {
             <p className="mt-6 max-w-lg text-lg text-muted-foreground">
               Hand-picked video lessons from Gino Fabbri, Luca Montersino, Cupcake Jemma, Joshua Weissman and more — organized day-by-day with full recipes, so you actually finish the course.
             </p>
+            <div className="mt-8 max-w-xl">
+              <CatalogSearch placeholder="Type a cake name — Bento, Medovik, Croissant…" />
+              <p className="mt-2 pl-2 text-xs text-muted-foreground">
+                <span className="font-medium text-foreground">Kek ismini yaz, üretime başla.</span>{" "}
+                Jump straight to the lesson and recipe.
+              </p>
+            </div>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/courses"
