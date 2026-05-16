@@ -111,17 +111,20 @@ function RootShell({ children }: { children: React.ReactNode }) {
 import { StoreProvider } from "@/lib/store";
 import { CartDrawer } from "@/components/cart-drawer";
 import { AIChatbot } from "@/components/ai-chatbot";
+import { I18nProvider } from "@/lib/i18n";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <StoreProvider>
-        <Outlet />
-        <CartDrawer />
-        <AIChatbot />
-      </StoreProvider>
+      <I18nProvider>
+        <StoreProvider>
+          <Outlet />
+          <CartDrawer />
+          <AIChatbot />
+        </StoreProvider>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }

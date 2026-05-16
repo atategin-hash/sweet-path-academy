@@ -27,9 +27,22 @@ import {
   Home,
   Store,
   Factory,
+  Headphones,
+  Subtitles as SubtitlesIcon,
+  Wand2,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseFAQDark } from "@/components/course-faq";
+import { useI18n, LANGUAGES, type Lang } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/language-selector";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const classroomSearch = z.object({
   lesson: fallback(z.string(), "").default(""),
@@ -61,6 +74,7 @@ export const Route = createFileRoute("/classroom/$id")({
 function ClassroomPage() {
   const { course } = Route.useLoaderData();
   const { lesson: lessonParam } = Route.useSearch();
+  const { t, tx, lang } = useI18n();
   const lessons = useMemo(() => flatLessons(course), [course]);
   const initialIdx = useMemo(() => {
     if (!lessonParam) return 0;
@@ -70,6 +84,8 @@ function ClassroomPage() {
   const [activeIdx, setActiveIdx] = useState(initialIdx);
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const [started, setStarted] = useState(false);
+  const [audioLang, setAudioLang] = useState<Lang>(lang);
+  const [subLang, setSubLang] = useState<Lang | "off">(lang === "en" ? "off" : lang);
   const active = lessons[activeIdx];
 
   const pct = Math.round((completed.size / lessons.length) * 100);
@@ -104,20 +120,23 @@ function ClassroomPage() {
             to="/dashboard"
             className="inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
           >
-            <ChevronLeft className="h-4 w-4" /> Exit classroom
+            <ChevronLeft className="h-4 w-4" /> {t("classroom.exit")}
           </Link>
           <div className="hidden flex-1 px-8 md:block">
             <div className="flex items-center justify-center gap-3">
-              <span className="text-xs uppercase tracking-wider text-white/50">{course.title}</span>
+              <span className="text-xs uppercase tracking-wider text-white/50">{tx(course.title)}</span>
               <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">
                 <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
               </div>
               <span className="text-xs font-medium text-white/70">{pct}%</span>
             </div>
           </div>
-          <div className="inline-flex items-center gap-2 text-sm text-white/60">
-            <Sparkles className="h-4 w-4 text-primary" />
-            {completed.size}/{lessons.length}
+          <div className="flex items-center gap-3">
+            <LanguageSelector variant="dark" />
+            <div className="hidden items-center gap-2 text-sm text-white/60 sm:inline-flex">
+              <Sparkles className="h-4 w-4 text-primary" />
+              {completed.size}/{lessons.length}
+            </div>
           </div>
         </div>
       </header>
@@ -150,12 +169,24 @@ function ClassroomPage() {
                   </div>
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-6 text-left">
                     <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                      Lesson {activeIdx + 1} · {active.duration}
+                      {t("recipe.step") /* reuse */} {activeIdx + 1} · {active.duration}
                     </p>
-                    <h2 className="mt-1 font-serif text-2xl text-white md:text-3xl">{active.title}</h2>
+                    <h2 className="mt-1 font-serif text-2xl text-white md:text-3xl">{tx(active.title)}</h2>
                   </div>
                 </button>
               )}
+            </div>
+
+            {/* AI Translation control bar */}
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-2.5 pl-4">
+              <p className="inline-flex items-center gap-2 text-xs text-white/60">
+                <span className="text-base leading-none">🤖</span>
+                {t("classroom.aiPowered")}
+              </p>
+              <div className="flex items-center gap-2">
+                <AudioPicker value={audioLang} onChange={setAudioLang} label={t("classroom.audio")} />
+                <SubtitlePicker value={subLang} onChange={setSubLang} label={t("classroom.subtitles")} offLabel={t("classroom.subtitlesOff")} />
+              </div>
             </div>
 
             {/* Lesson header + actions */}
@@ -177,44 +208,53 @@ function ClassroomPage() {
                   }`}
                 >
                   <CheckCircle2 className="h-4 w-4" />
-                  {completed.has(activeIdx) ? "Completed" : "Mark complete"}
+                  {completed.has(activeIdx) ? t("classroom.completed") : t("classroom.markComplete")}
                 </button>
                 <button
                   disabled={activeIdx === lessons.length - 1}
                   onClick={() => pickLesson(Math.min(lessons.length - 1, activeIdx + 1))}
                   className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-40"
                 >
-                  Next lesson →
+                  {t("classroom.next")} →
                 </button>
               </div>
             </div>
+
+            {/* Subtitle simulation strip */}
+            {subLang !== "off" && started && (
+              <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center text-sm italic text-white/80">
+                <span className="mr-2 inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 py-0.5 text-[10px] uppercase tracking-wider not-italic text-primary">
+                  <SubtitlesIcon className="h-3 w-3" /> {LANGUAGES.find((l) => l.code === subLang)?.label}
+                </span>
+                {tx(active.title)} — {t("classroom.aiTranslating")}
+              </div>
+            )}
 
             {/* Tabs */}
             <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
               <Tabs defaultValue="overview" value={undefined} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-white/5">
                   <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <BookOpen className="mr-2 h-4 w-4" /> Overview
+                    <BookOpen className="mr-2 h-4 w-4" /> {t("tabs.overview")}
                   </TabsTrigger>
                   <TabsTrigger value="recipes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <ListChecks className="mr-2 h-4 w-4" /> Recipes
+                    <ListChecks className="mr-2 h-4 w-4" /> {t("tabs.recipes")}
                   </TabsTrigger>
                   <TabsTrigger value="discussion" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <MessageCircle className="mr-2 h-4 w-4" /> Discussion
+                    <MessageCircle className="mr-2 h-4 w-4" /> {t("tabs.discussion")}
                   </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="overview" className="mt-6 space-y-4">
-                  <h3 className="font-serif text-xl text-white">About this lesson</h3>
+                  <h3 className="font-serif text-xl text-white">{tx("About this lesson")}</h3>
                   <p className="text-sm leading-relaxed text-white/70">
-                    {course.description} In this lesson — <span className="text-white">{active.title}</span> — you'll watch the full studio video and follow along with the printable recipe in the Recipes tab.
+                    {tx(course.description)}
                   </p>
-                  <ul className="grid gap-2 text-sm text-white/70 sm:grid-cols-2">
-                    <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Duration {active.duration}</li>
-                    <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Difficulty {course.difficulty}</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Curated free video</li>
-                    <li className="flex items-center gap-2"><Download className="h-4 w-4 text-primary" /> Full written recipe</li>
-                  </ul>
+                  {lang !== "en" && (
+                    <p className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-medium text-primary">
+                      <Wand2 className="h-3 w-3" /> {t("classroom.aiTranslating")}
+                    </p>
+                  )}
                 </TabsContent>
 
                 <TabsContent value="recipes" className="mt-6">
@@ -354,6 +394,7 @@ function RecipePanel({
   lesson: ReturnType<typeof flatLessons>[number];
   defaultMode: ScaleMode;
 }) {
+  const { t, tx, lang } = useI18n();
   const r = lesson.recipe;
   const [mode, setMode] = useState<ScaleMode>(defaultMode);
   if (!r) {
@@ -367,18 +408,25 @@ function RecipePanel({
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-primary">Recipe</p>
-          <h3 className="mt-1 font-serif text-2xl text-white">{lesson.title}</h3>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary">
+            {t("tabs.recipes")}
+            {lang !== "en" && (
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 py-0.5 text-[10px] not-italic text-primary">
+                <Wand2 className="h-3 w-3" /> {t("classroom.aiTranslating")}
+              </span>
+            )}
+          </p>
+          <h3 className="mt-1 font-serif text-2xl text-white">{tx(lesson.title)}</h3>
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-white/60">
           {r.servings && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Users className="h-3.5 w-3.5 text-primary" /> {r.servings}
+              <Users className="h-3.5 w-3.5 text-primary" /> {t("recipe.servings")}: {r.servings}
             </span>
           )}
           {r.time && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Timer className="h-3.5 w-3.5 text-primary" /> {r.time}
+              <Timer className="h-3.5 w-3.5 text-primary" /> {t("recipe.time")}: {r.time}
             </span>
           )}
         </div>
@@ -390,12 +438,12 @@ function RecipePanel({
           Scale for production
         </p>
         <div className="grid grid-cols-3 gap-1.5">
-          {SCALE_TABS.map((t) => {
-            const active = mode === t.id;
+          {SCALE_TABS.map((tab) => {
+            const active = mode === tab.id;
             return (
               <button
-                key={t.id}
-                onClick={() => setMode(t.id)}
+                key={tab.id}
+                onClick={() => setMode(tab.id)}
                 className={`flex flex-col items-start gap-0.5 rounded-xl px-3 py-2.5 text-left text-xs transition-all ${
                   active
                     ? "bg-primary text-primary-foreground shadow-[0_4px_20px_-4px_oklch(0.7_0.15_50/0.6)]"
@@ -403,11 +451,11 @@ function RecipePanel({
                 }`}
               >
                 <span className="inline-flex items-center gap-1.5 font-medium">
-                  <t.Icon className="h-3.5 w-3.5" />
-                  {t.label}
+                  <tab.Icon className="h-3.5 w-3.5" />
+                  {tab.label}
                 </span>
                 <span className={`text-[10px] ${active ? "text-primary-foreground/80" : "text-white/40"}`}>
-                  {t.hint}
+                  {tab.hint}
                 </span>
               </button>
             );
@@ -417,12 +465,12 @@ function RecipePanel({
 
       <div>
         <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">
-          Ingredients <span className="text-white/30">· {SCALE_TABS.find((t) => t.id === mode)?.hint}</span>
+          {t("recipe.ingredients")} <span className="text-white/30">· {SCALE_TABS.find((tab) => tab.id === mode)?.hint}</span>
         </h4>
         <ul className="grid gap-2 text-sm sm:grid-cols-2">
           {r.ingredients.map((ing, i) => (
             <li key={i} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 transition-all">
-              <span className="text-white/85">{ing.item}</span>
+              <span className="text-white/85">{tx(ing.item)}</span>
               <span className="flex-shrink-0 font-medium text-primary tabular-nums">
                 {scaleIngredient(ing.qty, mode)}
               </span>
@@ -432,14 +480,17 @@ function RecipePanel({
       </div>
 
       <div>
-        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">Method</h4>
+        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">{t("recipe.steps")}</h4>
         <ol className="space-y-3">
           {r.steps.map((step, i) => (
             <li key={i} className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                 {i + 1}
               </span>
-              <p className="text-sm leading-relaxed text-white/80">{step}</p>
+              <p className="text-sm leading-relaxed text-white/80">
+                <span className="mr-2 text-xs uppercase tracking-wider text-white/40">{t("recipe.step")} {i + 1}</span>
+                {tx(step)}
+              </p>
             </li>
           ))}
         </ol>
@@ -472,3 +523,96 @@ const sampleComments = [
   { name: "Olivia R.", text: "The mise en place breakdown finally clicked for me. Best 5 minutes I've spent in the kitchen." },
   { name: "Daniel K.", text: "Loved the slow-motion piping shots — so much easier to follow than other tutorials." },
 ];
+
+const ORIGINAL_AUDIO: Lang = "en";
+
+function AudioPicker({
+  value,
+  onChange,
+  label,
+}: {
+  value: Lang;
+  onChange: (l: Lang) => void;
+  label: string;
+}) {
+  const current = LANGUAGES.find((l) => l.code === value)!;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">
+        <Headphones className="h-3.5 w-3.5 text-primary" />
+        <span className="text-sm leading-none">{current.flag}</span>
+        <span className="hidden sm:inline">{current.native}</span>
+        <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[9px] uppercase text-primary">
+          {value === ORIGINAL_AUDIO ? "Original" : "AI"}
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel className="text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {LANGUAGES.map((l) => (
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => onChange(l.code)}
+            className="flex cursor-pointer items-center gap-2"
+          >
+            <span className="text-lg leading-none">{l.flag}</span>
+            <span className="flex-1 text-sm">{l.native}</span>
+            <span className="text-[10px] uppercase text-muted-foreground">
+              {l.code === ORIGINAL_AUDIO ? "Original" : "AI Dubbed"}
+            </span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function SubtitlePicker({
+  value,
+  onChange,
+  label,
+  offLabel,
+}: {
+  value: Lang | "off";
+  onChange: (v: Lang | "off") => void;
+  label: string;
+  offLabel: string;
+}) {
+  const current = value === "off" ? null : LANGUAGES.find((l) => l.code === value)!;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">
+        <SubtitlesIcon className="h-3.5 w-3.5 text-primary" />
+        {current ? (
+          <>
+            <span className="text-sm leading-none">{current.flag}</span>
+            <span className="hidden sm:inline">CC · {current.label}</span>
+          </>
+        ) : (
+          <span>CC {offLabel}</span>
+        )}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-52">
+        <DropdownMenuLabel className="text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => onChange("off")} className="cursor-pointer text-sm">
+          {offLabel}
+        </DropdownMenuItem>
+        {LANGUAGES.map((l) => (
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => onChange(l.code)}
+            className="flex cursor-pointer items-center gap-2"
+          >
+            <span className="text-lg leading-none">{l.flag}</span>
+            <span className="flex-1 text-sm">{l.native}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

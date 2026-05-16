@@ -2,17 +2,20 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Cake, Menu, X, ShoppingBag } from "lucide-react";
 import { useState } from "react";
 import { useStore } from "@/lib/store";
-
-const navLinks = [
-  { to: "/" as const, label: "Home", exact: true },
-  { to: "/courses" as const, label: "Courses" },
-  { to: "/dashboard" as const, label: "Dashboard" },
-];
+import { useI18n } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/language-selector";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { cart, openDrawer } = useStore();
+  const { t } = useI18n();
+
+  const navLinks = [
+    { to: "/" as const, label: t("nav.home"), exact: true },
+    { to: "/courses" as const, label: t("nav.courses") },
+    { to: "/dashboard" as const, label: t("nav.dashboard") },
+  ];
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -41,9 +44,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageSelector />
           <button
             onClick={openDrawer}
-            aria-label="Open cart"
+            aria-label={t("cart.open")}
             className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-accent"
           >
             <ShoppingBag className="h-4 w-4" />
@@ -57,7 +61,7 @@ export function SiteHeader() {
             to="/courses"
             className="hidden h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5 md:inline-flex"
           >
-            Start baking
+            {t("nav.start")}
           </Link>
           <button
             onClick={() => setOpen((o) => !o)}
@@ -92,7 +96,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground"
             >
-              Start baking
+              {t("nav.start")}
             </Link>
           </nav>
         </div>
