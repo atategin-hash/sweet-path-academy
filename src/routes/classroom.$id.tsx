@@ -417,8 +417,7 @@ function RecipePanel({
   isFree?: boolean;
   courseId?: string;
 }) {
-  const { t, tx, lang } = useI18n();
-  const r = lesson.recipe;
+  const { t, tx, lang, region } = useI18n();
   const [mode, setMode] = useState<ScaleMode>(defaultMode);
   if (!r) {
     return (
