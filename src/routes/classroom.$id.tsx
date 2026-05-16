@@ -33,6 +33,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseFAQDark } from "@/components/course-faq";
 import { CountdownUpsell, NextStepTeaser, LockedChefSecrets } from "@/components/free-upsell";
+import { CertificateSection } from "@/components/certificate-section";
 import { useI18n, LANGUAGES, type Lang } from "@/lib/i18n";
 import { LanguageSelector } from "@/components/language-selector";
 import {
@@ -386,6 +387,15 @@ function ClassroomPage() {
             </Link>
           </aside>
         </div>
+
+        {!course.free && (
+          <CertificateSection
+            courseTitle={course.title}
+            unlocked={completed.size >= lessons.length}
+            totalLessons={lessons.length}
+            completedCount={completed.size}
+          />
+        )}
 
         <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
