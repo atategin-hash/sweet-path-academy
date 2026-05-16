@@ -927,15 +927,44 @@ type I18nCtx = {
 
 const Ctx = createContext<I18nCtx | null>(null);
 const STORAGE_KEY = "maisoncrumb.lang";
+const DEFAULT_LANG: Lang = "en";
+const EMPTY_DICT: Dict = Object.freeze({});
 
-const ALL_CODES: Lang[] = ["en","fr","es","de","it","pt","tr","ru","ar","ja","ko","zh"];
+const ALL_CODES: Lang[] = LANGUAGES.map((language) => language.code);
+const LANGUAGE_ALIASES: Record<string, Lang> = {
+  cn: "zh",
+  "zh-cn": "zh",
+  "zh-hans": "zh",
+  jp: "ja",
+  kr: "ko",
+};
 
 function normalizeLang(input?: string | null): Lang | null {
   if (!input) return null;
-  const lower = input.toLowerCase();
+  const lower = input.toLowerCase().trim().replace("_", "-");
+  if (LANGUAGE_ALIASES[lower]) return LANGUAGE_ALIASES[lower];
   if (lower.startsWith("zh")) return "zh";
   const code = lower.slice(0, 2) as Lang;
   return ALL_CODES.includes(code) ? code : null;
+}
+
+function applyGlossary(text: string, glossary: Array<[RegExp, string]>): string {
+  return glossary.reduce((out, [re, val]) => out.replace(re, val), text);
+}
+
+function translateContent(text: string, lang: Lang): string {
+  const content = CONTENT_TRANSLATIONS[lang] ?? EMPTY_DICT;
+  const direct = content[text];
+  if (direct) return direct;
+
+  const englishContent = CONTENT_TRANSLATIONS.en ?? EMPTY_DICT;
+  const englishFallback = englishContent[text];
+  if (lang === DEFAULT_LANG) return englishFallback ?? text;
+
+  const glossary = CONTENT_GLOSSARY[lang] ?? [];
+  if (englishFallback) return applyGlossary(englishFallback, glossary);
+
+  return applyGlossary(text, glossary);
 }
 
 function detectLanguage(): Lang {
@@ -948,7 +977,7 @@ function detectLanguage(): Lang {
 export function I18nProvider({ children }: { children: ReactNode }) {
   // Start with "en" on both server and first client paint to avoid hydration
   // mismatch, then sync to the persisted/browser preference right after mount.
-  const [lang, setLangState] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
 
   useEffect(() => {
     const detected = detectLanguage();
@@ -962,17 +991,16 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, [lang]);
 
   const setLang = useCallback((nextLang: Lang) => {
-    setLangState(nextLang);
+    const normalized = normalizeLang(nextLang) ?? DEFAULT_LANG;
+    setLangState(normalized);
     if (typeof window !== "undefined") {
-      window.localStorage.setItem(STORAGE_KEY, nextLang);
+      window.localStorage.setItem(STORAGE_KEY, normalized);
     }
   }, []);
 
   const value = useMemo<I18nCtx>(() => {
-    const dict = DICTIONARIES[lang] ?? {};
+    const dict = DICTIONARIES[lang] ?? EMPTY_DICT;
     const fallback = DICTIONARIES.en;
-    const content = CONTENT_TRANSLATIONS[lang] ?? {};
-    const glossary = CONTENT_GLOSSARY[lang] ?? [];
     return {
       lang,
       setLang,
@@ -981,11 +1009,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       t: (key: string) => dict[key] ?? fallback[key] ?? key,
       tx: (text?: string | null) => {
         if (!text) return "";
-        if (lang === "en") return text;
-        if (content[text]) return content[text];
-        let out = text;
-        for (const [re, val] of glossary) out = out.replace(re, val);
-        return out;
+        return translateContent(text, lang);
       },
     };
   }, [lang, setLang]);
