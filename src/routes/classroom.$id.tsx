@@ -390,10 +390,10 @@ function ClassroomPage() {
   );
 }
 
-const SCALE_TABS: { id: ScaleMode; label: string; Icon: typeof Home; hint: string }[] = [
-  { id: "home", label: TIER_META.home.label, Icon: Home, hint: "1× recipe" },
-  { id: "business", label: TIER_META.business.label, Icon: Store, hint: "10× batch" },
-  { id: "industrial", label: TIER_META.industrial.label, Icon: Factory, hint: "100× · kg" },
+const SCALE_TABS: { id: ScaleMode; labelKey: string; Icon: typeof Home; hintKey: string }[] = [
+  { id: "home", labelKey: "tier.home.label", Icon: Home, hintKey: "scale.home.hint" },
+  { id: "business", labelKey: "tier.business.label", Icon: Store, hintKey: "scale.business.hint" },
+  { id: "industrial", labelKey: "tier.industrial.label", Icon: Factory, hintKey: "scale.industrial.hint" },
 ];
 
 function RecipePanel({
@@ -409,7 +409,7 @@ function RecipePanel({
   if (!r) {
     return (
       <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 text-center text-sm text-white/60">
-        Recipe coming soon for this lesson.
+        {t("classroom.noRecipe")}
       </div>
     );
   }
@@ -444,7 +444,7 @@ function RecipePanel({
       {/* Tier scaling selector */}
       <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-3">
         <p className="px-2 pb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
-          Scale for production
+          {t("classroom.scale")}
         </p>
         <div className="grid grid-cols-3 gap-1.5">
           {SCALE_TABS.map((tab) => {
@@ -461,10 +461,10 @@ function RecipePanel({
               >
                 <span className="inline-flex items-center gap-1.5 font-medium">
                   <tab.Icon className="h-3.5 w-3.5" />
-                  {tab.label}
+                  {t(tab.labelKey)}
                 </span>
                 <span className={`text-[10px] ${active ? "text-primary-foreground/80" : "text-white/40"}`}>
-                  {tab.hint}
+                  {t(tab.hintKey)}
                 </span>
               </button>
             );
