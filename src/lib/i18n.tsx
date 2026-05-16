@@ -166,6 +166,32 @@ const DICTIONARIES: Record<Lang, Dict> = {
     "updates.yesterday": "Yesterday",
     "updates.daysAgo": "2 days ago",
 
+    "home.eyebrow": "Curated free masterclasses",
+    "home.heroTitle1": "Learn pastry from the",
+    "home.heroTitleEm": "world's best free resources",
+    "home.heroTitle2": ", curated into structured masterclasses.",
+    "home.heroLead": "Hand-picked video lessons from Gino Fabbri, Luca Montersino, Cupcake Jemma, Joshua Weissman and more — organized day-by-day with full recipes, so you actually finish the course.",
+    "home.searchPlaceholder": "Type a cake name — Bento, Medovik, Croissant…",
+    "home.searchHint": "Jump straight to the lesson and recipe.",
+    "home.browse": "Browse the masterclasses",
+    "home.preview": "Watch a preview",
+    "home.ratingFrom": "from 12,000+ students worldwide",
+    "home.certified": "Certified courses",
+    "home.lifetime": "Lifetime access",
+    "home.featured.eyebrow": "Featured courses",
+    "home.featured.title": "Hand-picked classes for your next bake.",
+    "home.featured.viewAll": "View all courses →",
+    "home.testimonials.eyebrow": "Loved by bakers",
+    "home.testimonials.title": "Stories from our kitchen community.",
+    "home.cta.title": "Your apron is waiting.",
+    "home.cta.lead": "Join thousands of bakers learning a new recipe every week. Start with a single course or go all-in.",
+    "home.cta.action": "Explore the catalog",
+    "free.eyebrow": "Free Masterclasses",
+    "free.title": "Free Masterclasses — Start Baking Now",
+    "free.lead": "Stream the full lessons instantly. No sign-up, no credit card — just press play.",
+    "free.badge": "Free",
+    "free.watchNow": "Watch now →",
+
     "lang.label": "Language",
   },
   tr: {
@@ -323,6 +349,32 @@ const DICTIONARIES: Record<Lang, Dict> = {
     "updates.yesterday": "Dün",
     "updates.daysAgo": "2 gün önce",
 
+    "home.eyebrow": "Seçilmiş ücretsiz uzmanlık dersleri",
+    "home.heroTitle1": "Pastacılığı",
+    "home.heroTitleEm": "dünyanın en iyi ücretsiz kaynaklarından",
+    "home.heroTitle2": " — yapılandırılmış masterclass'lar halinde öğrenin.",
+    "home.heroLead": "Gino Fabbri, Luca Montersino, Cupcake Jemma, Joshua Weissman ve daha fazlasından seçilmiş video dersler — günlük plan ve tam reçetelerle, kursu gerçekten bitirmeniz için.",
+    "home.searchPlaceholder": "Bir kek adı yazın — Bento, Medovik, Kruvasan…",
+    "home.searchHint": "Doğrudan derse ve reçeteye atlayın.",
+    "home.browse": "Masterclass'lara göz at",
+    "home.preview": "Önizlemeyi izle",
+    "home.ratingFrom": "Dünya çapında 12.000+ öğrenciden",
+    "home.certified": "Sertifikalı kurslar",
+    "home.lifetime": "Ömür boyu erişim",
+    "home.featured.eyebrow": "Öne çıkan kurslar",
+    "home.featured.title": "Sonraki pişirmeniz için seçilmiş dersler.",
+    "home.featured.viewAll": "Tüm kursları gör →",
+    "home.testimonials.eyebrow": "Pastacıların sevgisi",
+    "home.testimonials.title": "Mutfak topluluğumuzdan hikayeler.",
+    "home.cta.title": "Önlüğünüz sizi bekliyor.",
+    "home.cta.lead": "Her hafta yeni bir tarif öğrenen binlerce pastacıya katılın. Tek kursla başlayın ya da tüm akademiye geçin.",
+    "home.cta.action": "Kataloğu keşfet",
+    "free.eyebrow": "Ücretsiz Uzmanlık Dersleri",
+    "free.title": "Ücretsiz Masterclass'lar — Hemen Pişirmeye Başla",
+    "free.lead": "Tam dersleri anında izleyin. Kayıt yok, kredi kartı yok — sadece oynat.",
+    "free.badge": "Ücretsiz",
+    "free.watchNow": "Şimdi izle →",
+
     "lang.label": "Dil",
   },
   ru: {
@@ -479,6 +531,32 @@ const DICTIONARIES: Record<Lang, Dict> = {
     "updates.today": "Сегодня · 2 часа назад",
     "updates.yesterday": "Вчера",
     "updates.daysAgo": "2 дня назад",
+
+    "home.eyebrow": "Подборка бесплатных мастер-классов",
+    "home.heroTitle1": "Учитесь кондитерскому делу по",
+    "home.heroTitleEm": "лучшим бесплатным ресурсам мира",
+    "home.heroTitle2": ", собранным в структурированные мастер-классы.",
+    "home.heroLead": "Отобранные видеоуроки от Джино Фаббри, Луки Монтерсино, Cupcake Jemma, Джошуа Вайсмана и других — по дням и с полными рецептами, чтобы вы действительно завершили курс.",
+    "home.searchPlaceholder": "Введите название — Бенто, Медовик, Круассан…",
+    "home.searchHint": "Сразу перейдите к уроку и рецепту.",
+    "home.browse": "Смотреть мастер-классы",
+    "home.preview": "Смотреть превью",
+    "home.ratingFrom": "от 12 000+ студентов по всему миру",
+    "home.certified": "Сертифицированные курсы",
+    "home.lifetime": "Пожизненный доступ",
+    "home.featured.eyebrow": "Избранные курсы",
+    "home.featured.title": "Отобранные классы для вашей следующей выпечки.",
+    "home.featured.viewAll": "Все курсы →",
+    "home.testimonials.eyebrow": "Любимы пекарями",
+    "home.testimonials.title": "Истории нашего кулинарного сообщества.",
+    "home.cta.title": "Ваш фартук уже ждёт.",
+    "home.cta.lead": "Присоединяйтесь к тысячам пекарей, изучающих новый рецепт каждую неделю. Начните с одного курса или возьмите всё сразу.",
+    "home.cta.action": "Открыть каталог",
+    "free.eyebrow": "Бесплатные мастер-классы",
+    "free.title": "Бесплатные мастер-классы — начните печь сейчас",
+    "free.lead": "Смотрите полные уроки мгновенно. Без регистрации и карты — просто нажмите воспроизведение.",
+    "free.badge": "Бесплатно",
+    "free.watchNow": "Смотреть →",
 
     "lang.label": "Язык",
   },
@@ -710,7 +788,14 @@ function detectLanguage(): Lang {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => detectLanguage());
+  // Start with "en" on both server and first client paint to avoid hydration
+  // mismatch, then sync to the persisted/browser preference right after mount.
+  const [lang, setLangState] = useState<Lang>("en");
+
+  useEffect(() => {
+    const detected = detectLanguage();
+    setLangState((curr) => (curr === detected ? curr : detected));
+  }, []);
 
   useEffect(() => {
     if (typeof document === "undefined") return;

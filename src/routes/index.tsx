@@ -6,6 +6,7 @@ import { FreeMasterclasses } from "@/components/free-masterclasses";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,6 +39,7 @@ const testimonials = [
 ];
 
 function HomePage() {
+  const { t, tx } = useI18n();
   const featured = courses.slice(0, 3);
 
   return (
@@ -49,19 +51,18 @@ function HomePage() {
         <div className="container mx-auto grid gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Curated free masterclasses
+              <Sparkles className="h-3.5 w-3.5" /> {t("home.eyebrow")}
             </span>
             <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              Learn pastry from the <em className="italic text-primary">world's best free resources</em>, curated into structured masterclasses.
+              {t("home.heroTitle1")} <em className="italic text-primary">{t("home.heroTitleEm")}</em>{t("home.heroTitle2")}
             </h1>
             <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-              Hand-picked video lessons from Gino Fabbri, Luca Montersino, Cupcake Jemma, Joshua Weissman and more — organized day-by-day with full recipes, so you actually finish the course.
+              {t("home.heroLead")}
             </p>
             <div className="mt-8 max-w-xl">
-              <CatalogSearch placeholder="Type a cake name — Bento, Medovik, Croissant…" />
+              <CatalogSearch placeholder={t("home.searchPlaceholder")} />
               <p className="mt-2 pl-2 text-xs text-muted-foreground">
-                <span className="font-medium text-foreground">Kek ismini yaz, üretime başla.</span>{" "}
-                Jump straight to the lesson and recipe.
+                {t("home.searchHint")}
               </p>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -69,14 +70,14 @@ function HomePage() {
                 to="/courses"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
               >
-                Browse the masterclasses
+                {t("home.browse")}
               </Link>
               <Link
                 to="/course/$id"
                 params={{ id: "italian-pastries" }}
                 className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
-                <PlayCircle className="h-4 w-4 text-primary" /> Watch a preview
+                <PlayCircle className="h-4 w-4 text-primary" /> {t("home.preview")}
               </Link>
             </div>
             <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
@@ -86,7 +87,7 @@ function HomePage() {
                 ))}
                 <span className="ml-2 font-medium text-foreground">4.9</span>
               </div>
-              <span>from 12,000+ students worldwide</span>
+              <span>{t("home.ratingFrom")}</span>
             </div>
           </div>
 
@@ -106,8 +107,8 @@ function HomePage() {
                 <Award className="h-5 w-5 text-primary" />
               </span>
               <div className="text-sm">
-                <p className="font-medium text-foreground">Certified courses</p>
-                <p className="text-muted-foreground">Lifetime access</p>
+                <p className="font-medium text-foreground">{t("home.certified")}</p>
+                <p className="text-muted-foreground">{t("home.lifetime")}</p>
               </div>
             </div>
           </div>
@@ -120,13 +121,13 @@ function HomePage() {
       <section className="container mx-auto px-6 py-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">Featured courses</p>
+            <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
             <h2 className="mt-2 max-w-xl font-serif text-4xl text-foreground md:text-5xl">
-              Hand-picked classes for your next bake.
+              {t("home.featured.title")}
             </h2>
           </div>
           <Link to="/courses" className="text-sm font-medium text-primary hover:underline">
-            View all courses →
+            {t("home.featured.viewAll")}
           </Link>
         </div>
 
@@ -141,25 +142,25 @@ function HomePage() {
       <section className="bg-muted/40 py-20">
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">Loved by bakers</p>
+            <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
             <h2 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
-              Stories from our kitchen community.
+              {t("home.testimonials.title")}
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
-              <figure key={t.name} className="flex flex-col rounded-3xl border border-border/60 bg-card p-8 shadow-[var(--shadow-soft)]">
+            {testimonials.map((tm) => (
+              <figure key={tm.name} className="flex flex-col rounded-3xl border border-border/60 bg-card p-8 shadow-[var(--shadow-soft)]">
                 <div className="flex gap-0.5">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                 </div>
                 <blockquote className="mt-5 flex-1 font-serif text-lg leading-relaxed text-foreground">
-                  "{t.quote}"
+                  "{tx(tm.quote)}"
                 </blockquote>
                 <figcaption className="mt-6 border-t border-border/60 pt-4 text-sm">
-                  <p className="font-medium text-foreground">{t.name}</p>
-                  <p className="text-muted-foreground">{t.role}</p>
+                  <p className="font-medium text-foreground">{tm.name}</p>
+                  <p className="text-muted-foreground">{tx(tm.role)}</p>
                 </figcaption>
               </figure>
             ))}
@@ -172,16 +173,16 @@ function HomePage() {
         <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16" style={{ background: "var(--gradient-warm)" }}>
           <div className="relative max-w-2xl">
             <h2 className="font-serif text-4xl text-foreground md:text-5xl">
-              Your apron is waiting.
+              {t("home.cta.title")}
             </h2>
             <p className="mt-4 text-lg text-foreground/80">
-              Join thousands of bakers learning a new recipe every week. Start with a single course or go all-in.
+              {t("home.cta.lead")}
             </p>
             <Link
               to="/courses"
               className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
             >
-              Explore the catalog
+              {t("home.cta.action")}
             </Link>
           </div>
         </div>
