@@ -585,7 +585,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
   },
 };
 
-const CONTENT_TRANSLATIONS: Record<Lang, Dict> = {
+const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
   en: {
     "Bu keki ne kadar saklayabilirim?": "How long can I store this cake?",
     "Ev şartlarında buzdolabında hava almayan kapta 3–4 gün, derin dondurucuda dilim halinde 1 aya kadar saklayabilirsiniz.": "At home, store it in an airtight container in the refrigerator for 3–4 days, or freeze sliced portions for up to 1 month.",
