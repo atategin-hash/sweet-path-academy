@@ -204,7 +204,7 @@ export function AIChatbot() {
           {messages.length <= 1 && (
             <div className="border-t border-border/60 bg-muted/30 px-5 py-3">
               <p className="mb-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Hızlı sorular
+                {t("chatbot.quick")}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {QUICK_PROMPTS.map((q) => (
