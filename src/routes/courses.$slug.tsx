@@ -69,7 +69,7 @@ function CoursePage() {
             <div className="mt-10">
               <h2 className="font-serif text-3xl text-foreground">Syllabus</h2>
               <ul className="mt-6 divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/60 bg-card">
-                {course.syllabus.map((lesson, i) => (
+                {course.syllabus.map((lesson: Course["syllabus"][number], i: number) => (
                   <li key={lesson.title} className="flex items-center gap-4 p-5">
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-medium text-primary">
                       {String(i + 1).padStart(2, "0")}
