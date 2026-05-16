@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseFAQDark } from "@/components/course-faq";
+import { CountdownUpsell, NextStepTeaser, LockedChefSecrets } from "@/components/free-upsell";
 import { useI18n, LANGUAGES, type Lang } from "@/lib/i18n";
 import { LanguageSelector } from "@/components/language-selector";
 import {
