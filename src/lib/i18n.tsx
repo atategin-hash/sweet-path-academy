@@ -194,6 +194,7 @@ const DICTIONARIES: Record<Lang, Dict> = {
 
     "lang.label": "Language",
   },
+  tr: {
     "nav.home": "Ana Sayfa",
     "nav.courses": "Kurslar",
     "nav.dashboard": "Panel",
