@@ -17,7 +17,19 @@ export const LANGUAGES: { code: Lang; label: string; flag: string; native: strin
   { code: "tr", label: "TR", flag: "🇹🇷", native: "Türkçe" },
   { code: "ru", label: "RU", flag: "🇷🇺", native: "Русский" },
   { code: "ar", label: "AR", flag: "🇸🇦", native: "العربية" },
-  { code: "ja", label: "JP", flag: "
+  { code: "ja", label: "JP", flag: "🇯🇵", native: "日本語" },
+  { code: "ko", label: "KR", flag: "🇰🇷", native: "한국어" },
+  { code: "zh", label: "ZH", flag: "🇨🇳", native: "中文" },
+];
+
+export const MEASUREMENT_SYSTEM: Record<Lang, MeasurementSystem> = {
+  en: "imperial",
+  fr: "metric", es: "metric", de: "metric", it: "metric", pt: "metric",
+  tr: "metric", ru: "metric", ar: "metric",
+  ja: "metric", ko: "metric", zh: "metric",
+};
+
+export const RTL_LANGS: Lang[] = ["ar"];
 
 type Dict = Record<string, string>;
 
