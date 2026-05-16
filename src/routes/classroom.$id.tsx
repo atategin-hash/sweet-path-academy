@@ -474,7 +474,7 @@ function RecipePanel({
 
       <div>
         <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">
-          {t("recipe.ingredients")} <span className="text-white/30">· {SCALE_TABS.find((tab) => tab.id === mode)?.hint}</span>
+          {t("recipe.ingredients")} <span className="text-white/30">· {t(SCALE_TABS.find((tab) => tab.id === mode)?.hintKey ?? "")}</span>
         </h4>
         <ul className="grid gap-2 text-sm sm:grid-cols-2">
           {r.ingredients.map((ing, i) => (
@@ -508,11 +508,11 @@ function RecipePanel({
       {r.chefNotes && r.chefNotes.length > 0 && (
         <div className="rounded-2xl border border-primary/30 bg-primary/10 p-5">
           <div className="mb-2 flex items-center gap-2 text-sm font-medium text-primary">
-            <ChefHat className="h-4 w-4" /> Chef's notes
+            <ChefHat className="h-4 w-4" /> {t("recipe.chefNotes")}
           </div>
           <ul className="space-y-1.5 text-sm text-white/80">
             {r.chefNotes.map((n, i) => (
-              <li key={i}>— {n}</li>
+              <li key={i}>— {tx(n)}</li>
             ))}
           </ul>
         </div>
@@ -522,7 +522,7 @@ function RecipePanel({
         onClick={() => window.print()}
         className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-sm text-white transition-colors hover:bg-white/10"
       >
-        <Download className="h-4 w-4" /> Print recipe card
+        <Download className="h-4 w-4" /> {t("classroom.print")}
       </button>
     </div>
   );
