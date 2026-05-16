@@ -481,6 +481,7 @@ export const courses: Course[] = [
     difficulty: "Intermediate",
     tier: "home",
     trending: true,
+    free: true,
     keywords: ["medovik", "honey cake", "russian", "sour cream", "trending"],
     duration: "1h 15m",
     price: 39,
