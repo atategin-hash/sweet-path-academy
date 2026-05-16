@@ -33,7 +33,7 @@ export const RTL_LANGS: Lang[] = ["ar"];
 
 type Dict = Record<string, string>;
 
-const DICTIONARIES: Record<Lang, Dict> = {
+const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
   en: {
     "nav.home": "Home",
     "nav.courses": "Courses",
