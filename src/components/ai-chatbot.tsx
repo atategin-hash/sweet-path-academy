@@ -131,9 +131,9 @@ export function AIChatbot() {
                 <ChefHat className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <SheetTitle className="font-serif text-xl">AI Pasta Asistanı</SheetTitle>
+                <SheetTitle className="font-serif text-xl">{t("chatbot.title")}</SheetTitle>
                 <SheetDescription className="text-xs">
-                  Üretim seviyenize özel yanıtlar
+                  {t("chatbot.subtitle")} · {region === "imperial" ? "°F / oz / lb" : "°C / g / kg"}
                 </SheetDescription>
               </div>
               <button
