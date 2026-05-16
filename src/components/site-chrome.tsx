@@ -66,7 +66,7 @@ export function SiteHeader() {
           <button
             onClick={() => setOpen((o) => !o)}
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground md:hidden"
-            aria-label="Toggle menu"
+            aria-label={t("nav.toggle")}
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -106,6 +106,7 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
+  const { t } = useI18n();
   return (
     <footer className="border-t border-border/60 bg-muted/40">
       <div className="container mx-auto grid gap-8 px-6 py-12 md:grid-cols-3">
@@ -117,24 +118,24 @@ export function SiteFooter() {
             <span className="font-serif text-lg">MaisonCrumb</span>
           </div>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-            An online academy for cake and pastry lovers — taught by world-class chefs.
+            {t("footer.about")}
           </p>
         </div>
         <div className="text-sm">
-          <p className="font-medium text-foreground">Explore</p>
+          <p className="font-medium text-foreground">{t("footer.explore")}</p>
           <ul className="mt-3 space-y-2 text-muted-foreground">
-            <li><Link to="/courses" className="hover:text-foreground">All courses</Link></li>
-            <li><Link to="/dashboard" className="hover:text-foreground">Dashboard</Link></li>
+            <li><Link to="/courses" className="hover:text-foreground">{t("footer.allCourses")}</Link></li>
+            <li><Link to="/dashboard" className="hover:text-foreground">{t("nav.dashboard")}</Link></li>
           </ul>
         </div>
         <div className="text-sm">
-          <p className="font-medium text-foreground">Contact</p>
+          <p className="font-medium text-foreground">{t("footer.contact")}</p>
           <p className="mt-3 text-muted-foreground">hello@maisoncrumb.com</p>
           <p className="text-muted-foreground">Paris · Tokyo · New York</p>
         </div>
       </div>
       <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} MaisonCrumb Academy. Baked with love.
+        © {new Date().getFullYear()} MaisonCrumb Academy. {t("footer.made")}
       </div>
     </footer>
   );
