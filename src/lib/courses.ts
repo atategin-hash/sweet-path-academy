@@ -90,6 +90,7 @@ export const courses: Course[] = [
     image: pastries,
     difficulty: "Intermediate",
     tier: "business",
+    free: true,
     keywords: ["italian", "frolla", "caprese", "cheesecake", "croissant", "occhi di bue"],
     duration: "4h 30m",
     price: 89,
