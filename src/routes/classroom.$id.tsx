@@ -1,5 +1,14 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { getCourse, flatLessons, type Course } from "@/lib/courses";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
+import {
+  getCourse,
+  flatLessons,
+  scaleIngredient,
+  TIER_META,
+  type Course,
+  type ScaleMode,
+} from "@/lib/courses";
 import { useMemo, useState } from "react";
 import {
   Play,
@@ -15,10 +24,18 @@ import {
   ChefHat,
   Timer,
   Users,
+  Home,
+  Store,
+  Factory,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+const classroomSearch = z.object({
+  lesson: fallback(z.string(), "").default(""),
+});
+
 export const Route = createFileRoute("/classroom/$id")({
+  validateSearch: zodValidator(classroomSearch),
   loader: ({ params }): { course: Course } => {
     const course = getCourse(params.id);
     if (!course) throw notFound();
@@ -42,8 +59,14 @@ export const Route = createFileRoute("/classroom/$id")({
 
 function ClassroomPage() {
   const { course } = Route.useLoaderData();
+  const { lesson: lessonParam } = Route.useSearch();
   const lessons = useMemo(() => flatLessons(course), [course]);
-  const [activeIdx, setActiveIdx] = useState(0);
+  const initialIdx = useMemo(() => {
+    if (!lessonParam) return 0;
+    const i = lessons.findIndex((l) => l.id === lessonParam);
+    return i >= 0 ? i : 0;
+  }, [lessons, lessonParam]);
+  const [activeIdx, setActiveIdx] = useState(initialIdx);
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const [started, setStarted] = useState(false);
   const active = lessons[activeIdx];
