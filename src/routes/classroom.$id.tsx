@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseFAQDark } from "@/components/course-faq";
+import { CountdownUpsell, NextStepTeaser, LockedChefSecrets } from "@/components/free-upsell";
 import { useI18n, LANGUAGES, type Lang } from "@/lib/i18n";
 import { LanguageSelector } from "@/components/language-selector";
 import {
@@ -90,6 +91,7 @@ function ClassroomPage() {
   const [started, setStarted] = useState(false);
   const [audioLang, setAudioLang] = useState<Lang>(lang);
   const [subLang, setSubLang] = useState<Lang | "off">(lang === "en" ? "off" : lang);
+  const [teaserOpen, setTeaserOpen] = useState(false);
   const active = lessons[activeIdx];
 
   useEffect(() => {
@@ -115,6 +117,7 @@ function ClassroomPage() {
       next.add(activeIdx);
       return next;
     });
+    if (course.free) setTeaserOpen(true);
   };
 
   const isYouTube = active.videoUrl.includes("youtube.com/embed");
@@ -267,7 +270,7 @@ function ClassroomPage() {
                 </TabsContent>
 
                 <TabsContent value="recipes" className="mt-6">
-                  <RecipePanel lesson={active} defaultMode={course.tier} />
+                  <RecipePanel lesson={active} defaultMode={course.tier} isFree={!!course.free} courseId={course.id} />
                 </TabsContent>
 
                 <TabsContent value="discussion" className="mt-6 space-y-4">
@@ -386,6 +389,13 @@ function ClassroomPage() {
 
         <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
+
+      {course.free && (
+        <>
+          <CountdownUpsell courseId={course.id} />
+          <NextStepTeaser open={teaserOpen} onClose={() => setTeaserOpen(false)} courseId={course.id} />
+        </>
+      )}
     </div>
   );
 }
@@ -399,9 +409,13 @@ const SCALE_TABS: { id: ScaleMode; labelKey: string; Icon: typeof Home; hintKey:
 function RecipePanel({
   lesson,
   defaultMode,
+  isFree,
+  courseId,
 }: {
   lesson: ReturnType<typeof flatLessons>[number];
   defaultMode: ScaleMode;
+  isFree?: boolean;
+  courseId?: string;
 }) {
   const { t, tx, lang } = useI18n();
   const r = lesson.recipe;
@@ -517,6 +531,8 @@ function RecipePanel({
           </ul>
         </div>
       )}
+
+      {isFree && courseId && <LockedChefSecrets courseId={courseId} />}
 
       <button
         onClick={() => window.print()}

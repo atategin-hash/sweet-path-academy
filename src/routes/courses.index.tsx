@@ -6,6 +6,7 @@ import { Home, Store, Factory, Layers } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { CourseCard } from "@/components/course-card";
 import { CatalogSearch } from "@/components/catalog-search";
+import { FreeMasterclasses } from "@/components/free-masterclasses";
 import { courses, type Tier } from "@/lib/courses";
 import { useI18n } from "@/lib/i18n";
 
@@ -111,6 +112,7 @@ function CoursesPage() {
           </div>
         )}
       </section>
+      <FreeMasterclasses />
       <SiteFooter />
     </div>
   );

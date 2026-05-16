@@ -65,6 +65,7 @@ export type Course = {
   difficulty: Difficulty;
   tier: Tier;
   trending?: boolean;
+  free?: boolean;
   keywords?: string[];
   duration: string;
   price: number;
@@ -89,6 +90,7 @@ export const courses: Course[] = [
     image: pastries,
     difficulty: "Intermediate",
     tier: "business",
+    free: true,
     keywords: ["italian", "frolla", "caprese", "cheesecake", "croissant", "occhi di bue"],
     duration: "4h 30m",
     price: 89,
@@ -363,6 +365,7 @@ export const courses: Course[] = [
     difficulty: "Beginner",
     tier: "home",
     trending: true,
+    free: true,
     keywords: ["cinnamon rolls", "yeast", "bread", "mise en place", "bakery basics"],
     duration: "1h 30m",
     price: 49,
@@ -478,6 +481,7 @@ export const courses: Course[] = [
     difficulty: "Intermediate",
     tier: "home",
     trending: true,
+    free: true,
     keywords: ["medovik", "honey cake", "russian", "sour cream", "trending"],
     duration: "1h 15m",
     price: 39,

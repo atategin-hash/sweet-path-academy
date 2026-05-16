@@ -1,12 +1,21 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { SiteHeader } from "@/components/site-chrome";
 import { useStore } from "@/lib/store";
 import { getCourse } from "@/lib/courses";
-import { useState } from "react";
-import { CreditCard, Lock, CheckCircle2, ArrowRight, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CreditCard, Lock, CheckCircle2, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 import { Confetti } from "@/components/confetti";
 
+const checkoutSearch = z.object({
+  course: fallback(z.string().optional(), undefined).default(undefined),
+  promo: fallback(z.string().optional(), undefined).default(undefined),
+  discount: fallback(z.coerce.number().min(0).max(90).optional(), undefined).default(undefined),
+});
+
 export const Route = createFileRoute("/checkout")({
+  validateSearch: zodValidator(checkoutSearch),
   head: () => ({
     meta: [{ title: "Checkout — MaisonCrumb" }],
   }),
@@ -14,15 +23,27 @@ export const Route = createFileRoute("/checkout")({
 });
 
 function CheckoutPage() {
-  const { cart, enroll, clearCart } = useStore();
+  const { cart, enroll, clearCart, addToCart } = useStore();
+  const { course: courseParam, promo, discount } = Route.useSearch();
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  // Auto-add course from URL (marketing redirects)
+  useEffect(() => {
+    if (courseParam && getCourse(courseParam)) {
+      addToCart(courseParam);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseParam]);
+
   const items = cart.map((id) => getCourse(id)).filter((c): c is NonNullable<ReturnType<typeof getCourse>> => !!c);
   const subtotal = items.reduce((s, c) => s + c.price, 0);
-  const tax = Math.round(subtotal * 0.08);
-  const total = subtotal + tax;
+  const discountPct = discount ?? 0;
+  const discountAmt = Math.round(subtotal * (discountPct / 100));
+  const afterDiscount = subtotal - discountAmt;
+  const tax = Math.round(afterDiscount * 0.08);
+  const total = afterDiscount + tax;
 
   const handlePay = (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,6 +89,24 @@ function CheckoutPage() {
           </Link>
           <h1 className="mt-3 font-serif text-4xl text-foreground md:text-5xl">Checkout</h1>
           <p className="mt-2 text-muted-foreground">Secure payment · Lifetime access · 30-day guarantee</p>
+
+          {discountPct > 0 && (
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500 text-white">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">
+                    Promo <span className="font-mono">{promo ?? "AUTO"}</span> applied —{" "}
+                    <span className="text-emerald-600">{discountPct}% OFF</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">Discount auto-loaded from your offer link.</p>
+                </div>
+              </div>
+              <span className="font-serif text-2xl text-emerald-600">−${discountAmt}</span>
+            </div>
+          )}
 
           <div className="mt-10 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
             {/* Form */}
@@ -145,6 +184,9 @@ function CheckoutPage() {
                 </ul>
                 <div className="space-y-2 border-t border-border/60 p-6 text-sm">
                   <Row label="Subtotal" value={`$${subtotal}`} />
+                  {discountPct > 0 && (
+                    <Row label={`Promo ${promo ?? ""} (${discountPct}%)`} value={`−$${discountAmt}`} accent />
+                  )}
                   <Row label="Tax (8%)" value={`$${tax}`} />
                   <div className="my-2 h-px bg-border/60" />
                   <div className="flex items-baseline justify-between">
@@ -215,11 +257,11 @@ function Field({
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function Row({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div className="flex justify-between text-muted-foreground">
       <span>{label}</span>
-      <span className="text-foreground">{value}</span>
+      <span className={accent ? "font-semibold text-emerald-600" : "text-foreground"}>{value}</span>
     </div>
   );
 }

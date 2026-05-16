@@ -38,6 +38,11 @@ export function CourseCard({ course }: { course: Course }) {
             </span>
           )}
         </div>
+        {course.free && (
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md">
+            ★ Free
+          </span>
+        )}
       </div>
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-primary">
@@ -59,8 +64,14 @@ export function CourseCard({ course }: { course: Course }) {
           </span>
         </div>
         <div className="mt-6 flex items-end justify-between border-t border-border/60 pt-4">
-          <span className="font-serif text-2xl text-foreground">${course.price}</span>
-          <span className="text-sm font-medium text-primary group-hover:underline">{t("course.view")} →</span>
+          {course.free ? (
+            <span className="font-serif text-2xl text-emerald-600">Free</span>
+          ) : (
+            <span className="font-serif text-2xl text-foreground">${course.price}</span>
+          )}
+          <span className="text-sm font-medium text-primary group-hover:underline">
+            {course.free ? "Watch now" : t("course.view")} →
+          </span>
         </div>
       </div>
     </Link>
