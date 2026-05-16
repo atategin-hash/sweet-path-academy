@@ -269,7 +269,7 @@ function ClassroomPage() {
                   )}
                 </TabsContent>
 
-                <TabsContent value="recipes" className="mt-6">
+                <TabsContent value="recipes" className="mt-6" key={`recipes-${lang}-${active.id}`}>
                   <RecipePanel lesson={active} defaultMode={course.tier} isFree={!!course.free} courseId={course.id} />
                 </TabsContent>
 
