@@ -698,7 +698,22 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
   },
   zh: {
     "nav.home": "首页", "nav.courses": "课程", "nav.dashboard": "我的", "nav.start": "开始烘焙",
-    
+    "common.lessons": "课时", "common.modules": "模块", "common.trending": "热门", "common.hot": "推荐",
+    "tier.all.label": "全部课程", "tier.home.label": "家庭烘焙", "tier.home.short": "家庭",
+    "tier.business.label": "精品咖啡店", "tier.business.short": "咖啡店",
+    "tier.industrial.label": "工业生产", "tier.industrial.short": "工厂",
+    "catalog.searchPlaceholder": "输入蛋糕名称…",
+    "lang.label": "语言",
+    "chatbot.title": "AI 烘焙助手", "chatbot.subtitle": "根据您的水平提供答案",
+    "chatbot.welcome": "您好!我是 MaisonCrumb 的 AI 烘焙助手 🧁。请选择一个快速问题或自行输入。",
+    "chatbot.placeholder": "输入您的问题…", "chatbot.quick": "快速问题",
+    "chatbot.q1": "为什么我的蛋糕没发起来?", "chatbot.q2": "烤箱该如何设置?",
+    "chatbot.q3": "在哪里购买原料?", "chatbot.q4": "奶油分离了 — 怎么办?",
+  },
+};
+
+const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
+
   en: {
     "Bu keki ne kadar saklayabilirim?": "How long can I store this cake?",
     "Ev şartlarında buzdolabında hava almayan kapta 3–4 gün, derin dondurucuda dilim halinde 1 aya kadar saklayabilirsiniz.": "At home, store it in an airtight container in the refrigerator for 3–4 days, or freeze sliced portions for up to 1 month.",
