@@ -389,6 +389,13 @@ function ClassroomPage() {
 
         <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
+
+      {course.free && (
+        <>
+          <CountdownUpsell courseId={course.id} />
+          <NextStepTeaser open={teaserOpen} onClose={() => setTeaserOpen(false)} courseId={course.id} />
+        </>
+      )}
     </div>
   );
 }
