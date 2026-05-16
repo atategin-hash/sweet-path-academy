@@ -394,6 +394,7 @@ function RecipePanel({
   lesson: ReturnType<typeof flatLessons>[number];
   defaultMode: ScaleMode;
 }) {
+  const { t, tx, lang } = useI18n();
   const r = lesson.recipe;
   const [mode, setMode] = useState<ScaleMode>(defaultMode);
   if (!r) {
@@ -407,18 +408,25 @@ function RecipePanel({
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-primary">Recipe</p>
-          <h3 className="mt-1 font-serif text-2xl text-white">{lesson.title}</h3>
+          <p className="text-xs uppercase tracking-[0.2em] text-primary">
+            {t("tabs.recipes")}
+            {lang !== "en" && (
+              <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 py-0.5 text-[10px] not-italic text-primary">
+                <Wand2 className="h-3 w-3" /> {t("classroom.aiTranslating")}
+              </span>
+            )}
+          </p>
+          <h3 className="mt-1 font-serif text-2xl text-white">{tx(lesson.title)}</h3>
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-white/60">
           {r.servings && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Users className="h-3.5 w-3.5 text-primary" /> {r.servings}
+              <Users className="h-3.5 w-3.5 text-primary" /> {t("recipe.servings")}: {r.servings}
             </span>
           )}
           {r.time && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1.5">
-              <Timer className="h-3.5 w-3.5 text-primary" /> {r.time}
+              <Timer className="h-3.5 w-3.5 text-primary" /> {t("recipe.time")}: {r.time}
             </span>
           )}
         </div>
@@ -430,12 +438,12 @@ function RecipePanel({
           Scale for production
         </p>
         <div className="grid grid-cols-3 gap-1.5">
-          {SCALE_TABS.map((t) => {
-            const active = mode === t.id;
+          {SCALE_TABS.map((tab) => {
+            const active = mode === tab.id;
             return (
               <button
-                key={t.id}
-                onClick={() => setMode(t.id)}
+                key={tab.id}
+                onClick={() => setMode(tab.id)}
                 className={`flex flex-col items-start gap-0.5 rounded-xl px-3 py-2.5 text-left text-xs transition-all ${
                   active
                     ? "bg-primary text-primary-foreground shadow-[0_4px_20px_-4px_oklch(0.7_0.15_50/0.6)]"
@@ -443,11 +451,11 @@ function RecipePanel({
                 }`}
               >
                 <span className="inline-flex items-center gap-1.5 font-medium">
-                  <t.Icon className="h-3.5 w-3.5" />
-                  {t.label}
+                  <tab.Icon className="h-3.5 w-3.5" />
+                  {tab.label}
                 </span>
                 <span className={`text-[10px] ${active ? "text-primary-foreground/80" : "text-white/40"}`}>
-                  {t.hint}
+                  {tab.hint}
                 </span>
               </button>
             );
@@ -457,12 +465,12 @@ function RecipePanel({
 
       <div>
         <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">
-          Ingredients <span className="text-white/30">· {SCALE_TABS.find((t) => t.id === mode)?.hint}</span>
+          {t("recipe.ingredients")} <span className="text-white/30">· {SCALE_TABS.find((tab) => tab.id === mode)?.hint}</span>
         </h4>
         <ul className="grid gap-2 text-sm sm:grid-cols-2">
           {r.ingredients.map((ing, i) => (
             <li key={i} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 transition-all">
-              <span className="text-white/85">{ing.item}</span>
+              <span className="text-white/85">{tx(ing.item)}</span>
               <span className="flex-shrink-0 font-medium text-primary tabular-nums">
                 {scaleIngredient(ing.qty, mode)}
               </span>
@@ -472,14 +480,17 @@ function RecipePanel({
       </div>
 
       <div>
-        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">Method</h4>
+        <h4 className="mb-3 text-sm font-medium uppercase tracking-wider text-white/50">{t("recipe.steps")}</h4>
         <ol className="space-y-3">
           {r.steps.map((step, i) => (
             <li key={i} className="flex gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4">
               <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                 {i + 1}
               </span>
-              <p className="text-sm leading-relaxed text-white/80">{step}</p>
+              <p className="text-sm leading-relaxed text-white/80">
+                <span className="mr-2 text-xs uppercase tracking-wider text-white/40">{t("recipe.step")} {i + 1}</span>
+                {tx(step)}
+              </p>
             </li>
           ))}
         </ol>
