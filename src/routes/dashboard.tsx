@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { courses, getCourse, flatLessons } from "@/lib/courses";
 import { useStore } from "@/lib/store";
-import { PlayCircle, Clock, BookOpen, Trophy, Flame, Sparkles } from "lucide-react";
+import { PlayCircle, Clock, BookOpen, Trophy, Flame } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
