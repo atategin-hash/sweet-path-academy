@@ -74,6 +74,7 @@ export const Route = createFileRoute("/classroom/$id")({
 function ClassroomPage() {
   const { course } = Route.useLoaderData();
   const { lesson: lessonParam } = Route.useSearch();
+  const { t, tx, lang } = useI18n();
   const lessons = useMemo(() => flatLessons(course), [course]);
   const initialIdx = useMemo(() => {
     if (!lessonParam) return 0;
@@ -83,6 +84,8 @@ function ClassroomPage() {
   const [activeIdx, setActiveIdx] = useState(initialIdx);
   const [completed, setCompleted] = useState<Set<number>>(new Set());
   const [started, setStarted] = useState(false);
+  const [audioLang, setAudioLang] = useState<Lang>(lang);
+  const [subLang, setSubLang] = useState<Lang | "off">(lang === "en" ? "off" : lang);
   const active = lessons[activeIdx];
 
   const pct = Math.round((completed.size / lessons.length) * 100);
