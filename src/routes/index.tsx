@@ -19,17 +19,17 @@ export const Route = createFileRoute("/")({
 
 const testimonials = [
   {
-    quote: "The macaron course finally cracked it for me. My shells have feet, my shells are smooth, and my friends keep asking for more.",
+    quote: "Finally — someone took the chaos of YouTube baking and turned it into an actual course. I did Day 1 to Day 4 of the Italian masterclass in a single weekend.",
     name: "Lara Mendes",
     role: "Home baker, Lisbon",
   },
   {
-    quote: "Marco's chocolate cake class is the most generous, well-paced course I've taken. Felt like a private lesson.",
+    quote: "The bento cake module saved my daughter's birthday. The recipes are precise and the videos are the best on the internet.",
     name: "Daniel Ortiz",
     role: "Café owner, Mexico City",
   },
   {
-    quote: "I went from sourdough panic to confident weekly bakes in a month. The video quality is gorgeous.",
+    quote: "Mise en place changed how I bake forever. The bakery foundations course is genuinely the start I wish I'd had.",
     name: "Yuki Sato",
     role: "Student, Osaka",
   },
@@ -47,24 +47,24 @@ function HomePage() {
         <div className="container mx-auto grid gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
           <div className="relative z-10">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> New season — winter classics
+              <Sparkles className="h-3.5 w-3.5" /> Curated free masterclasses
             </span>
-            <h1 className="mt-6 font-serif text-5xl leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-              Learn the craft of <em className="italic text-primary">cake & pastry</em> from anywhere.
+            <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              Learn pastry from the <em className="italic text-primary">world's best free resources</em>, curated into structured masterclasses.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-muted-foreground">
-              On-demand masterclasses from chefs in Paris, Tokyo, and Milan. Beautiful video, honest technique, lifetime access.
+              Hand-picked video lessons from Gino Fabbri, Luca Montersino, Cupcake Jemma, Joshua Weissman and more — organized day-by-day with full recipes, so you actually finish the course.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/courses"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
               >
-                Browse all courses
+                Browse the masterclasses
               </Link>
               <Link
                 to="/course/$id"
-                params={{ id: "french-macarons" }}
+                params={{ id: "italian-pastries" }}
                 className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
                 <PlayCircle className="h-4 w-4 text-primary" /> Watch a preview
