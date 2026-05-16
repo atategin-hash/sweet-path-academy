@@ -112,6 +112,7 @@ function CoursesPage() {
           </div>
         )}
       </section>
+      <FreeMasterclasses />
       <SiteFooter />
     </div>
   );
