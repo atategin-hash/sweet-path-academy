@@ -1,16 +1,39 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type Lang = "en" | "tr" | "ru";
+export type Lang =
+  | "en" | "tr" | "ru"
+  | "fr" | "es" | "de" | "it" | "pt"
+  | "ja" | "ko" | "zh" | "ar";
+
+export type MeasurementSystem = "metric" | "imperial";
 
 export const LANGUAGES: { code: Lang; label: string; flag: string; native: string }[] = [
   { code: "en", label: "EN", flag: "🇬🇧", native: "English" },
+  { code: "fr", label: "FR", flag: "🇫🇷", native: "Français" },
+  { code: "es", label: "ES", flag: "🇪🇸", native: "Español" },
+  { code: "de", label: "DE", flag: "🇩🇪", native: "Deutsch" },
+  { code: "it", label: "IT", flag: "🇮🇹", native: "Italiano" },
+  { code: "pt", label: "PT", flag: "🇵🇹", native: "Português" },
   { code: "tr", label: "TR", flag: "🇹🇷", native: "Türkçe" },
   { code: "ru", label: "RU", flag: "🇷🇺", native: "Русский" },
+  { code: "ar", label: "AR", flag: "🇸🇦", native: "العربية" },
+  { code: "ja", label: "JP", flag: "🇯🇵", native: "日本語" },
+  { code: "ko", label: "KR", flag: "🇰🇷", native: "한국어" },
+  { code: "zh", label: "ZH", flag: "🇨🇳", native: "中文" },
 ];
+
+export const MEASUREMENT_SYSTEM: Record<Lang, MeasurementSystem> = {
+  en: "imperial",
+  fr: "metric", es: "metric", de: "metric", it: "metric", pt: "metric",
+  tr: "metric", ru: "metric", ar: "metric",
+  ja: "metric", ko: "metric", zh: "metric",
+};
+
+export const RTL_LANGS: Lang[] = ["ar"];
 
 type Dict = Record<string, string>;
 
-const DICTIONARIES: Record<Lang, Dict> = {
+const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
   en: {
     "nav.home": "Home",
     "nav.courses": "Courses",
@@ -560,9 +583,137 @@ const DICTIONARIES: Record<Lang, Dict> = {
 
     "lang.label": "Язык",
   },
+
+  fr: {
+    "nav.home": "Accueil", "nav.courses": "Cours", "nav.dashboard": "Tableau de bord", "nav.start": "Commencer",
+    "common.lessons": "leçons", "common.modules": "modules", "common.trending": "Tendance", "common.hot": "Populaire",
+    "tier.all.label": "Tous les cours", "tier.home.label": "Pâtissier amateur", "tier.home.short": "Maison",
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industriel", "tier.industrial.short": "Usine",
+    "catalog.searchPlaceholder": "Tapez un nom de gâteau…",
+    "lang.label": "Langue",
+    "chatbot.title": "Assistant Pâtisserie IA", "chatbot.subtitle": "Réponses adaptées à votre niveau",
+    "chatbot.welcome": "Bonjour ! Je suis votre assistant pâtisserie MaisonCrumb 🧁. Choisissez une question rapide ou posez la vôtre.",
+    "chatbot.placeholder": "Votre question…", "chatbot.quick": "Questions rapides",
+    "chatbot.q1": "Pourquoi mon gâteau n'a-t-il pas levé ?", "chatbot.q2": "Quel réglage pour mon four ?",
+    "chatbot.q3": "Où acheter mes ingrédients ?", "chatbot.q4": "Ma crème a tranché — que faire ?",
+  },
+  es: {
+    "nav.home": "Inicio", "nav.courses": "Cursos", "nav.dashboard": "Panel", "nav.start": "Empezar",
+    "common.lessons": "lecciones", "common.modules": "módulos", "common.trending": "Tendencia", "common.hot": "Popular",
+    "tier.all.label": "Todos los cursos", "tier.home.label": "Repostería casera", "tier.home.short": "Casa",
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industrial", "tier.industrial.short": "Fábrica",
+    "catalog.searchPlaceholder": "Escribe un nombre de pastel…",
+    "lang.label": "Idioma",
+    "chatbot.title": "Asistente de Repostería IA", "chatbot.subtitle": "Respuestas según tu nivel",
+    "chatbot.welcome": "¡Hola! Soy tu asistente de repostería MaisonCrumb 🧁. Elige una pregunta rápida o escribe la tuya.",
+    "chatbot.placeholder": "Tu pregunta…", "chatbot.quick": "Preguntas rápidas",
+    "chatbot.q1": "¿Por qué no subió mi pastel?", "chatbot.q2": "¿Cómo ajusto mi horno?",
+    "chatbot.q3": "¿Dónde compro ingredientes?", "chatbot.q4": "Mi crema se cortó — ¿qué hago?",
+  },
+  de: {
+    "nav.home": "Start", "nav.courses": "Kurse", "nav.dashboard": "Übersicht", "nav.start": "Loslegen",
+    "common.lessons": "Lektionen", "common.modules": "Module", "common.trending": "Trend", "common.hot": "Beliebt",
+    "tier.all.label": "Alle Kurse", "tier.home.label": "Hobbybäcker", "tier.home.short": "Zuhause",
+    "tier.business.label": "Café & Bistro", "tier.business.short": "Café",
+    "tier.industrial.label": "Industriell", "tier.industrial.short": "Fabrik",
+    "catalog.searchPlaceholder": "Kuchenname eingeben…",
+    "lang.label": "Sprache",
+    "chatbot.title": "KI-Backassistent", "chatbot.subtitle": "Antworten passend zu deinem Niveau",
+    "chatbot.welcome": "Hallo! Ich bin dein MaisonCrumb KI-Backassistent 🧁. Wähle eine Schnellfrage oder stelle deine eigene.",
+    "chatbot.placeholder": "Deine Frage…", "chatbot.quick": "Schnellfragen",
+    "chatbot.q1": "Warum ist mein Kuchen nicht aufgegangen?", "chatbot.q2": "Welche Ofeneinstellung?",
+    "chatbot.q3": "Wo bekomme ich die Zutaten?", "chatbot.q4": "Meine Creme ist geronnen — was tun?",
+  },
+  it: {
+    "nav.home": "Home", "nav.courses": "Corsi", "nav.dashboard": "Bacheca", "nav.start": "Inizia",
+    "common.lessons": "lezioni", "common.modules": "moduli", "common.trending": "Di tendenza", "common.hot": "Popolare",
+    "tier.all.label": "Tutti i corsi", "tier.home.label": "Pasticcere casalingo", "tier.home.short": "Casa",
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industriale", "tier.industrial.short": "Fabbrica",
+    "catalog.searchPlaceholder": "Digita un nome di dolce…",
+    "lang.label": "Lingua",
+    "chatbot.title": "Assistente Pasticceria AI", "chatbot.subtitle": "Risposte adatte al tuo livello",
+    "chatbot.welcome": "Ciao! Sono il tuo assistente pasticceria MaisonCrumb 🧁. Scegli una domanda rapida o scrivi la tua.",
+    "chatbot.placeholder": "La tua domanda…", "chatbot.quick": "Domande rapide",
+    "chatbot.q1": "Perché la torta non è lievitata?", "chatbot.q2": "Come imposto il forno?",
+    "chatbot.q3": "Dove compro gli ingredienti?", "chatbot.q4": "La crema si è separata — cosa faccio?",
+  },
+  pt: {
+    "nav.home": "Início", "nav.courses": "Cursos", "nav.dashboard": "Painel", "nav.start": "Começar",
+    "common.lessons": "aulas", "common.modules": "módulos", "common.trending": "Em alta", "common.hot": "Popular",
+    "tier.all.label": "Todos os cursos", "tier.home.label": "Confeiteiro caseiro", "tier.home.short": "Casa",
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industrial", "tier.industrial.short": "Fábrica",
+    "catalog.searchPlaceholder": "Digite o nome de um bolo…",
+    "lang.label": "Idioma",
+    "chatbot.title": "Assistente de Confeitaria IA", "chatbot.subtitle": "Respostas para o seu nível",
+    "chatbot.welcome": "Olá! Sou seu assistente de confeitaria MaisonCrumb 🧁. Escolha uma pergunta rápida ou digite a sua.",
+    "chatbot.placeholder": "Sua pergunta…", "chatbot.quick": "Perguntas rápidas",
+    "chatbot.q1": "Por que meu bolo não cresceu?", "chatbot.q2": "Como ajusto meu forno?",
+    "chatbot.q3": "Onde compro os ingredientes?", "chatbot.q4": "Meu creme talhou — o que fazer?",
+  },
+  ar: {
+    "nav.home": "الرئيسية", "nav.courses": "الدورات", "nav.dashboard": "لوحتي", "nav.start": "ابدأ الخبز",
+    "common.lessons": "دروس", "common.modules": "وحدات", "common.trending": "رائج", "common.hot": "الأكثر طلباً",
+    "tier.all.label": "كل الدورات", "tier.home.label": "خباز منزلي", "tier.home.short": "منزلي",
+    "tier.business.label": "مقهى بوتيك", "tier.business.short": "مقهى",
+    "tier.industrial.label": "صناعي", "tier.industrial.short": "مصنع",
+    "catalog.searchPlaceholder": "اكتب اسم كعكة…",
+    "lang.label": "اللغة",
+    "chatbot.title": "مساعد المخبوزات الذكي", "chatbot.subtitle": "إجابات تناسب مستواك",
+    "chatbot.welcome": "مرحباً! أنا مساعدك الذكي للمخبوزات في MaisonCrumb 🧁. اختر سؤالاً سريعاً أو اكتب سؤالك.",
+    "chatbot.placeholder": "سؤالك…", "chatbot.quick": "أسئلة سريعة",
+    "chatbot.q1": "لماذا لم ترتفع كعكتي؟", "chatbot.q2": "كيف أضبط الفرن؟",
+    "chatbot.q3": "أين أجد المكونات؟", "chatbot.q4": "تجلطت الكريمة — ماذا أفعل؟",
+  },
+  ja: {
+    "nav.home": "ホーム", "nav.courses": "コース", "nav.dashboard": "ダッシュボード", "nav.start": "始める",
+    "common.lessons": "レッスン", "common.modules": "モジュール", "common.trending": "トレンド", "common.hot": "人気",
+    "tier.all.label": "すべてのコース", "tier.home.label": "家庭ベイカー", "tier.home.short": "家庭",
+    "tier.business.label": "カフェ", "tier.business.short": "カフェ",
+    "tier.industrial.label": "工業生産", "tier.industrial.short": "工場",
+    "catalog.searchPlaceholder": "ケーキ名を入力…",
+    "lang.label": "言語",
+    "chatbot.title": "AIベーキングアシスタント", "chatbot.subtitle": "あなたのレベルに合わせた回答",
+    "chatbot.welcome": "こんにちは!MaisonCrumbのAIベーキングアシスタントです 🧁。クイック質問を選ぶか、ご自身で入力してください。",
+    "chatbot.placeholder": "質問を入力…", "chatbot.quick": "クイック質問",
+    "chatbot.q1": "ケーキが膨らまないのはなぜ?", "chatbot.q2": "オーブンの設定は?",
+    "chatbot.q3": "材料はどこで買える?", "chatbot.q4": "クリームが分離した — どうすれば?",
+  },
+  ko: {
+    "nav.home": "홈", "nav.courses": "코스", "nav.dashboard": "대시보드", "nav.start": "시작하기",
+    "common.lessons": "강의", "common.modules": "모듈", "common.trending": "인기", "common.hot": "핫",
+    "tier.all.label": "모든 코스", "tier.home.label": "홈베이커", "tier.home.short": "홈",
+    "tier.business.label": "부티크 카페", "tier.business.short": "카페",
+    "tier.industrial.label": "산업용", "tier.industrial.short": "공장",
+    "catalog.searchPlaceholder": "케이크 이름 입력…",
+    "lang.label": "언어",
+    "chatbot.title": "AI 베이킹 어시스턴트", "chatbot.subtitle": "수준에 맞춘 답변",
+    "chatbot.welcome": "안녕하세요! MaisonCrumb AI 베이킹 어시스턴트입니다 🧁. 빠른 질문을 선택하거나 직접 입력하세요.",
+    "chatbot.placeholder": "질문 입력…", "chatbot.quick": "빠른 질문",
+    "chatbot.q1": "케이크가 왜 부풀지 않나요?", "chatbot.q2": "오븐 설정은 어떻게?",
+    "chatbot.q3": "재료는 어디서 사나요?", "chatbot.q4": "크림이 분리됐어요 — 어떻게 하나요?",
+  },
+  zh: {
+    "nav.home": "首页", "nav.courses": "课程", "nav.dashboard": "我的", "nav.start": "开始烘焙",
+    "common.lessons": "课时", "common.modules": "模块", "common.trending": "热门", "common.hot": "推荐",
+    "tier.all.label": "全部课程", "tier.home.label": "家庭烘焙", "tier.home.short": "家庭",
+    "tier.business.label": "精品咖啡店", "tier.business.short": "咖啡店",
+    "tier.industrial.label": "工业生产", "tier.industrial.short": "工厂",
+    "catalog.searchPlaceholder": "输入蛋糕名称…",
+    "lang.label": "语言",
+    "chatbot.title": "AI 烘焙助手", "chatbot.subtitle": "根据您的水平提供答案",
+    "chatbot.welcome": "您好!我是 MaisonCrumb 的 AI 烘焙助手 🧁。请选择一个快速问题或自行输入。",
+    "chatbot.placeholder": "输入您的问题…", "chatbot.quick": "快速问题",
+    "chatbot.q1": "为什么我的蛋糕没发起来?", "chatbot.q2": "烤箱该如何设置?",
+    "chatbot.q3": "在哪里购买原料?", "chatbot.q4": "奶油分离了 — 怎么办?",
+  },
 };
 
-const CONTENT_TRANSLATIONS: Record<Lang, Dict> = {
+const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
+
   en: {
     "Bu keki ne kadar saklayabilirim?": "How long can I store this cake?",
     "Ev şartlarında buzdolabında hava almayan kapta 3–4 gün, derin dondurucuda dilim halinde 1 aya kadar saklayabilirsiniz.": "At home, store it in an airtight container in the refrigerator for 3–4 days, or freeze sliced portions for up to 1 month.",
@@ -743,7 +894,7 @@ const CONTENT_TRANSLATIONS: Record<Lang, Dict> = {
   },
 };
 
-const CONTENT_GLOSSARY: Record<Lang, Array<[RegExp, string]>> = {
+const CONTENT_GLOSSARY: Partial<Record<Lang, Array<[RegExp, string]>>> = {
   en: [],
   tr: [
     [/\bAll-purpose flour\b/gi, "Çok amaçlı un"], [/\bBread flour\b/gi, "Ekmek unu"], [/\bSelf-raising flour\b/gi, "Kendinden kabaran un"], [/\bCake flour\b/gi, "Kek unu"], [/\bAlmond flour\b/gi, "Badem unu"],
@@ -770,14 +921,21 @@ type I18nCtx = {
   setLang: (l: Lang) => void;
   t: (key: string) => string;
   tx: (text?: string | null) => string;
+  region: MeasurementSystem;
+  isRTL: boolean;
 };
 
 const Ctx = createContext<I18nCtx | null>(null);
 const STORAGE_KEY = "maisoncrumb.lang";
 
+const ALL_CODES: Lang[] = ["en","fr","es","de","it","pt","tr","ru","ar","ja","ko","zh"];
+
 function normalizeLang(input?: string | null): Lang | null {
-  const code = input?.slice(0, 2).toLowerCase();
-  return code === "tr" || code === "ru" || code === "en" ? code : null;
+  if (!input) return null;
+  const lower = input.toLowerCase();
+  if (lower.startsWith("zh")) return "zh";
+  const code = lower.slice(0, 2) as Lang;
+  return ALL_CODES.includes(code) ? code : null;
 }
 
 function detectLanguage(): Lang {
@@ -800,7 +958,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (typeof document === "undefined") return;
     document.documentElement.lang = lang;
-    document.documentElement.dir = "ltr";
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
   }, [lang]);
 
   const setLang = useCallback((nextLang: Lang) => {
@@ -811,19 +969,22 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<I18nCtx>(() => {
-    const dict = DICTIONARIES[lang];
+    const dict = DICTIONARIES[lang] ?? {};
     const fallback = DICTIONARIES.en;
-    const content = CONTENT_TRANSLATIONS[lang];
+    const content = CONTENT_TRANSLATIONS[lang] ?? {};
+    const glossary = CONTENT_GLOSSARY[lang] ?? [];
     return {
       lang,
       setLang,
+      region: MEASUREMENT_SYSTEM[lang],
+      isRTL: RTL_LANGS.includes(lang),
       t: (key: string) => dict[key] ?? fallback[key] ?? key,
       tx: (text?: string | null) => {
         if (!text) return "";
         if (lang === "en") return text;
         if (content[text]) return content[text];
         let out = text;
-        for (const [re, val] of CONTENT_GLOSSARY[lang]) out = out.replace(re, val);
+        for (const [re, val] of glossary) out = out.replace(re, val);
         return out;
       },
     };

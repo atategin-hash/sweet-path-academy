@@ -417,7 +417,7 @@ function RecipePanel({
   isFree?: boolean;
   courseId?: string;
 }) {
-  const { t, tx, lang } = useI18n();
+  const { t, tx, lang, region } = useI18n();
   const r = lesson.recipe;
   const [mode, setMode] = useState<ScaleMode>(defaultMode);
   if (!r) {
@@ -495,7 +495,7 @@ function RecipePanel({
             <li key={i} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 transition-all">
               <span className="text-white/85">{tx(ing.item)}</span>
               <span className="flex-shrink-0 font-medium text-primary tabular-nums">
-                {scaleIngredient(ing.qty, mode)}
+                {scaleIngredient(ing.qty, mode, region)}
               </span>
             </li>
           ))}

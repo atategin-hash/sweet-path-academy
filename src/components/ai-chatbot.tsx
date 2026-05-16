@@ -8,15 +8,9 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { TIER_META, type Tier } from "@/lib/courses";
+import { useI18n } from "@/lib/i18n";
 
 type Msg = { role: "user" | "assistant"; text: string };
-
-const QUICK_PROMPTS = [
-  "Kekim neden kabarmadı?",
-  "Ev tipi fırın ayarı nasıl olmalı?",
-  "Bişkek'te bu malzemeleri nereden bulabilirim?",
-  "Krema neden ayrıştı?",
-];
 
 const TIER_OPTIONS: { id: Tier; Icon: typeof Home }[] = [
   { id: "home", Icon: Home },
@@ -79,18 +73,20 @@ function smartReply(prompt: string, tier: Tier): string {
 }
 
 export function AIChatbot() {
+  const { t, lang, region } = useI18n();
   const [open, setOpen] = useState(false);
   const [tier, setTier] = useState<Tier>("home");
-  const [messages, setMessages] = useState<Msg[]>([
-    {
-      role: "assistant",
-      text:
-        "Merhaba! Ben MaisonCrumb AI Pasta Asistanı 🧁. Üretim seviyenize göre size yardım edebilirim — alttaki hızlı sorulardan birini seçin ya da kendi sorunuzu yazın.",
-    },
-  ]);
+  const welcome = t("chatbot.welcome");
+  const QUICK_PROMPTS = [t("chatbot.q1"), t("chatbot.q2"), t("chatbot.q3"), t("chatbot.q4")];
+  const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", text: welcome }]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Reset greeting when language changes
+  useEffect(() => {
+    setMessages([{ role: "assistant", text: t("chatbot.welcome") }]);
+  }, [lang, t]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -135,9 +131,9 @@ export function AIChatbot() {
                 <ChefHat className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <SheetTitle className="font-serif text-xl">AI Pasta Asistanı</SheetTitle>
+                <SheetTitle className="font-serif text-xl">{t("chatbot.title")}</SheetTitle>
                 <SheetDescription className="text-xs">
-                  Üretim seviyenize özel yanıtlar
+                  {t("chatbot.subtitle")} · {region === "imperial" ? "°F / oz / lb" : "°C / g / kg"}
                 </SheetDescription>
               </div>
               <button
@@ -208,7 +204,7 @@ export function AIChatbot() {
           {messages.length <= 1 && (
             <div className="border-t border-border/60 bg-muted/30 px-5 py-3">
               <p className="mb-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                Hızlı sorular
+                {t("chatbot.quick")}
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {QUICK_PROMPTS.map((q) => (
@@ -235,7 +231,7 @@ export function AIChatbot() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Sorunuzu yazın…"
+              placeholder={t("chatbot.placeholder")}
               className="flex-1 rounded-full border border-border bg-card px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             />
             <button
