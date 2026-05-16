@@ -1,10 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { getCourse } from "@/lib/courses";
+import { getCourse, type Course } from "@/lib/courses";
 import { Clock, BookOpen, BarChart3, PlayCircle, CheckCircle2, ShoppingBag } from "lucide-react";
 
 export const Route = createFileRoute("/courses/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { course: Course } => {
     const course = getCourse(params.slug);
     if (!course) throw notFound();
     return { course };
