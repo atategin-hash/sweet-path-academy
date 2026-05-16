@@ -402,9 +402,13 @@ const SCALE_TABS: { id: ScaleMode; labelKey: string; Icon: typeof Home; hintKey:
 function RecipePanel({
   lesson,
   defaultMode,
+  isFree,
+  courseId,
 }: {
   lesson: ReturnType<typeof flatLessons>[number];
   defaultMode: ScaleMode;
+  isFree?: boolean;
+  courseId?: string;
 }) {
   const { t, tx, lang } = useI18n();
   const r = lesson.recipe;
