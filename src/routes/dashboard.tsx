@@ -96,7 +96,7 @@ function DashboardPage() {
                         params={{ id: course.id }}
                         className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground"
                       >
-                        <PlayCircle className="h-4 w-4" /> Resume lesson
+                        <PlayCircle className="h-4 w-4" /> Continue learning
                       </Link>
                       <Link
                         to="/course/$id"
