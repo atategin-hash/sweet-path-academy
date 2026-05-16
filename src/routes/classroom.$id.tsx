@@ -120,20 +120,23 @@ function ClassroomPage() {
             to="/dashboard"
             className="inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
           >
-            <ChevronLeft className="h-4 w-4" /> Exit classroom
+            <ChevronLeft className="h-4 w-4" /> {t("classroom.exit")}
           </Link>
           <div className="hidden flex-1 px-8 md:block">
             <div className="flex items-center justify-center gap-3">
-              <span className="text-xs uppercase tracking-wider text-white/50">{course.title}</span>
+              <span className="text-xs uppercase tracking-wider text-white/50">{tx(course.title)}</span>
               <div className="h-1 w-40 overflow-hidden rounded-full bg-white/10">
                 <div className="h-full rounded-full bg-primary transition-all duration-500" style={{ width: `${pct}%` }} />
               </div>
               <span className="text-xs font-medium text-white/70">{pct}%</span>
             </div>
           </div>
-          <div className="inline-flex items-center gap-2 text-sm text-white/60">
-            <Sparkles className="h-4 w-4 text-primary" />
-            {completed.size}/{lessons.length}
+          <div className="flex items-center gap-3">
+            <LanguageSelector variant="dark" />
+            <div className="hidden items-center gap-2 text-sm text-white/60 sm:inline-flex">
+              <Sparkles className="h-4 w-4 text-primary" />
+              {completed.size}/{lessons.length}
+            </div>
           </div>
         </div>
       </header>
