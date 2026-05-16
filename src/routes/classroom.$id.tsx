@@ -91,6 +91,7 @@ function ClassroomPage() {
   const [started, setStarted] = useState(false);
   const [audioLang, setAudioLang] = useState<Lang>(lang);
   const [subLang, setSubLang] = useState<Lang | "off">(lang === "en" ? "off" : lang);
+  const [teaserOpen, setTeaserOpen] = useState(false);
   const active = lessons[activeIdx];
 
   useEffect(() => {
