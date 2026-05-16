@@ -1,12 +1,23 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-export type Lang = "en" | "tr" | "ru";
+export type Lang =
+  | "en" | "tr" | "ru"
+  | "fr" | "es" | "de" | "it" | "pt"
+  | "ja" | "ko" | "zh" | "ar";
+
+export type MeasurementSystem = "metric" | "imperial";
 
 export const LANGUAGES: { code: Lang; label: string; flag: string; native: string }[] = [
   { code: "en", label: "EN", flag: "🇬🇧", native: "English" },
+  { code: "fr", label: "FR", flag: "🇫🇷", native: "Français" },
+  { code: "es", label: "ES", flag: "🇪🇸", native: "Español" },
+  { code: "de", label: "DE", flag: "🇩🇪", native: "Deutsch" },
+  { code: "it", label: "IT", flag: "🇮🇹", native: "Italiano" },
+  { code: "pt", label: "PT", flag: "🇵🇹", native: "Português" },
   { code: "tr", label: "TR", flag: "🇹🇷", native: "Türkçe" },
   { code: "ru", label: "RU", flag: "🇷🇺", native: "Русский" },
-];
+  { code: "ar", label: "AR", flag: "🇸🇦", native: "العربية" },
+  { code: "ja", label: "JP", flag: "
 
 type Dict = Record<string, string>;
 
