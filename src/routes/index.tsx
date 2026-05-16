@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { CourseCard } from "@/components/course-card";
+import { CatalogSearch } from "@/components/catalog-search";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
