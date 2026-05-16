@@ -72,7 +72,7 @@ function CoursesPage() {
             return (
               <button
                 key={t.id}
-                onClick={() => navigate({ search: (s) => ({ ...s, tier: t.id }) })}
+                onClick={() => navigate({ search: (s: { tier: typeof tier; q: string }) => ({ ...s, tier: t.id }) })}
                 className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-300 ${
                   active
                     ? "bg-primary text-primary-foreground shadow-[var(--shadow-soft)]"
