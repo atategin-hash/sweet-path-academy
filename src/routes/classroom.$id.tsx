@@ -388,6 +388,15 @@ function ClassroomPage() {
           </aside>
         </div>
 
+        {!course.free && (
+          <CertificateSection
+            courseTitle={course.title}
+            unlocked={completed.size >= lessons.length}
+            totalLessons={lessons.length}
+            completedCount={completed.size}
+          />
+        )}
+
         <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
 
