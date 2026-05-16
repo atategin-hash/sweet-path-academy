@@ -307,10 +307,10 @@ function ClassroomPage() {
               </div>
 
               <div className="max-h-[34rem] overflow-y-auto">
-                {course.modules.map((mod, mIdx) => {
+                {course.modules.map((mod: Course["modules"][number], mIdx: number) => {
                   const offset = course.modules
                     .slice(0, mIdx)
-                    .reduce((s, m) => s + m.lessons.length, 0);
+                    .reduce((s: number, m: Course["modules"][number]) => s + m.lessons.length, 0);
                   return (
                     <div key={mod.id}>
                       <div className="sticky top-0 border-b border-white/10 bg-[oklch(0.14_0.01_60)]/90 px-5 py-2.5 backdrop-blur">
@@ -320,7 +320,7 @@ function ClassroomPage() {
                         <p className="text-sm font-medium text-white">{mod.title}</p>
                       </div>
                       <ol>
-                        {mod.lessons.map((lesson, lIdx) => {
+                        {mod.lessons.map((lesson: Course["modules"][number]["lessons"][number], lIdx: number) => {
                           const absIdx = offset + lIdx;
                           const isActive = absIdx === activeIdx;
                           const isDone = completed.has(absIdx);
