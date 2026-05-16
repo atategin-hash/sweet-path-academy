@@ -169,12 +169,24 @@ function ClassroomPage() {
                   </div>
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-6 text-left">
                     <p className="text-xs uppercase tracking-[0.2em] text-white/60">
-                      Lesson {activeIdx + 1} · {active.duration}
+                      {t("recipe.step") /* reuse */} {activeIdx + 1} · {active.duration}
                     </p>
-                    <h2 className="mt-1 font-serif text-2xl text-white md:text-3xl">{active.title}</h2>
+                    <h2 className="mt-1 font-serif text-2xl text-white md:text-3xl">{tx(active.title)}</h2>
                   </div>
                 </button>
               )}
+            </div>
+
+            {/* AI Translation control bar */}
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-2.5 pl-4">
+              <p className="inline-flex items-center gap-2 text-xs text-white/60">
+                <span className="text-base leading-none">🤖</span>
+                {t("classroom.aiPowered")}
+              </p>
+              <div className="flex items-center gap-2">
+                <AudioPicker value={audioLang} onChange={setAudioLang} label={t("classroom.audio")} />
+                <SubtitlePicker value={subLang} onChange={setSubLang} label={t("classroom.subtitles")} offLabel={t("classroom.subtitlesOff")} />
+              </div>
             </div>
 
             {/* Lesson header + actions */}
@@ -196,44 +208,53 @@ function ClassroomPage() {
                   }`}
                 >
                   <CheckCircle2 className="h-4 w-4" />
-                  {completed.has(activeIdx) ? "Completed" : "Mark complete"}
+                  {completed.has(activeIdx) ? t("classroom.completed") : t("classroom.markComplete")}
                 </button>
                 <button
                   disabled={activeIdx === lessons.length - 1}
                   onClick={() => pickLesson(Math.min(lessons.length - 1, activeIdx + 1))}
                   className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5 disabled:opacity-40"
                 >
-                  Next lesson →
+                  {t("classroom.next")} →
                 </button>
               </div>
             </div>
+
+            {/* Subtitle simulation strip */}
+            {subLang !== "off" && started && (
+              <div className="mt-4 rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3 text-center text-sm italic text-white/80">
+                <span className="mr-2 inline-flex items-center gap-1 rounded-full bg-primary/20 px-2 py-0.5 text-[10px] uppercase tracking-wider not-italic text-primary">
+                  <SubtitlesIcon className="h-3 w-3" /> {LANGUAGES.find((l) => l.code === subLang)?.label}
+                </span>
+                {tx(active.title)} — {t("classroom.aiTranslating")}
+              </div>
+            )}
 
             {/* Tabs */}
             <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur">
               <Tabs defaultValue="overview" value={undefined} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-white/5">
                   <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <BookOpen className="mr-2 h-4 w-4" /> Overview
+                    <BookOpen className="mr-2 h-4 w-4" /> {t("tabs.overview")}
                   </TabsTrigger>
                   <TabsTrigger value="recipes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <ListChecks className="mr-2 h-4 w-4" /> Recipes
+                    <ListChecks className="mr-2 h-4 w-4" /> {t("tabs.recipes")}
                   </TabsTrigger>
                   <TabsTrigger value="discussion" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <MessageCircle className="mr-2 h-4 w-4" /> Discussion
+                    <MessageCircle className="mr-2 h-4 w-4" /> {t("tabs.discussion")}
                   </TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="overview" className="mt-6 space-y-4">
-                  <h3 className="font-serif text-xl text-white">About this lesson</h3>
+                  <h3 className="font-serif text-xl text-white">{tx("About this lesson")}</h3>
                   <p className="text-sm leading-relaxed text-white/70">
-                    {course.description} In this lesson — <span className="text-white">{active.title}</span> — you'll watch the full studio video and follow along with the printable recipe in the Recipes tab.
+                    {tx(course.description)}
                   </p>
-                  <ul className="grid gap-2 text-sm text-white/70 sm:grid-cols-2">
-                    <li className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> Duration {active.duration}</li>
-                    <li className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-primary" /> Difficulty {course.difficulty}</li>
-                    <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Curated free video</li>
-                    <li className="flex items-center gap-2"><Download className="h-4 w-4 text-primary" /> Full written recipe</li>
-                  </ul>
+                  {lang !== "en" && (
+                    <p className="inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-[11px] font-medium text-primary">
+                      <Wand2 className="h-3 w-3" /> {t("classroom.aiTranslating")}
+                    </p>
+                  )}
                 </TabsContent>
 
                 <TabsContent value="recipes" className="mt-6">
