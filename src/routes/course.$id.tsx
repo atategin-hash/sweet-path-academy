@@ -91,7 +91,7 @@ function CoursePage() {
               </div>
 
               <div className="mt-6 space-y-4">
-                {course.modules.map((mod, mIdx) => (
+                {course.modules.map((mod: Course["modules"][number], mIdx: number) => (
                   <details
                     key={mod.id}
                     open={mIdx === 0}
@@ -113,7 +113,7 @@ function CoursePage() {
                       <span className="text-muted-foreground transition-transform group-open:rotate-180">▾</span>
                     </summary>
                     <ul className="divide-y divide-border/60 border-t border-border/60">
-                      {mod.lessons.map((lesson, lIdx) => (
+                      {mod.lessons.map((lesson: Course["modules"][number]["lessons"][number], lIdx: number) => (
                         <li key={lesson.id} className="flex items-center gap-4 px-5 py-4">
                           <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
                             {lIdx + 1}
