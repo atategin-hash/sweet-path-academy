@@ -29,6 +29,7 @@ import {
   Factory,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CourseFAQDark } from "@/components/course-faq";
 
 const classroomSearch = z.object({
   lesson: fallback(z.string(), "").default(""),
@@ -333,6 +334,8 @@ function ClassroomPage() {
             </Link>
           </aside>
         </div>
+
+        <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
     </div>
   );

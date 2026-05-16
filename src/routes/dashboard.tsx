@@ -3,6 +3,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { courses, getCourse, flatLessons } from "@/lib/courses";
 import { useStore } from "@/lib/store";
 import { PlayCircle, Clock, BookOpen, Trophy, Flame } from "lucide-react";
+import { LiveUpdates } from "@/components/live-updates";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -51,6 +52,11 @@ function DashboardPage() {
           <StatCard icon={<BookOpen className="h-5 w-5" />} label="Enrolled courses" value={String(enrolled.length)} />
           <StatCard icon={<Trophy className="h-5 w-5" />} label="Average progress" value={`${avgProgress}%`} />
           <StatCard icon={<Flame className="h-5 w-5" />} label="Day streak" value="7" />
+        </div>
+
+        {/* Live updates */}
+        <div className="mt-10">
+          <LiveUpdates />
         </div>
 
         {/* Continue learning */}
