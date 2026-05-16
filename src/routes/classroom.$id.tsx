@@ -270,7 +270,7 @@ function ClassroomPage() {
                 </TabsContent>
 
                 <TabsContent value="recipes" className="mt-6">
-                  <RecipePanel lesson={active} defaultMode={course.tier} />
+                  <RecipePanel lesson={active} defaultMode={course.tier} isFree={!!course.free} courseId={course.id} />
                 </TabsContent>
 
                 <TabsContent value="discussion" className="mt-6 space-y-4">
