@@ -92,6 +92,11 @@ function ClassroomPage() {
   const [subLang, setSubLang] = useState<Lang | "off">(lang === "en" ? "off" : lang);
   const active = lessons[activeIdx];
 
+  useEffect(() => {
+    setAudioLang(lang);
+    setSubLang(lang === "en" ? "off" : lang);
+  }, [lang]);
+
   const pct = Math.round((completed.size / lessons.length) * 100);
 
   const pickLesson = (i: number) => {
@@ -250,7 +255,7 @@ function ClassroomPage() {
                 </TabsList>
 
                 <TabsContent value="overview" className="mt-6 space-y-4">
-                  <h3 className="font-serif text-xl text-white">{tx("About this lesson")}</h3>
+                  <h3 className="font-serif text-xl text-white">{t("classroom.aboutLesson")}</h3>
                   <p className="text-sm leading-relaxed text-white/70">
                     {tx(course.description)}
                   </p>
@@ -266,16 +271,16 @@ function ClassroomPage() {
                 </TabsContent>
 
                 <TabsContent value="discussion" className="mt-6 space-y-4">
-                  <h3 className="font-serif text-xl text-white">Ask the chef</h3>
-                  <p className="text-sm text-white/60">Share your bake, ask a question, get feedback from the community.</p>
+                  <h3 className="font-serif text-xl text-white">{t("classroom.discussionTitle")}</h3>
+                  <p className="text-sm text-white/60">{t("classroom.discussionBody")}</p>
                   <textarea
                     rows={3}
-                    placeholder={`What did you discover in "${active.title}"?`}
+                    placeholder={t("classroom.commentPlaceholder")}
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none"
                   />
                   <div className="flex justify-end">
                     <button className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground">
-                      Post comment
+                      {t("classroom.postComment")}
                     </button>
                   </div>
                   <div className="mt-4 space-y-3">
