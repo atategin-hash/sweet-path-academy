@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { courses, getCourse } from "@/lib/courses";
+import { courses, getCourse, flatLessons } from "@/lib/courses";
 import { enrolledCourses } from "@/lib/enrollment";
 import { PlayCircle, Clock, BookOpen, Trophy, Flame } from "lucide-react";
 
@@ -73,8 +73,8 @@ function DashboardPage() {
                     <p className="text-xs uppercase tracking-wider text-primary">{course.difficulty}</p>
                     <h3 className="mt-1 font-serif text-xl text-foreground">{course.title}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Lesson {lastLesson} of {course.syllabus.length} ·{" "}
-                      <span className="text-foreground">{course.syllabus[lastLesson - 1]?.title}</span>
+                      Lesson {lastLesson} of {flatLessons(course).length} ·{" "}
+                      <span className="text-foreground">{flatLessons(course)[lastLesson - 1]?.title}</span>
                     </p>
 
                     <div className="mt-4">
