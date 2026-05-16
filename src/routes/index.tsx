@@ -6,6 +6,7 @@ import { FreeMasterclasses } from "@/components/free-masterclasses";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   head: () => ({
