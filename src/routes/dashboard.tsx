@@ -16,10 +16,10 @@ export const Route = createFileRoute("/dashboard")({
 
 function DashboardPage() {
   const enrolled = enrolledCourses
-    .map((e) => ({ ...e, course: getCourse(e.slug)! }))
+    .map((e) => ({ ...e, course: getCourse(e.id)! }))
     .filter((e) => e.course);
 
-  const recommended = courses.filter((c) => !enrolled.some((e) => e.slug === c.slug)).slice(0, 3);
+  const recommended = courses.filter((c) => !enrolled.some((e) => e.id === c.id)).slice(0, 3);
   const avgProgress = Math.round((enrolled.reduce((a, b) => a + b.progress, 0) / enrolled.length) * 100);
 
   return (
@@ -58,7 +58,7 @@ function DashboardPage() {
               const pct = Math.round(progress * 100);
               return (
                 <div
-                  key={course.slug}
+                  key={course.id}
                   className="group flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-card sm:flex-row"
                 >
                   <div className="aspect-[5/4] w-full sm:aspect-auto sm:w-48 sm:flex-shrink-0">
@@ -70,7 +70,7 @@ function DashboardPage() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-xs uppercase tracking-wider text-primary">{course.level}</p>
+                    <p className="text-xs uppercase tracking-wider text-primary">{course.difficulty}</p>
                     <h3 className="mt-1 font-serif text-xl text-foreground">{course.title}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
                       Lesson {lastLesson} of {course.syllabus.length} ·{" "}
@@ -93,14 +93,14 @@ function DashboardPage() {
                     <div className="mt-5 flex flex-wrap gap-2">
                       <Link
                         to="/classroom/$id"
-                        params={{ id: course.slug }}
+                        params={{ id: course.id }}
                         className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground"
                       >
                         <PlayCircle className="h-4 w-4" /> Resume lesson
                       </Link>
                       <Link
                         to="/course/$id"
-                        params={{ id: course.slug }}
+                        params={{ id: course.id }}
                         className="inline-flex h-10 items-center rounded-full border border-border px-4 text-sm text-foreground hover:bg-accent"
                       >
                         Course details
@@ -119,14 +119,14 @@ function DashboardPage() {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {recommended.map((c) => (
               <Link
-                key={c.slug}
+                key={c.id}
                 to="/course/$id"
-                params={{ id: c.slug }}
+                params={{ id: c.id }}
                 className="group overflow-hidden rounded-2xl border border-border/60 bg-card transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
               >
                 <img src={c.image} alt={c.title} loading="lazy" className="aspect-video w-full object-cover" />
                 <div className="p-5">
-                  <p className="text-xs uppercase tracking-wider text-primary">{c.level}</p>
+                  <p className="text-xs uppercase tracking-wider text-primary">{c.difficulty}</p>
                   <p className="mt-1 font-serif text-lg text-foreground">{c.title}</p>
                   <p className="mt-3 text-sm text-primary group-hover:underline">View course →</p>
                 </div>
