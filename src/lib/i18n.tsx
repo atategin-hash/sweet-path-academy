@@ -710,7 +710,14 @@ function detectLanguage(): Lang {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => detectLanguage());
+  // Start with "en" on both server and first client paint to avoid hydration
+  // mismatch, then sync to the persisted/browser preference right after mount.
+  const [lang, setLangState] = useState<Lang>("en");
+
+  useEffect(() => {
+    const detected = detectLanguage();
+    setLangState((curr) => (curr === detected ? curr : detected));
+  }, []);
 
   useEffect(() => {
     if (typeof document === "undefined") return;
