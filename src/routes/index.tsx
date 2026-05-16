@@ -3,6 +3,11 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { CourseCard } from "@/components/course-card";
 import { CatalogSearch } from "@/components/catalog-search";
 import { FreeMasterclasses } from "@/components/free-masterclasses";
+import {
+  RecipeOfTheDay,
+  LiveAndRoadmapSection,
+  DailyProTip,
+} from "@/components/live-widgets";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
@@ -115,7 +120,11 @@ function HomePage() {
         </div>
       </section>
 
+      <RecipeOfTheDay />
+
       <FreeMasterclasses />
+
+      <LiveAndRoadmapSection />
 
       {/* FEATURED COURSES */}
       <section className="container mx-auto px-6 py-20">
@@ -189,6 +198,7 @@ function HomePage() {
       </section>
 
       <SiteFooter />
+      <DailyProTip />
     </div>
   );
 }
