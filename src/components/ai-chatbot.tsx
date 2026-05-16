@@ -8,15 +8,9 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { TIER_META, type Tier } from "@/lib/courses";
+import { useI18n } from "@/lib/i18n";
 
 type Msg = { role: "user" | "assistant"; text: string };
-
-const QUICK_PROMPTS = [
-  "Kekim neden kabarmadı?",
-  "Ev tipi fırın ayarı nasıl olmalı?",
-  "Bişkek'te bu malzemeleri nereden bulabilirim?",
-  "Krema neden ayrıştı?",
-];
 
 const TIER_OPTIONS: { id: Tier; Icon: typeof Home }[] = [
   { id: "home", Icon: Home },
