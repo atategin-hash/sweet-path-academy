@@ -5,8 +5,8 @@ import type { Course } from "@/lib/courses";
 export function CourseCard({ course }: { course: Course }) {
   return (
     <Link
-      to="/courses/$slug"
-      params={{ slug: course.slug }}
+      to="/course/$id"
+      params={{ id: course.slug }}
       className="group relative flex flex-col overflow-hidden rounded-3xl border border-border/60 bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-warm)]"
     >
       <div className="aspect-[5/4] overflow-hidden">
