@@ -33,7 +33,7 @@ export function LanguageSelector({ variant = "light" }: { variant?: "light" | "d
         {LANGUAGES.map((l) => (
           <DropdownMenuItem
             key={l.code}
-            onClick={() => setLang(l.code as Lang)}
+            onSelect={() => setLang(l.code as Lang)}
             className="flex cursor-pointer items-center gap-2"
           >
             <span className="text-lg leading-none">{l.flag}</span>
