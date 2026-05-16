@@ -1,40 +1,20 @@
 import { useState } from "react";
 import { Bell, Flame, Sparkles, TrendingUp, X } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 type Update = {
   id: string;
   icon: typeof Flame;
-  badge: string;
-  title: string;
-  when: string;
+  badgeKey: string;
+  titleKey: string;
+  whenKey: string;
   tone: "trend" | "new" | "update";
 };
 
 const UPDATES: Update[] = [
-  {
-    id: "u1",
-    icon: Flame,
-    badge: "Yeni Trend",
-    title: "New York Roll reçetesi güncellendi",
-    when: "Bugün · 2 saat önce",
-    tone: "trend",
-  },
-  {
-    id: "u2",
-    icon: Sparkles,
-    badge: "Yeni Ders",
-    title: "Bento Cake — kişisel tasarım kılavuzu eklendi",
-    when: "Dün",
-    tone: "new",
-  },
-  {
-    id: "u3",
-    icon: TrendingUp,
-    badge: "Güncelleme",
-    title: "Endüstriyel cheesecake — tunel fırın profili revize edildi",
-    when: "2 gün önce",
-    tone: "update",
-  },
+  { id: "u1", icon: Flame, badgeKey: "updates.badge.trend", titleKey: "updates.u1", whenKey: "updates.today", tone: "trend" },
+  { id: "u2", icon: Sparkles, badgeKey: "updates.badge.lesson", titleKey: "updates.u2", whenKey: "updates.yesterday", tone: "new" },
+  { id: "u3", icon: TrendingUp, badgeKey: "updates.badge.update", titleKey: "updates.u3", whenKey: "updates.daysAgo", tone: "update" },
 ];
 
 const toneStyles: Record<Update["tone"], string> = {
@@ -44,6 +24,7 @@ const toneStyles: Record<Update["tone"], string> = {
 };
 
 export function LiveUpdates() {
+  const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
   const visible = UPDATES.filter((u) => !dismissed.has(u.id));
@@ -56,18 +37,18 @@ export function LiveUpdates() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/70 opacity-75" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
           </span>
-          <p className="text-sm font-medium text-foreground">Canlı güncellemeler</p>
+          <p className="text-sm font-medium text-foreground">{t("updates.title")}</p>
           <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-primary">
-            {visible.length} yeni
+            {visible.length} {t("updates.new")}
           </span>
         </div>
         <button
           onClick={() => setOpen((o) => !o)}
           className="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-foreground"
-          aria-label="Toggle notifications"
+          aria-label={t("updates.toggle")}
         >
           <Bell className="h-3.5 w-3.5" />
-          {open ? "Gizle" : "Tümü"}
+          {open ? t("updates.hide") : t("updates.show")}
         </button>
       </div>
 
@@ -82,10 +63,10 @@ export function LiveUpdates() {
             </span>
             <div className="min-w-0 flex-1">
               <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                {u.badge}
+                {t(u.badgeKey)}
               </p>
-              <p className="truncate text-sm font-medium text-foreground">{u.title}</p>
-              <p className="text-xs text-muted-foreground">{u.when}</p>
+              <p className="truncate text-sm font-medium text-foreground">{t(u.titleKey)}</p>
+              <p className="text-xs text-muted-foreground">{t(u.whenKey)}</p>
             </div>
             <button
               onClick={() => setDismissed((s) => new Set(s).add(u.id))}
@@ -98,7 +79,7 @@ export function LiveUpdates() {
         ))}
         {visible.length === 0 && (
           <p className="rounded-2xl border border-dashed border-border/60 p-4 text-center text-xs text-muted-foreground">
-            Şu anda yeni bildirim yok.
+            {t("updates.empty")}
           </p>
         )}
       </div>

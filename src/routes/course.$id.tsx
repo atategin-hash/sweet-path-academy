@@ -3,6 +3,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { getCourse, totalLessons, type Course } from "@/lib/courses";
 import { useStore } from "@/lib/store";
 import { CourseFAQ } from "@/components/course-faq";
+import { useI18n } from "@/lib/i18n";
 import {
   Clock,
   BookOpen,
@@ -32,24 +33,31 @@ export const Route = createFileRoute("/course/$id")({
         ]
       : [],
   }),
-  notFoundComponent: () => (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
-      <div className="container mx-auto px-6 py-24 text-center">
-        <h1 className="font-serif text-4xl">Course not found</h1>
-        <Link to="/courses" className="mt-6 inline-block text-primary hover:underline">← Back to catalog</Link>
-      </div>
-    </div>
-  ),
+  notFoundComponent: CourseNotFound,
   component: CoursePage,
 });
 
+function CourseNotFound() {
+  const { t } = useI18n();
+  return (
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <div className="container mx-auto px-6 py-24 text-center">
+        <h1 className="font-serif text-4xl">{t("course.notFound")}</h1>
+        <Link to="/courses" className="mt-6 inline-block text-primary hover:underline">← {t("course.backCatalog")}</Link>
+      </div>
+    </div>
+  );
+}
+
 function CoursePage() {
   const { course } = Route.useLoaderData();
+  const { t, tx } = useI18n();
   const lessonCount = totalLessons(course);
   const { addToCart, openDrawer, isInCart, isEnrolled } = useStore();
   const inCart = isInCart(course.id);
   const enrolled = isEnrolled(course.id);
+  const features = ["course.feature.hd", "course.feature.recipes", "course.feature.qa", "course.feature.certificate"];
 
   return (
     <div className="min-h-screen bg-background">
@@ -57,7 +65,7 @@ function CoursePage() {
 
       <section className="container mx-auto px-6 py-12 md:py-16">
         <Link to="/courses" className="text-sm text-muted-foreground hover:text-foreground">
-          ← All courses
+          ← {t("course.all")}
         </Link>
 
         <div className="mt-6 grid gap-12 lg:grid-cols-[1.3fr_1fr]">
@@ -65,7 +73,7 @@ function CoursePage() {
             <div className="relative overflow-hidden rounded-[2rem] shadow-[var(--shadow-warm)]">
               <img
                 src={course.image}
-                alt={course.title}
+                alt={tx(course.title)}
                 width={800}
                 height={640}
                 className="aspect-[5/4] w-full object-cover"
@@ -76,22 +84,21 @@ function CoursePage() {
                 className="absolute inset-0 flex items-center justify-center bg-foreground/20 opacity-0 transition-opacity hover:opacity-100"
               >
                 <span className="flex items-center gap-2 rounded-full bg-background/95 px-6 py-3 text-sm font-medium text-foreground">
-                  <PlayCircle className="h-5 w-5 text-primary" /> Play preview
+                  <PlayCircle className="h-5 w-5 text-primary" /> {t("course.playPreview")}
                 </span>
               </Link>
             </div>
 
             <div className="mt-10">
-              <h2 className="font-serif text-3xl text-foreground">About this course</h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{course.description}</p>
+              <h2 className="font-serif text-3xl text-foreground">{t("course.about")}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
             </div>
 
-            {/* Curriculum */}
             <div className="mt-12">
               <div className="flex flex-wrap items-end justify-between gap-2">
-                <h2 className="font-serif text-3xl text-foreground">Curriculum</h2>
+                <h2 className="font-serif text-3xl text-foreground">{t("course.curriculum")}</h2>
                 <span className="text-sm text-muted-foreground">
-                  {course.modules.length} modules · {lessonCount} lessons · {course.duration}
+                  {course.modules.length} {t("common.modules")} · {lessonCount} {t("common.lessons")} · {course.duration}
                 </span>
               </div>
 
@@ -108,12 +115,12 @@ function CoursePage() {
                       </span>
                       <div className="flex-1">
                         <p className="text-xs uppercase tracking-wider text-primary">
-                          Module {mIdx + 1}
+                          {t("common.module")} {mIdx + 1}
                         </p>
-                        <p className="font-serif text-xl text-foreground">{mod.title}</p>
+                        <p className="font-serif text-xl text-foreground">{tx(mod.title)}</p>
                       </div>
                       <span className="text-sm text-muted-foreground">
-                        {mod.lessons.length} lessons
+                        {mod.lessons.length} {t("common.lessons")}
                       </span>
                       <span className="text-muted-foreground transition-transform group-open:rotate-180">▾</span>
                     </summary>
@@ -124,7 +131,7 @@ function CoursePage() {
                             {lIdx + 1}
                           </span>
                           <div className="flex-1">
-                            <p className="text-sm text-foreground">{lesson.title}</p>
+                            <p className="text-sm text-foreground">{tx(lesson.title)}</p>
                           </div>
                           <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                             <Clock className="h-3 w-3" />
@@ -140,12 +147,11 @@ function CoursePage() {
             </div>
           </div>
 
-          {/* Sidebar */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-[var(--shadow-soft)]">
               <div className="flex items-center gap-2">
                 <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary">
-                  {course.difficulty}
+                  {t(`difficulty.${course.difficulty}`)}
                 </span>
                 <span className="inline-flex items-center gap-1 text-sm text-muted-foreground">
                   <Star className="h-3.5 w-3.5 fill-primary text-primary" />
@@ -154,13 +160,13 @@ function CoursePage() {
                 </span>
               </div>
               <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground">
-                {course.title}
+                {tx(course.title)}
               </h1>
-              <p className="mt-3 text-muted-foreground">{course.tagline}</p>
+              <p className="mt-3 text-muted-foreground">{tx(course.tagline)}</p>
 
               <div className="mt-6 flex items-baseline gap-2">
                 <span className="font-serif text-5xl text-foreground">${course.price}</span>
-                <span className="text-sm text-muted-foreground">/ lifetime access</span>
+                <span className="text-sm text-muted-foreground">/ {t("course.lifetime")}</span>
               </div>
 
               {enrolled ? (
@@ -169,7 +175,7 @@ function CoursePage() {
                   params={{ id: course.id }}
                   className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                 >
-                  <PlayCircle className="h-4 w-4" /> Continue learning
+                  <PlayCircle className="h-4 w-4" /> {t("course.continue")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               ) : (
@@ -181,7 +187,7 @@ function CoursePage() {
                   className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                 >
                   <ShoppingBag className="h-4 w-4" />
-                  {inCart ? "View in cart" : "Add to cart"}
+                  {inCart ? t("course.viewInCart") : t("course.addToCart")}
                   <ArrowRight className="h-4 w-4" />
                 </button>
               )}
@@ -190,18 +196,18 @@ function CoursePage() {
                 params={{ id: course.id }}
                 className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-background text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
-                <PlayCircle className="h-4 w-4 text-primary" /> Watch free preview
+                <PlayCircle className="h-4 w-4 text-primary" /> {t("course.preview")}
               </Link>
 
               <dl className="mt-8 space-y-3 border-t border-border/60 pt-6 text-sm">
-                <Stat icon={<Clock className="h-4 w-4" />} label="Total runtime" value={course.duration} />
-                <Stat icon={<BookOpen className="h-4 w-4" />} label="Lessons" value={`${lessonCount} videos`} />
-                <Stat icon={<Layers className="h-4 w-4" />} label="Modules" value={String(course.modules.length)} />
-                <Stat icon={<BarChart3 className="h-4 w-4" />} label="Difficulty" value={course.difficulty} />
+                <Stat icon={<Clock className="h-4 w-4" />} label={t("course.runtime")} value={course.duration} />
+                <Stat icon={<BookOpen className="h-4 w-4" />} label={t("course.lessons")} value={`${lessonCount} ${t("common.videos")}`} />
+                <Stat icon={<Layers className="h-4 w-4" />} label={t("course.modules")} value={String(course.modules.length)} />
+                <Stat icon={<BarChart3 className="h-4 w-4" />} label={t("course.difficulty")} value={t(`difficulty.${course.difficulty}`)} />
               </dl>
 
               <div className="mt-8 border-t border-border/60 pt-6">
-                <p className="text-sm font-medium text-foreground">Your instructor</p>
+                <p className="text-sm font-medium text-foreground">{t("course.instructor")}</p>
                 <div className="mt-3 flex items-center gap-3">
                   <img
                     src={course.instructor.avatar}
@@ -217,9 +223,9 @@ function CoursePage() {
               </div>
 
               <ul className="mt-8 space-y-2 border-t border-border/60 pt-6 text-sm text-muted-foreground">
-                {["HD video lessons", "Downloadable recipes", "Q&A with chef", "Certificate of completion"].map((f) => (
+                {features.map((f) => (
                   <li key={f} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-primary" /> {f}
+                    <CheckCircle2 className="h-4 w-4 text-primary" /> {t(f)}
                   </li>
                 ))}
               </ul>
