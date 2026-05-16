@@ -29,6 +29,7 @@ import {
   Factory,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CourseFAQDark } from "@/components/course-faq";
 
 const classroomSearch = z.object({
   lesson: fallback(z.string(), "").default(""),

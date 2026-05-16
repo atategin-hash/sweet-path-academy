@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { getCourse, totalLessons, type Course } from "@/lib/courses";
 import { useStore } from "@/lib/store";
+import { CourseFAQ } from "@/components/course-faq";
 import {
   Clock,
   BookOpen,
@@ -225,6 +226,8 @@ function CoursePage() {
             </div>
           </aside>
         </div>
+
+        <CourseFAQ course={course} className="mt-20 max-w-3xl" />
       </section>
 
       <SiteFooter />
