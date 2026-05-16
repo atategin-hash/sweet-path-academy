@@ -27,9 +27,22 @@ import {
   Home,
   Store,
   Factory,
+  Headphones,
+  Subtitles as SubtitlesIcon,
+  Wand2,
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseFAQDark } from "@/components/course-faq";
+import { useI18n, LANGUAGES, type Lang } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/language-selector";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const classroomSearch = z.object({
   lesson: fallback(z.string(), "").default(""),
