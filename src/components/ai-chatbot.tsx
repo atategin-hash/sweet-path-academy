@@ -231,7 +231,7 @@ export function AIChatbot() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Sorunuzu yazın…"
+              placeholder={t("chatbot.placeholder")}
               className="flex-1 rounded-full border border-border bg-card px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none"
             />
             <button
