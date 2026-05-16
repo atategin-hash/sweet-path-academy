@@ -365,6 +365,7 @@ export const courses: Course[] = [
     difficulty: "Beginner",
     tier: "home",
     trending: true,
+    free: true,
     keywords: ["cinnamon rolls", "yeast", "bread", "mise en place", "bakery basics"],
     duration: "1h 30m",
     price: 49,
