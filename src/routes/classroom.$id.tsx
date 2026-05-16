@@ -523,3 +523,96 @@ const sampleComments = [
   { name: "Olivia R.", text: "The mise en place breakdown finally clicked for me. Best 5 minutes I've spent in the kitchen." },
   { name: "Daniel K.", text: "Loved the slow-motion piping shots — so much easier to follow than other tutorials." },
 ];
+
+const ORIGINAL_AUDIO: Lang = "en";
+
+function AudioPicker({
+  value,
+  onChange,
+  label,
+}: {
+  value: Lang;
+  onChange: (l: Lang) => void;
+  label: string;
+}) {
+  const current = LANGUAGES.find((l) => l.code === value)!;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">
+        <Headphones className="h-3.5 w-3.5 text-primary" />
+        <span className="text-sm leading-none">{current.flag}</span>
+        <span className="hidden sm:inline">{current.native}</span>
+        <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[9px] uppercase text-primary">
+          {value === ORIGINAL_AUDIO ? "Original" : "AI"}
+        </span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel className="text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {LANGUAGES.map((l) => (
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => onChange(l.code)}
+            className="flex cursor-pointer items-center gap-2"
+          >
+            <span className="text-lg leading-none">{l.flag}</span>
+            <span className="flex-1 text-sm">{l.native}</span>
+            <span className="text-[10px] uppercase text-muted-foreground">
+              {l.code === ORIGINAL_AUDIO ? "Original" : "AI Dubbed"}
+            </span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function SubtitlePicker({
+  value,
+  onChange,
+  label,
+  offLabel,
+}: {
+  value: Lang | "off";
+  onChange: (v: Lang | "off") => void;
+  label: string;
+  offLabel: string;
+}) {
+  const current = value === "off" ? null : LANGUAGES.find((l) => l.code === value)!;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="inline-flex h-9 items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 text-xs font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white">
+        <SubtitlesIcon className="h-3.5 w-3.5 text-primary" />
+        {current ? (
+          <>
+            <span className="text-sm leading-none">{current.flag}</span>
+            <span className="hidden sm:inline">CC · {current.label}</span>
+          </>
+        ) : (
+          <span>CC {offLabel}</span>
+        )}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-52">
+        <DropdownMenuLabel className="text-xs uppercase tracking-wider text-muted-foreground">
+          {label}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => onChange("off")} className="cursor-pointer text-sm">
+          {offLabel}
+        </DropdownMenuItem>
+        {LANGUAGES.map((l) => (
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => onChange(l.code)}
+            className="flex cursor-pointer items-center gap-2"
+          >
+            <span className="text-lg leading-none">{l.flag}</span>
+            <span className="flex-1 text-sm">{l.native}</span>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
