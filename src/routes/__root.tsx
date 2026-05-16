@@ -72,34 +72,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MaisonCrumb | Global Smart Baking Academy" },
-      {
-        name: "description",
-        content:
-          "Learn trending pastry and baking secrets from world-class free resources, structured for Home, Business, and Industrial levels.",
-      },
-      { name: "author", content: "MaisonCrumb Pastry Academy" },
-      { name: "theme-color", content: "#1a120b" },
-      { property: "og:site_name", content: "MaisonCrumb" },
-      { property: "og:title", content: "MaisonCrumb | Global Smart Baking Academy" },
-      {
-        property: "og:description",
-        content:
-          "Trending pastry & baking masterclasses for Home, Business, and Industrial bakers — taught in 12 languages.",
-      },
+      { title: "Lovable App" },
+      { name: "description", content: "Bake Academy Hub is an online platform for learning baking and pastry skills through interactive courses." },
+      { name: "author", content: "Lovable" },
+      { property: "og:title", content: "Lovable App" },
+      { property: "og:description", content: "Bake Academy Hub is an online platform for learning baking and pastry skills through interactive courses." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "MaisonCrumb | Global Smart Baking Academy" },
-      {
-        name: "twitter:description",
-        content:
-          "Trending pastry & baking masterclasses for Home, Business, and Industrial bakers.",
-      },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:description", content: "Bake Academy Hub is an online platform for learning baking and pastry skills through interactive courses." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/253cfb86-6170-4ab4-b32b-8c429b1241d6/id-preview-edc6032e--81c65bb4-c383-4c4c-9a7f-423f106cd5e7.lovable.app-1778929691773.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/253cfb86-6170-4ab4-b32b-8c429b1241d6/id-preview-edc6032e--81c65bb4-c383-4c4c-9a7f-423f106cd5e7.lovable.app-1778929691773.png" },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-      { rel: "apple-touch-icon", href: "/favicon.svg" },
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
     ],
   }),
   shellComponent: RootShell,
