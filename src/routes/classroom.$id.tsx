@@ -334,6 +334,8 @@ function ClassroomPage() {
             </Link>
           </aside>
         </div>
+
+        <CourseFAQDark course={course} className="mt-16 max-w-3xl" />
       </div>
     </div>
   );
