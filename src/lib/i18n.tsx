@@ -823,7 +823,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (typeof document === "undefined") return;
     document.documentElement.lang = lang;
-    document.documentElement.dir = "ltr";
+    document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
   }, [lang]);
 
   const setLang = useCallback((nextLang: Lang) => {
@@ -834,19 +834,22 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<I18nCtx>(() => {
-    const dict = DICTIONARIES[lang];
+    const dict = DICTIONARIES[lang] ?? {};
     const fallback = DICTIONARIES.en;
-    const content = CONTENT_TRANSLATIONS[lang];
+    const content = CONTENT_TRANSLATIONS[lang] ?? {};
+    const glossary = CONTENT_GLOSSARY[lang] ?? [];
     return {
       lang,
       setLang,
+      region: MEASUREMENT_SYSTEM[lang],
+      isRTL: RTL_LANGS.includes(lang),
       t: (key: string) => dict[key] ?? fallback[key] ?? key,
       tx: (text?: string | null) => {
         if (!text) return "";
         if (lang === "en") return text;
         if (content[text]) return content[text];
         let out = text;
-        for (const [re, val] of CONTENT_GLOSSARY[lang]) out = out.replace(re, val);
+        for (const [re, val] of glossary) out = out.replace(re, val);
         return out;
       },
     };
