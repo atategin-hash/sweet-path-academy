@@ -159,7 +159,7 @@ function ClassroomPage() {
                 </div>
               </div>
               <ol className="max-h-[28rem] overflow-y-auto">
-                {course.syllabus.map((lesson, i) => {
+                {course.syllabus.map((lesson: Course["syllabus"][number], i: number) => {
                   const isActive = i === activeIdx;
                   const isDone = completed.has(i);
                   const isLocked = i > 0 && !completed.has(i - 1) && !isActive && i !== activeIdx + 1;
