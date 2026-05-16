@@ -112,22 +112,23 @@ export function CourseFAQ({ course, className }: { course: Course; className?: s
 
 /** Dark-themed variant for the classroom page. */
 export function CourseFAQDark({ course, className }: { course: Course; className?: string }) {
+  const { t, tx } = useI18n();
   const items = [...TIER_FAQ[course.tier], ...GENERIC];
   return (
     <section className={className}>
       <div className="flex items-center gap-2">
         <HelpCircle className="h-5 w-5 text-primary" />
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">FAQ</p>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-primary">{t("faq.title")}</p>
       </div>
-      <h2 className="mt-2 font-serif text-2xl text-white">Bu kursta sıkça sorulanlar</h2>
+      <h2 className="mt-2 font-serif text-2xl text-white">{t("faq.subtitle")}</h2>
       <Accordion type="single" collapsible className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] px-2 backdrop-blur">
         {items.map((it, i) => (
           <AccordionItem key={i} value={`cfaq-${i}`} className="border-b border-white/10 last:border-0">
             <AccordionTrigger className="px-4 text-left text-sm font-medium text-white hover:no-underline">
-              {it.q}
+              {tx(it.q)}
             </AccordionTrigger>
             <AccordionContent className="px-4 text-sm leading-relaxed text-white/70">
-              {it.a}
+              {tx(it.a)}
             </AccordionContent>
           </AccordionItem>
         ))}
