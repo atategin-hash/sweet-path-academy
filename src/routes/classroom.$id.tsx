@@ -117,6 +117,7 @@ function ClassroomPage() {
       next.add(activeIdx);
       return next;
     });
+    if (course.free) setTeaserOpen(true);
   };
 
   const isYouTube = active.videoUrl.includes("youtube.com/embed");
