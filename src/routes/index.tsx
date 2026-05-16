@@ -114,6 +114,8 @@ function HomePage() {
         </div>
       </section>
 
+      <FreeMasterclasses />
+
       {/* FEATURED COURSES */}
       <section className="container mx-auto px-6 py-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
