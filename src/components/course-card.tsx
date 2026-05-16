@@ -40,7 +40,7 @@ export function CourseCard({ course }: { course: Course }) {
         </div>
         {course.free && (
           <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md">
-            ★ Free
+            ★ {t("free.badge")}
           </span>
         )}
       </div>
@@ -70,7 +70,7 @@ export function CourseCard({ course }: { course: Course }) {
             <span className="font-serif text-2xl text-foreground">${course.price}</span>
           )}
           <span className="text-sm font-medium text-primary group-hover:underline">
-            {course.free ? "Watch now" : t("course.view")} →
+            {course.free ? t("free.watchNow") : `${t("course.view")} →`}
           </span>
         </div>
       </div>
