@@ -16,7 +16,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesIndexRouteImport } from './routes/courses.index'
 import { Route as CourseIdRouteImport } from './routes/course.$id'
 import { Route as ClassroomIdRouteImport } from './routes/classroom.$id'
-import { Route as CourseRouteImport } from './routes/course.'
 
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
@@ -53,18 +52,12 @@ const ClassroomIdRoute = ClassroomIdRouteImport.update({
   path: '/classroom/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CourseRoute = CourseRouteImport.update({
-  id: '/course/',
-  path: '/course/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/dashboard': typeof DashboardRoute
-  '/course/': typeof CourseRoute
   '/classroom/$id': typeof ClassroomIdRoute
   '/course/$id': typeof CourseIdRoute
   '/courses/': typeof CoursesIndexRoute
@@ -74,7 +67,6 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/dashboard': typeof DashboardRoute
-  '/course': typeof CourseRoute
   '/classroom/$id': typeof ClassroomIdRoute
   '/course/$id': typeof CourseIdRoute
   '/courses': typeof CoursesIndexRoute
@@ -85,7 +77,6 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/checkout': typeof CheckoutRoute
   '/dashboard': typeof DashboardRoute
-  '/course/': typeof CourseRoute
   '/classroom/$id': typeof ClassroomIdRoute
   '/course/$id': typeof CourseIdRoute
   '/courses/': typeof CoursesIndexRoute
@@ -97,7 +88,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/dashboard'
-    | '/course/'
     | '/classroom/$id'
     | '/course/$id'
     | '/courses/'
@@ -107,7 +97,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/dashboard'
-    | '/course'
     | '/classroom/$id'
     | '/course/$id'
     | '/courses'
@@ -117,7 +106,6 @@ export interface FileRouteTypes {
     | '/about'
     | '/checkout'
     | '/dashboard'
-    | '/course/'
     | '/classroom/$id'
     | '/course/$id'
     | '/courses/'
@@ -128,7 +116,6 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CheckoutRoute: typeof CheckoutRoute
   DashboardRoute: typeof DashboardRoute
-  CourseRoute: typeof CourseRoute
   ClassroomIdRoute: typeof ClassroomIdRoute
   CourseIdRoute: typeof CourseIdRoute
   CoursesIndexRoute: typeof CoursesIndexRoute
@@ -185,13 +172,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClassroomIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/course/': {
-      id: '/course/'
-      path: '/course'
-      fullPath: '/course/'
-      preLoaderRoute: typeof CourseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -200,7 +180,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CheckoutRoute: CheckoutRoute,
   DashboardRoute: DashboardRoute,
-  CourseRoute: CourseRoute,
   ClassroomIdRoute: ClassroomIdRoute,
   CourseIdRoute: CourseIdRoute,
   CoursesIndexRoute: CoursesIndexRoute,
@@ -208,3 +187,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
