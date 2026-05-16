@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { courses, getCourse, flatLessons } from "@/lib/courses";
-import { enrolledCourses } from "@/lib/enrollment";
+import { useStore } from "@/lib/store";
 import { PlayCircle, Clock, BookOpen, Trophy, Flame } from "lucide-react";
 
 export const Route = createFileRoute("/dashboard")({
@@ -15,12 +15,15 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function DashboardPage() {
-  const enrolled = enrolledCourses
+  const { enrolled: enrolledList } = useStore();
+  const enrolled = enrolledList
     .map((e) => ({ ...e, course: getCourse(e.id)! }))
     .filter((e) => e.course);
 
   const recommended = courses.filter((c) => !enrolled.some((e) => e.id === c.id)).slice(0, 3);
-  const avgProgress = Math.round((enrolled.reduce((a, b) => a + b.progress, 0) / enrolled.length) * 100);
+  const avgProgress = enrolled.length
+    ? Math.round((enrolled.reduce((a, b) => a + b.progress, 0) / enrolled.length) * 100)
+    : 0;
 
   return (
     <div className="min-h-screen bg-background">

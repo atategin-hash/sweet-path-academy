@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { getCourse, totalLessons, type Course } from "@/lib/courses";
+import { useStore } from "@/lib/store";
 import {
   Clock,
   BookOpen,
@@ -45,6 +46,9 @@ export const Route = createFileRoute("/course/$id")({
 function CoursePage() {
   const { course } = Route.useLoaderData();
   const lessonCount = totalLessons(course);
+  const { addToCart, openDrawer, isInCart, isEnrolled } = useStore();
+  const inCart = isInCart(course.id);
+  const enrolled = isEnrolled(course.id);
 
   return (
     <div className="min-h-screen bg-background">
@@ -158,14 +162,28 @@ function CoursePage() {
                 <span className="text-sm text-muted-foreground">/ lifetime access</span>
               </div>
 
-              <Link
-                to="/classroom/$id"
-                params={{ id: course.id }}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-              >
-                <ShoppingBag className="h-4 w-4" /> Enroll Now
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {enrolled ? (
+                <Link
+                  to="/classroom/$id"
+                  params={{ id: course.id }}
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                >
+                  <PlayCircle className="h-4 w-4" /> Continue learning
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : (
+                <button
+                  onClick={() => {
+                    if (!inCart) addToCart(course.id);
+                    openDrawer();
+                  }}
+                  className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  {inCart ? "View in cart" : "Add to cart"}
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              )}
               <Link
                 to="/classroom/$id"
                 params={{ id: course.id }}
