@@ -583,7 +583,25 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
 
     "lang.label": "Язык",
   },
-};
+
+  fr: {
+    "nav.home": "Accueil", "nav.courses": "Cours", "nav.dashboard": "Tableau de bord", "nav.start": "Commencer",
+    "common.lessons": "leçons", "common.modules": "modules", "common.trending": "Tendance", "common.hot": "Populaire",
+    "tier.all.label": "Tous les cours", "tier.home.label": "Pâtissier amateur", "tier.home.short": "Maison",
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industriel", "tier.industrial.short": "Usine",
+    "catalog.searchPlaceholder": "Tapez un nom de gâteau…",
+    "lang.label": "Langue",
+    "chatbot.title": "Assistant Pâtisserie IA", "chatbot.subtitle": "Réponses adaptées à votre niveau",
+    "chatbot.welcome": "Bonjour ! Je suis votre assistant pâtisserie MaisonCrumb 🧁. Choisissez une question rapide ou posez la vôtre.",
+    "chatbot.placeholder": "Votre question…", "chatbot.quick": "Questions rapides",
+    "chatbot.q1": "Pourquoi mon gâteau n'a-t-il pas levé ?", "chatbot.q2": "Quel réglage pour mon four ?",
+    "chatbot.q3": "Où acheter mes ingrédients ?", "chatbot.q4": "Ma crème a tranché — que faire ?",
+  },
+  es: {
+    "nav.home": "Inicio", "nav.courses": "Cursos", "nav.dashboard": "Panel", "nav.start": "Empezar",
+    "common.lessons": "lecciones", "common.modules": "módulos", "common.trending": "Tendencia", "common.hot": "Popular",
+    "tier.all.label": "Todos los cursos", "tier.home.label": "Repostería casera", "tier.home.short": "Casa",
 
 const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
   en: {
