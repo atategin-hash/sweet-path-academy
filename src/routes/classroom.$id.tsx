@@ -5,11 +5,10 @@ import {
   getCourse,
   flatLessons,
   scaleIngredient,
-  TIER_META,
   type Course,
   type ScaleMode,
 } from "@/lib/courses";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Play,
   CheckCircle2,
@@ -58,18 +57,23 @@ export const Route = createFileRoute("/classroom/$id")({
   head: ({ loaderData }) => ({
     meta: loaderData ? [{ title: `Classroom — ${loaderData.course.title}` }] : [],
   }),
-  notFoundComponent: () => (
+  notFoundComponent: ClassroomNotFound,
+  component: ClassroomPage,
+});
+
+function ClassroomNotFound() {
+  const { t } = useI18n();
+  return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-24 text-center">
-        <h1 className="font-serif text-4xl">Classroom not found</h1>
+        <h1 className="font-serif text-4xl">{t("classroom.notFound")}</h1>
         <Link to="/dashboard" className="mt-6 inline-block text-primary hover:underline">
-          ← Back to dashboard
+          ← {t("classroom.backDashboard")}
         </Link>
       </div>
     </div>
-  ),
-  component: ClassroomPage,
-});
+  );
+}
 
 function ClassroomPage() {
   const { course } = Route.useLoaderData();
