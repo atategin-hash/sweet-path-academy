@@ -793,14 +793,21 @@ type I18nCtx = {
   setLang: (l: Lang) => void;
   t: (key: string) => string;
   tx: (text?: string | null) => string;
+  region: MeasurementSystem;
+  isRTL: boolean;
 };
 
 const Ctx = createContext<I18nCtx | null>(null);
 const STORAGE_KEY = "maisoncrumb.lang";
 
+const ALL_CODES: Lang[] = ["en","fr","es","de","it","pt","tr","ru","ar","ja","ko","zh"];
+
 function normalizeLang(input?: string | null): Lang | null {
-  const code = input?.slice(0, 2).toLowerCase();
-  return code === "tr" || code === "ru" || code === "en" ? code : null;
+  if (!input) return null;
+  const lower = input.toLowerCase();
+  if (lower.startsWith("zh")) return "zh";
+  const code = lower.slice(0, 2) as Lang;
+  return ALL_CODES.includes(code) ? code : null;
 }
 
 function detectLanguage(): Lang {
