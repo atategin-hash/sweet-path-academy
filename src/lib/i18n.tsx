@@ -602,8 +602,34 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "nav.home": "Inicio", "nav.courses": "Cursos", "nav.dashboard": "Panel", "nav.start": "Empezar",
     "common.lessons": "lecciones", "common.modules": "módulos", "common.trending": "Tendencia", "common.hot": "Popular",
     "tier.all.label": "Todos los cursos", "tier.home.label": "Repostería casera", "tier.home.short": "Casa",
-
-const CONTENT_TRANSLATIONS: Partial<Record<Lang, Dict>> = {
+    "tier.business.label": "Café Boutique", "tier.business.short": "Café",
+    "tier.industrial.label": "Industrial", "tier.industrial.short": "Fábrica",
+    "catalog.searchPlaceholder": "Escribe un nombre de pastel…",
+    "lang.label": "Idioma",
+    "chatbot.title": "Asistente de Repostería IA", "chatbot.subtitle": "Respuestas según tu nivel",
+    "chatbot.welcome": "¡Hola! Soy tu asistente de repostería MaisonCrumb 🧁. Elige una pregunta rápida o escribe la tuya.",
+    "chatbot.placeholder": "Tu pregunta…", "chatbot.quick": "Preguntas rápidas",
+    "chatbot.q1": "¿Por qué no subió mi pastel?", "chatbot.q2": "¿Cómo ajusto mi horno?",
+    "chatbot.q3": "¿Dónde compro ingredientes?", "chatbot.q4": "Mi crema se cortó — ¿qué hago?",
+  },
+  de: {
+    "nav.home": "Start", "nav.courses": "Kurse", "nav.dashboard": "Übersicht", "nav.start": "Loslegen",
+    "common.lessons": "Lektionen", "common.modules": "Module", "common.trending": "Trend", "common.hot": "Beliebt",
+    "tier.all.label": "Alle Kurse", "tier.home.label": "Hobbybäcker", "tier.home.short": "Zuhause",
+    "tier.business.label": "Café & Bistro", "tier.business.short": "Café",
+    "tier.industrial.label": "Industriell", "tier.industrial.short": "Fabrik",
+    "catalog.searchPlaceholder": "Kuchenname eingeben…",
+    "lang.label": "Sprache",
+    "chatbot.title": "KI-Backassistent", "chatbot.subtitle": "Antworten passend zu deinem Niveau",
+    "chatbot.welcome": "Hallo! Ich bin dein MaisonCrumb KI-Backassistent 🧁. Wähle eine Schnellfrage oder stelle deine eigene.",
+    "chatbot.placeholder": "Deine Frage…", "chatbot.quick": "Schnellfragen",
+    "chatbot.q1": "Warum ist mein Kuchen nicht aufgegangen?", "chatbot.q2": "Welche Ofeneinstellung?",
+    "chatbot.q3": "Wo bekomme ich die Zutaten?", "chatbot.q4": "Meine Creme ist geronnen — was tun?",
+  },
+  it: {
+    "nav.home": "Home", "nav.courses": "Corsi", "nav.dashboard": "Bacheca", "nav.start": "Inizia",
+    "common.lessons": "lezioni", "common.modules": "moduli", "common.trending": "Di tendenza", "common.hot": "Popolare",
+    
   en: {
     "Bu keki ne kadar saklayabilirim?": "How long can I store this cake?",
     "Ev şartlarında buzdolabında hava almayan kapta 3–4 gün, derin dondurucuda dilim halinde 1 aya kadar saklayabilirsiniz.": "At home, store it in an airtight container in the refrigerator for 3–4 days, or freeze sliced portions for up to 1 month.",
