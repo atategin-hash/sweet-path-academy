@@ -525,6 +525,8 @@ function RecipePanel({
         </div>
       )}
 
+      {isFree && courseId && <LockedChefSecrets courseId={courseId} />}
+
       <button
         onClick={() => window.print()}
         className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-sm text-white transition-colors hover:bg-white/10"
