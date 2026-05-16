@@ -121,7 +121,7 @@ function HomePage() {
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {featured.map((course) => (
-            <CourseCard key={course.slug} course={course} />
+            <CourseCard key={course.id} course={course} />
           ))}
         </div>
       </section>

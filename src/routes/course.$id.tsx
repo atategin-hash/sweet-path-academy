@@ -1,7 +1,17 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { getCourse, type Course } from "@/lib/courses";
-import { Clock, BookOpen, BarChart3, PlayCircle, CheckCircle2, ShoppingBag, ArrowRight } from "lucide-react";
+import { getCourse, totalLessons, type Course } from "@/lib/courses";
+import {
+  Clock,
+  BookOpen,
+  BarChart3,
+  PlayCircle,
+  CheckCircle2,
+  ShoppingBag,
+  ArrowRight,
+  Star,
+  Layers,
+} from "lucide-react";
 
 export const Route = createFileRoute("/course/$id")({
   loader: ({ params }): { course: Course } => {
@@ -34,6 +44,7 @@ export const Route = createFileRoute("/course/$id")({
 
 function CoursePage() {
   const { course } = Route.useLoaderData();
+  const lessonCount = totalLessons(course);
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,7 +67,7 @@ function CoursePage() {
               />
               <Link
                 to="/classroom/$id"
-                params={{ id: course.slug }}
+                params={{ id: course.id }}
                 className="absolute inset-0 flex items-center justify-center bg-foreground/20 opacity-0 transition-opacity hover:opacity-100"
               >
                 <span className="flex items-center gap-2 rounded-full bg-background/95 px-6 py-3 text-sm font-medium text-foreground">
@@ -70,35 +81,74 @@ function CoursePage() {
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{course.description}</p>
             </div>
 
-            <div className="mt-10">
-              <div className="flex items-center justify-between">
+            {/* Curriculum */}
+            <div className="mt-12">
+              <div className="flex flex-wrap items-end justify-between gap-2">
                 <h2 className="font-serif text-3xl text-foreground">Curriculum</h2>
-                <span className="text-sm text-muted-foreground">{course.syllabus.length} lessons</span>
+                <span className="text-sm text-muted-foreground">
+                  {course.modules.length} modules · {lessonCount} lessons · {course.duration}
+                </span>
               </div>
-              <ul className="mt-6 divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/60 bg-card">
-                {course.syllabus.map((lesson: Course["syllabus"][number], i: number) => (
-                  <li key={lesson.title} className="flex items-center gap-4 p-5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-medium text-primary">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground">{lesson.title}</p>
-                    </div>
-                    <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                      <Clock className="h-3.5 w-3.5" />
-                      {lesson.duration}
-                    </span>
-                  </li>
+
+              <div className="mt-6 space-y-4">
+                {course.modules.map((mod: Course["modules"][number], mIdx: number) => (
+                  <details
+                    key={mod.id}
+                    open={mIdx === 0}
+                    className="group overflow-hidden rounded-2xl border border-border/60 bg-card"
+                  >
+                    <summary className="flex cursor-pointer list-none items-center gap-4 p-5">
+                      <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-accent text-primary">
+                        <Layers className="h-4 w-4" />
+                      </span>
+                      <div className="flex-1">
+                        <p className="text-xs uppercase tracking-wider text-primary">
+                          Module {mIdx + 1}
+                        </p>
+                        <p className="font-serif text-xl text-foreground">{mod.title}</p>
+                      </div>
+                      <span className="text-sm text-muted-foreground">
+                        {mod.lessons.length} lessons
+                      </span>
+                      <span className="text-muted-foreground transition-transform group-open:rotate-180">▾</span>
+                    </summary>
+                    <ul className="divide-y divide-border/60 border-t border-border/60">
+                      {mod.lessons.map((lesson: Course["modules"][number]["lessons"][number], lIdx: number) => (
+                        <li key={lesson.id} className="flex items-center gap-4 px-5 py-4">
+                          <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+                            {lIdx + 1}
+                          </span>
+                          <div className="flex-1">
+                            <p className="text-sm text-foreground">{lesson.title}</p>
+                          </div>
+                          <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <Clock className="h-3 w-3" />
+                            {lesson.duration}
+                          </span>
+                          <PlayCircle className="h-4 w-4 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
 
           {/* Sidebar */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-border/60 bg-card p-8 shadow-[var(--shadow-soft)]">
-              <p className="text-xs uppercase tracking-wider text-primary">{course.level}</p>
-              <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground">
+              <div className="flex items-center gap-2">
+                <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium uppercase tracking-wider text-primary">
+                  {course.difficulty}
+                </span>
+                <span className="inline-flex items-center gap-1 text-sm text-muted-foreground">
+                  <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                  <span className="font-medium text-foreground">{course.rating}</span>
+                  <span>({course.reviews})</span>
+                </span>
+              </div>
+              <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground">
                 {course.title}
               </h1>
               <p className="mt-3 text-muted-foreground">{course.tagline}</p>
@@ -110,7 +160,7 @@ function CoursePage() {
 
               <Link
                 to="/classroom/$id"
-                params={{ id: course.slug }}
+                params={{ id: course.id }}
                 className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
               >
                 <ShoppingBag className="h-4 w-4" /> Enroll Now
@@ -118,7 +168,7 @@ function CoursePage() {
               </Link>
               <Link
                 to="/classroom/$id"
-                params={{ id: course.slug }}
+                params={{ id: course.id }}
                 className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-background text-sm font-medium text-foreground transition-colors hover:bg-accent"
               >
                 <PlayCircle className="h-4 w-4 text-primary" /> Watch free preview
@@ -126,16 +176,20 @@ function CoursePage() {
 
               <dl className="mt-8 space-y-3 border-t border-border/60 pt-6 text-sm">
                 <Stat icon={<Clock className="h-4 w-4" />} label="Total runtime" value={course.duration} />
-                <Stat icon={<BookOpen className="h-4 w-4" />} label="Lessons" value={`${course.lessons} videos`} />
-                <Stat icon={<BarChart3 className="h-4 w-4" />} label="Level" value={course.level} />
+                <Stat icon={<BookOpen className="h-4 w-4" />} label="Lessons" value={`${lessonCount} videos`} />
+                <Stat icon={<Layers className="h-4 w-4" />} label="Modules" value={String(course.modules.length)} />
+                <Stat icon={<BarChart3 className="h-4 w-4" />} label="Difficulty" value={course.difficulty} />
               </dl>
 
               <div className="mt-8 border-t border-border/60 pt-6">
                 <p className="text-sm font-medium text-foreground">Your instructor</p>
                 <div className="mt-3 flex items-center gap-3">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent font-serif text-lg text-primary">
-                    {course.instructor.name.charAt(0)}
-                  </span>
+                  <img
+                    src={course.instructor.avatar}
+                    alt={course.instructor.name}
+                    className="h-12 w-12 rounded-full border border-border bg-accent"
+                    loading="lazy"
+                  />
                   <div>
                     <p className="font-medium text-foreground">{course.instructor.name}</p>
                     <p className="text-sm text-muted-foreground">{course.instructor.title}</p>
