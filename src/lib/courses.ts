@@ -65,6 +65,7 @@ export type Course = {
   difficulty: Difficulty;
   tier: Tier;
   trending?: boolean;
+  free?: boolean;
   keywords?: string[];
   duration: string;
   price: number;
