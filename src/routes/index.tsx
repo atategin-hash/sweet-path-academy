@@ -173,18 +173,18 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS + NEWSLETTER — combined horizontal row */}
-      <section className="bg-muted/20 py-10">
-        <div className="container mx-auto px-6">
-          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
+      <section className="bg-muted/20 py-6 md:py-10">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
             {/* Left: Testimonials */}
             <div>
               <p className="text-[11px] font-light uppercase tracking-[0.24em] text-primary">
                 {t("home.testimonials.eyebrow")}
               </p>
-              <h2 className="mt-1.5 font-serif text-2xl text-foreground md:text-3xl">
+              <h2 className="mt-1.5 font-serif text-xl text-foreground md:text-3xl">
                 Loved by Bakers Worldwide
               </h2>
-              <div className="mt-5">
+              <div className="mt-3 md:mt-5">
                 <TestimonialSlider items={testimonials} />
               </div>
             </div>
