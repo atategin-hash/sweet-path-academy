@@ -1,6 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ArrowRight } from "lucide-react";
+
+import {
   Calendar,
   Clock,
   Globe2,
