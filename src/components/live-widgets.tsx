@@ -376,15 +376,6 @@ export function LiveSidebar() {
 }
 
 // ---------- Academy Pulse: compact ticker banner ----------
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { ArrowRight } from "lucide-react";
 
 export function AcademyPulse() {
   const preview = useMemo(
