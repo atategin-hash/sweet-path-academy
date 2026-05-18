@@ -111,14 +111,20 @@ function CoursePage() {
               const mainTitle = splitMatch ? splitMatch[1] : fullTitle;
               const subTitle = splitMatch ? splitMatch[2] : tx(course.tagline);
               const fullDesc = tx(course.description);
-              const firstSentence =
-                fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc;
-              const restOfDesc = fullDesc.slice(firstSentence.length).trim();
+              const isMedovik = course.id === "medovik";
+              const leadSentence = isMedovik
+                ? "An artisanal study of the legendary Medovik, where heritage meets modern precision."
+                : (fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc);
+              const restOfDesc = isMedovik
+                ? fullDesc
+                : fullDesc.slice(leadSentence.length).trim();
+              const toggleLabel = isMedovik ? "Discover the process" : "Read more";
+              const toggleLabelOpen = isMedovik ? "Hide the process" : "Read less";
 
               return (
-                <div className="mt-5 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
+                <div className="mt-4 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
                   <div className="grid items-center md:grid-cols-[1.05fr_1fr]">
-                    {/* Left: condensed content, vertically centered */}
+                    {/* Left: ultra-condensed content */}
                     <div className="flex flex-col justify-center px-5 py-4 md:px-8 md:py-5">
                       <p className="text-[10px] font-light uppercase tracking-[0.28em] text-primary">
                         {subTitle}
@@ -127,27 +133,29 @@ function CoursePage() {
                         {mainTitle}
                       </h2>
 
-                      <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground">
-                        {firstSentence}
-                        {restOfDesc && aboutOpen && (
-                          <span className="text-muted-foreground"> {restOfDesc}</span>
-                        )}
-                        {restOfDesc && (
-                          <>
-                            {" "}
-                            <button
-                              type="button"
-                              onClick={() => setAboutOpen((v) => !v)}
-                              className="inline text-xs font-normal text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
-                              aria-expanded={aboutOpen}
-                            >
-                              {aboutOpen ? "Read less" : "Read more"}
-                            </button>
-                          </>
-                        )}
+                      <p className="mt-2.5 max-w-prose text-sm leading-relaxed text-muted-foreground">
+                        {leadSentence}
                       </p>
 
-                      <div className="mt-4">
+                      {restOfDesc && (
+                        <div className="mt-1.5">
+                          <button
+                            type="button"
+                            onClick={() => setAboutOpen((v) => !v)}
+                            className="text-xs font-normal text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
+                            aria-expanded={aboutOpen}
+                          >
+                            {aboutOpen ? toggleLabelOpen : toggleLabel}
+                          </button>
+                          {aboutOpen && (
+                            <p className="mt-2 max-w-prose text-sm leading-relaxed text-muted-foreground">
+                              {restOfDesc}
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      <div className="mt-3">
                         {enrolled ? (
                           <Link
                             to="/classroom/$id"
@@ -172,7 +180,7 @@ function CoursePage() {
                     </div>
 
                     {/* Right: hero image filling the column */}
-                    <div className="relative min-h-[200px] md:min-h-[260px] md:h-full">
+                    <div className="relative min-h-[180px] md:min-h-full md:self-stretch">
                       <img
                         src={aboutImage}
                         alt={mainTitle}
@@ -182,8 +190,8 @@ function CoursePage() {
                     </div>
                   </div>
                 </div>
-
               );
+
             })()}
 
             {/* AT A GLANCE */}
