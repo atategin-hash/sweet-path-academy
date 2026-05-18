@@ -258,6 +258,15 @@ function CoursePage() {
                 </div>
               </div>
 
+              <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-4">
+                <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  <Award className="h-3.5 w-3.5" /> Expert Guidance
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                  Learn from industry veterans with years of experience in luxury pastry shops.
+                </p>
+              </div>
+
               <ul className="mt-8 space-y-2 border-t border-border/60 pt-6 text-sm text-muted-foreground">
                 {features.map((f) => (
                   <li key={f} className="flex items-center gap-2">
