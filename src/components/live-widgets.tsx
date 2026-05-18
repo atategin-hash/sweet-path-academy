@@ -78,10 +78,10 @@ export function RecipeOfTheDay() {
         <div className="relative grid gap-10 md:grid-cols-[1.05fr_1fr] md:items-center">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">
-                <Sparkles className="h-3 w-3" /> Recipe of the Day
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-0.5 text-[10px] font-light uppercase tracking-[0.22em] text-primary">
+                <Sparkles className="h-2.5 w-2.5" /> Today's Pick
               </span>
-              <LivePulse label="AI-Curated Today" />
+              <LivePulse label="AI-Curated" />
             </div>
             <h2 className="mt-5 font-serif text-4xl leading-tight text-foreground md:text-5xl">
               {tx(course.title)}
@@ -91,9 +91,9 @@ export function RecipeOfTheDay() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-3 py-1.5 text-xs font-light tracking-wide text-muted-foreground">
                 <Clock className="h-3.5 w-3.5 text-primary" />
-                Refreshes in {fmt(h)}:{fmt(m)}:{fmt(s)}
+                Refresh in {fmt(h)}:{fmt(m)}:{fmt(s)}
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground">
                 <Calendar className="h-3.5 w-3.5 text-primary" />
@@ -132,7 +132,7 @@ export function RecipeOfTheDay() {
             </div>
             <div className="absolute -bottom-5 left-6 right-6 rounded-2xl border border-border/60 bg-card/95 p-4 shadow-[var(--shadow-soft)] backdrop-blur">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-medium uppercase tracking-wider text-primary">
+                <span className="text-[10px] font-light uppercase tracking-[0.22em] text-primary/80">
                   Today's Pick · #{dayIndex()}
                 </span>
                 <span className="text-muted-foreground">
