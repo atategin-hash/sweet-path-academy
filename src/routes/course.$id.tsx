@@ -70,6 +70,8 @@ function CoursePage() {
   const inCart = isInCart(course.id);
   const enrolled = isEnrolled(course.id);
   const features = ["course.feature.hd", "course.feature.recipes", "course.feature.qa", "course.feature.certificate"];
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const aboutImage = course.id === "medovik" ? medovikSlice : course.image;
 
   return (
     <div className="min-h-screen bg-background">
