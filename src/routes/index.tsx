@@ -9,6 +9,7 @@ import {
   DailyProTip,
 } from "@/components/live-widgets";
 import { NewsletterSection } from "@/components/newsletter";
+import { TestimonialSlider } from "@/components/testimonial-slider";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -172,32 +173,17 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-muted/40 py-8">
+      <section className="bg-muted/20 py-10">
         <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
-            <h2 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
+          <div className="mx-auto mb-6 max-w-2xl text-center">
+            <p className="text-[11px] font-light uppercase tracking-[0.24em] text-primary">
+              {t("home.testimonials.eyebrow")}
+            </p>
+            <h2 className="mt-1.5 font-serif text-2xl text-foreground md:text-3xl">
               Loved by Bakers Worldwide
             </h2>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {testimonials.map((tm) => (
-              <figure key={tm.name} className="flex flex-col rounded-3xl border border-border/60 bg-card p-8 shadow-[var(--shadow-soft)]">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <blockquote className="mt-5 flex-1 font-serif text-lg leading-relaxed text-foreground">
-                  "{tx(tm.quote)}"
-                </blockquote>
-                <figcaption className="mt-6 border-t border-border/60 pt-4 text-sm">
-                  <p className="font-medium text-foreground">{tm.name}</p>
-                  <p className="text-muted-foreground">{tx(tm.role)}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+          <TestimonialSlider items={testimonials} />
         </div>
       </section>
 
