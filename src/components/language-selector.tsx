@@ -11,7 +11,9 @@ import { LANGUAGES, useI18n, type Lang } from "@/lib/i18n";
 
 export function LanguageSelector({ variant = "light" }: { variant?: "light" | "dark" }) {
   const { lang, setLang, t } = useI18n();
-  const current = LANGUAGES.find((l) => l.code === lang)!;
+  const ALLOWED: Lang[] = ["en", "tr", "ru"];
+  const available = LANGUAGES.filter((l) => ALLOWED.includes(l.code));
+  const current = available.find((l) => l.code === lang) ?? available[0];
 
   const trigger =
     variant === "dark"
