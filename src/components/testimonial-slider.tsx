@@ -31,7 +31,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
     >
       <figure
         key={i}
-        className="animate-fade-in rounded-2xl border border-border/60 bg-card px-6 py-5 shadow-[var(--shadow-soft)]"
+        className="animate-fade-in rounded-2xl border border-border/50 bg-card px-6 py-5 shadow-[0_10px_30px_-12px_oklch(0.27_0.008_50/0.18)] ring-1 ring-foreground/[0.03]"
       >
         <div className="flex items-center justify-between">
           <div className="flex gap-0.5">
