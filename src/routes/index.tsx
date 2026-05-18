@@ -184,6 +184,8 @@ function HomePage() {
         </div>
       </section>
 
+      <NewsletterSection />
+
       {/* CTA */}
       <section className="container mx-auto px-6 py-20">
         <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16" style={{ background: "var(--gradient-warm)" }}>
