@@ -21,15 +21,15 @@ export function NewsletterSection() {
       </p>
       <h2
         id="newsletter-heading"
-        className="mt-1.5 font-serif text-2xl text-foreground md:text-3xl"
+        className="mt-1.5 font-serif text-xl text-foreground md:text-3xl"
       >
         Join the Maison Crumb Insider
       </h2>
-      <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground md:mt-3">
         Receive exclusive techniques, seasonal recipes, and academy updates directly to your inbox.
       </p>
 
-      <div className="mt-5">
+      <div className="mt-4 md:mt-5">
         {submitted ? (
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-medium text-primary">
             <Check className="h-4 w-4" />
