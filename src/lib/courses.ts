@@ -87,7 +87,7 @@ export const courses: Course[] = [
     title: "Artisanal Italian Pastries: The Perfect Croissant",
     tagline: "Four days inside Italy's finest pasticcerie",
     description:
-      "A curated masterclass inspired by Club Academy's open program. Learn signature recipes from Gino Fabbri, Luca Montersino, Leonardo Di Carlo, and finish with classic French croissants — all from the world's best free video resources, organized into a guided journey.",
+      "An artisanal journey through Italy's most revered pasticcerie, where heritage technique meets uncompromising precision. Across four immersive days you will internalise the doctrines behind frolla, almond-rich cakes, silken cheesecake, and the long lamination of a true French croissant. This is not a collection of recipes — it is a study of mastery, taught through the hands of Italy's living maestri.",
     image: pastries,
     difficulty: "Intermediate",
     tier: "business",
@@ -102,6 +102,13 @@ export const courses: Course[] = [
       title: "Italian pastry collective",
       avatar: avatar("Gino Fabbri"),
     },
+    learningOutcomes: [
+      "Mastering frolla emulsion and crumb structure",
+      "Engineering chocolate-almond batter balance",
+      "Controlling cream-cheese hydration and bake curve",
+      "Precision lamination across three single folds",
+      "Boutique-grade finishing and visual signature",
+    ],
     modules: [
       {
         id: "day-1",
@@ -245,7 +252,7 @@ export const courses: Course[] = [
     title: "Mastering Bento & Celebration Cakes",
     tagline: "From the sponge to the perfect piped letter",
     description:
-      "A modern three-module masterclass on the cake everyone is gifting right now. Build a tender vanilla sponge, master a silky stable buttercream, then finish with bento-style piping and lettering.",
+      "An artisanal masterclass in celebration cake architecture, where heritage sponge technique meets contemporary bento finesse. You will study the precision of crumb structure, the rheology of Swiss meringue buttercream, and the disciplined hand required for couture piping. The result is a confection that reads as both edible craft and gallery-grade design.",
     image: wedding,
     difficulty: "Beginner",
     tier: "home",
@@ -260,6 +267,13 @@ export const courses: Course[] = [
       title: "Cake artist · Crumbs & Doilies",
       avatar: avatar("Jemma Wilson"),
     },
+    learningOutcomes: [
+      "Engineering a tender, level vanilla sponge",
+      "Mastering Swiss meringue stability and gloss",
+      "Architectural stacking and crumb-coat precision",
+      "Couture piping pressure and rhythm control",
+      "Signature pastel lettering and finishing",
+    ],
     modules: [
       {
         id: "m1",
@@ -361,7 +375,7 @@ export const courses: Course[] = [
     title: "The Sourdough Secret: Artisan Bread Masterclass",
     tagline: "From mise en place to your first laminated rolls",
     description:
-      "A friendly first-step program for anyone walking into a kitchen for real. Set up like a pro, demystify yeast, then bake the cinnamon rolls everyone asks for.",
+      "A heritage foundation in artisan bread, taught with the precision of a working bakery. You will rebuild your kitchen around true mise en place, demystify the living chemistry of yeast, and finish with laminated cinnamon rolls that meet the standard of a serious morning counter. Every gesture is grounded in technique, not approximation.",
     image: bread,
     difficulty: "Beginner",
     tier: "home",
@@ -377,6 +391,13 @@ export const courses: Course[] = [
       title: "Bakery educator · Food52",
       avatar: avatar("Erin McDowell"),
     },
+    learningOutcomes: [
+      "Professional mise en place and bench discipline",
+      "Yeast activation and fermentation control",
+      "Hydration calibration for enriched doughs",
+      "Sheeting, filling and architectural rolling",
+      "Glaze formulation and finishing technique",
+    ],
     modules: [
       {
         id: "l1",
@@ -477,7 +498,7 @@ export const courses: Course[] = [
     title: "Medovik Excellence: The Art of Layered Honey Cake",
     tagline: "Eight delicate honey layers, silky sour-cream filling",
     description:
-      "Master the legendary Russian Honey Cake with our comprehensive Medovik masterclass. Discover the secrets behind the perfectly thin, honey-infused layers and the signature sour cream frosting. From temperature control to professional assembly, we guide you through every step to achieve bakery-quality results.",
+      "An artisanal study of the legendary Medovik, where Russian heritage meets the precision of modern pastry. You will master the chemistry of honey-caramelised dough, the discipline of paper-thin layering, and the architectural assembly that transforms eight delicate sheets into a single, silken confection. This masterclass is a meditation on patience, technique and luxury finish.",
     image: chocolate,
     difficulty: "Intermediate",
     tier: "home",
@@ -494,11 +515,12 @@ export const courses: Course[] = [
       avatar: avatar("Natasha Medovik"),
     },
     learningOutcomes: [
-      "The chemistry of honey-based dough for the perfect texture.",
-      "Advanced rolling and baking techniques for paper-thin layers.",
-      "Creating the classic 'Smetana' frosting with a modern balance.",
-      "Professional coating and decoration styles for a luxury aesthetic.",
-    ],
+      "Honey-dough chemistry and caramelisation control",
+      "Paper-thin lamination and bake-curve precision",
+      "Smetana frosting balance and aeration",
+      "Architectural eight-layer assembly",
+      "Heritage crumb coating and luxury presentation",
+    ],,
     modules: [
       {
         id: "med-intro",
@@ -578,7 +600,7 @@ export const courses: Course[] = [
     title: "San Sebastian Cheesecake for Cafés",
     tagline: "The viral burnt Basque — display-stable, café-ready",
     description:
-      "Built for boutique cafés: a high-margin signature dessert that holds its shape under glass for 48 hours, scales to 10 cakes per bake, and includes full cost-per-slice math.",
+      "A precision masterclass in the burnt Basque cheesecake, engineered for the artisanal café. You will study the heritage of Donostia's signature dessert and translate it into a production standard: display-stable for forty-eight hours, scalable to ten cakes per bake, and finished with the deep, deliberate burn that defines the form.",
     image: tarts,
     difficulty: "Intermediate",
     tier: "business",
@@ -593,6 +615,13 @@ export const courses: Course[] = [
       title: "Pastry consultant · Donostia",
       avatar: avatar("Mikel SanSebastian"),
     },
+    learningOutcomes: [
+      "Cream-cheese emulsion and air-free mixing",
+      "Caramelisation curve and burnt-top precision",
+      "Display-stable structure for café service",
+      "Batch scaling and cost-per-slice mastery",
+      "Heritage Donostia presentation standard",
+    ],
     modules: [
       {
         id: "ss-1",
@@ -637,7 +666,7 @@ export const courses: Course[] = [
     title: "New York Croissant Rolls",
     tagline: "Laminated, twisted, sugared — Instagram's favorite pastry",
     description:
-      "The supreme + flat croissant trend, decoded for café production. Make a one-day laminated dough, shape four trending formats, and finish with brûléed sugar tops.",
+      "An artisanal decoding of the New York croissant phenomenon, taught with the precision of a working laminator. You will master a same-day butter-block dough, four trending architectural shapes, and the brûléed finish that has redefined modern viennoiserie. This is heritage lamination, recalibrated for the contemporary café.",
     image: pastries,
     difficulty: "Expert",
     tier: "business",
@@ -652,6 +681,13 @@ export const courses: Course[] = [
       title: "Head baker · Apollon Brooklyn",
       avatar: avatar("Lasse NYC"),
     },
+    learningOutcomes: [
+      "Same-day lamination and butter-block control",
+      "Single-fold precision and dough relaxation",
+      "Architectural shaping across four formats",
+      "Proofing climate and oven-spring management",
+      "Brûléed sugar finish and signature presentation",
+    ],
     modules: [
       {
         id: "nyc-1",
@@ -698,7 +734,7 @@ export const courses: Course[] = [
     title: "French Macarons — Production Standard",
     tagline: "Consistent shells, 50-piece batches, zero rejects",
     description:
-      "The reliable Italian-meringue macaron method designed for boutique sale. Build glossy feet, perfect color saturation, and three signature ganaches that hold 7 days in display.",
+      "A precision masterclass in the Parisian macaron, taught to a production standard. You will internalise the Italian-meringue method, the discipline of macaronage, and the ganache architecture required to hold a seven-day display. Every shell is an exercise in heritage technique meeting industrial consistency.",
     image: macaronsImg,
     difficulty: "Expert",
     tier: "business",
@@ -712,6 +748,13 @@ export const courses: Course[] = [
       title: "Pâtissière · Paris",
       avatar: avatar("Claire Macaron"),
     },
+    learningOutcomes: [
+      "Italian-meringue precision and sugar-syrup control",
+      "Macaronage rheology and ribbon discipline",
+      "Foot formation and shell-symmetry mastery",
+      "Ganache architecture for boutique shelf-life",
+      "Colour saturation and luxury finishing",
+    ],
     modules: [
       {
         id: "mac-1",
@@ -756,7 +799,7 @@ export const courses: Course[] = [
     title: "Mass-Production Sponge Cakes",
     tagline: "Continuous mixers, sheet-pan yields, 12-month shelf-life",
     description:
-      "Factory-scale sponge for industrial bakeries: emulsifier-stabilized batter, continuous-mix workflows, sheet-tunnel baking, and shelf-life formulation for retail-packed cakes.",
+      "An industrial masterclass in stabilised sponge, where heritage cake technique is recalibrated for factory precision. You will study emulsifier systems, continuous-mix rheology and tunnel-bake curves, then formulate for a twelve-month retail shelf. This is the science of scale, taught with the discipline of pastry.",
     image: wedding,
     difficulty: "Expert",
     tier: "industrial",
@@ -770,6 +813,13 @@ export const courses: Course[] = [
       title: "Industrial bakery consultant · Hamburg",
       avatar: avatar("Helmut Industrial"),
     },
+    learningOutcomes: [
+      "Continuous-mix rheology and specific-gravity control",
+      "Emulsifier systems and air-cell stabilisation",
+      "Tunnel-bake calibration across deposit weights",
+      "Water-activity targeting for shelf-life",
+      "Modified-atmosphere packaging discipline",
+    ],
     modules: [
       {
         id: "ind-1",
@@ -816,7 +866,7 @@ export const courses: Course[] = [
     title: "Industrial Pastry Creams & Fillings",
     tagline: "Heat-stable creams that survive the production line",
     description:
-      "Engineer pastry creams, custards and bake-stable fillings for industrial pastry. Modified-starch systems, hot-fill packaging, and color/flavor stability across a 9-month shelf.",
+      "A precision masterclass in industrial pastry cream, engineered for the modern production line. You will master modified-starch systems, hot-fill aseptic workflows and the heat-stable formulation required to survive a 200 °C bake-out. Heritage custard technique, translated into the language of factory consistency.",
     image: chocolate,
     difficulty: "Expert",
     tier: "industrial",
@@ -830,6 +880,13 @@ export const courses: Course[] = [
       title: "Food technologist · Stockholm",
       avatar: avatar("Sofia Creams"),
     },
+    learningOutcomes: [
+      "Modified-starch hydration and gelatinisation",
+      "Yolk tempering and microbial-reduction holds",
+      "Hot-fill aseptic packaging discipline",
+      "Bake-stable viscosity engineering",
+      "Nine-month shelf-life formulation",
+    ],
     modules: [
       {
         id: "ic-1",
