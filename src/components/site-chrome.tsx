@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSelector } from "@/components/language-selector";
+import { LegalLink } from "@/components/LegalLink";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -109,7 +110,7 @@ export function SiteFooter() {
   const { t } = useI18n();
   return (
     <footer className="border-t border-border/60 bg-muted/40">
-      <div className="container mx-auto grid gap-8 px-6 py-12 md:grid-cols-3">
+      <div className="container mx-auto grid gap-8 px-6 py-12 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -133,9 +134,18 @@ export function SiteFooter() {
           <p className="mt-3 text-muted-foreground">hello@maisoncrumb.com</p>
           <p className="text-muted-foreground">Paris · Tokyo · New York</p>
         </div>
+        <div className="text-sm">
+          <p className="font-medium text-foreground">Legal</p>
+          <ul className="mt-3 space-y-2">
+            <li><LegalLink type="terms" /></li>
+            <li><LegalLink type="privacy" /></li>
+            <li><LegalLink type="refund" /></li>
+          </ul>
+        </div>
       </div>
-      <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} MaisonCrumb Academy. {t("footer.made")}
+      <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground space-y-1">
+        <p>© {new Date().getFullYear()} Maison Crumb Ltd. All rights reserved.</p>
+        <p>Maison Crumb Ltd is a company registered in England & Wales.</p>
       </div>
     </footer>
   );
