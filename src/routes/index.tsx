@@ -8,6 +8,7 @@ import {
   LiveAndRoadmapSection,
   DailyProTip,
 } from "@/components/live-widgets";
+import { NewsletterSection } from "@/components/newsletter";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -182,6 +183,8 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      <NewsletterSection />
 
       {/* CTA */}
       <section className="container mx-auto px-6 py-20">
