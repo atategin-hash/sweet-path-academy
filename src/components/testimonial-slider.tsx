@@ -16,7 +16,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setI((v) => (v + 1) % items.length), 6000);
+    const id = setInterval(() => setI((v) => (v + 1) % items.length), 5000);
     return () => clearInterval(id);
   }, [items.length, paused]);
 
@@ -31,7 +31,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
     >
       <figure
         key={i}
-        className="animate-fade-in rounded-2xl border border-border/60 bg-card px-6 py-5 shadow-[var(--shadow-soft)]"
+        className="animate-fade-in rounded-2xl border border-border/50 bg-card px-6 py-5 shadow-[0_10px_30px_-12px_oklch(0.27_0.008_50/0.18)] ring-1 ring-foreground/[0.03]"
       >
         <div className="flex items-center justify-between">
           <div className="flex gap-0.5">
@@ -86,8 +86,8 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
               key={k}
               onClick={() => setI(k)}
               aria-label={`Go to testimonial ${k + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                k === i ? "w-5 bg-primary" : "w-1.5 bg-border"
+              className={`h-1 rounded-full transition-all ${
+                k === i ? "w-4 bg-foreground" : "w-1 bg-foreground/25 hover:bg-foreground/50"
               }`}
             />
           ))}
