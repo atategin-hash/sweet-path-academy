@@ -189,7 +189,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "updates.yesterday": "Yesterday",
     "updates.daysAgo": "2 days ago",
 
-    "home.eyebrow": "Curated free masterclasses",
+    "home.eyebrow": "Signature pastry masterclasses",
     "home.heroTitle": "Master the Art of Global Pastry",
     "home.heroLead": "Unlock professional techniques and modern recipes curated from the world's finest pastry masters. Maison Crumb: Your international journey begins.",
     "home.searchPlaceholder": "Type a cake name — Bento, Medovik, Croissant…",
@@ -210,8 +210,9 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "free.eyebrow": "Signature Masterclasses",
     "free.title": "Signature Masterclasses — Master Every Technique",
     "free.lead": "Stream professional lessons instantly. Master the art with world-class guidance.",
-    "free.badge": "Free",
-    "free.watchNow": "Watch now →",
+    "free.badge": "Featured",
+    "free.watchNow": "View Course →",
+
 
     "lang.label": "Language",
   },
