@@ -187,18 +187,51 @@ function HomePage() {
       <NewsletterSection />
 
       {/* CTA */}
-      <section className="container mx-auto px-6 py-20">
-        <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16" style={{ background: "var(--gradient-warm)" }}>
-          <div className="relative max-w-2xl">
-            <h2 className="font-serif text-4xl text-foreground md:text-5xl">
-              {t("home.cta.title")}
-            </h2>
-            <p className="mt-4 text-lg text-foreground/80">
-              {t("home.cta.lead")}
-            </p>
+      <section className="container mx-auto px-6 py-10">
+        <div
+          className="relative overflow-hidden rounded-[2rem] px-8 py-8 md:px-12 md:py-10"
+          style={{ background: "var(--gradient-warm)" }}
+        >
+          {/* Subtle grain texture */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.18] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+            }}
+            aria-hidden="true"
+          />
+          {/* Faint line-art whisk in corner */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 200"
+            className="pointer-events-none absolute -right-6 -bottom-10 h-44 w-44 text-foreground/15 md:h-56 md:w-56"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+          >
+            <line x1="40" y1="170" x2="115" y2="80" />
+            <ellipse cx="135" cy="58" rx="34" ry="46" transform="rotate(35 135 58)" />
+            <path d="M105 95 Q135 58 165 30" />
+            <path d="M112 105 Q140 70 172 45" />
+            <path d="M118 115 Q148 82 178 60" />
+            <path d="M124 125 Q156 95 184 75" />
+            <rect x="34" y="168" width="14" height="20" rx="3" transform="rotate(-50 41 178)" />
+          </svg>
+
+          <div className="relative flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-10">
+            <div className="max-w-xl">
+              <h2 className="font-serif text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                {t("home.cta.title")}
+              </h2>
+              <p className="mt-2 text-sm text-foreground/75 md:text-base">
+                {t("home.cta.lead")}
+              </p>
+            </div>
             <Link
               to="/courses"
-              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-foreground px-7 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
             >
               {t("home.cta.action")}
             </Link>
