@@ -124,19 +124,39 @@ function HomePage() {
         </div>
       </section>
 
-      <RecipeOfTheDay />
+      {/* TRUST BAR */}
+      <section className="border-y border-border/60 bg-background">
+        <div className="container mx-auto grid grid-cols-1 gap-4 px-6 py-5 sm:grid-cols-3 sm:gap-8">
+          {[
+            { Icon: MapPin, label: "London Based" },
+            { Icon: ChefHat, label: "Expert Led" },
+            { Icon: InfinityIcon, label: "Lifetime Access" },
+          ].map(({ Icon, label }) => (
+            <div key={label} className="flex items-center justify-center gap-2.5 text-sm text-muted-foreground">
+              <Icon className="h-4 w-4 text-primary" />
+              <span className="font-medium uppercase tracking-[0.18em] text-foreground text-[11px]">{label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="bg-muted/30">
+        <RecipeOfTheDay />
+      </div>
 
       <FreeMasterclasses />
 
-      <LiveAndRoadmapSection />
+      <div className="bg-muted/30">
+        <LiveAndRoadmapSection />
+      </div>
 
       {/* FEATURED COURSES */}
-      <section className="container mx-auto px-6 py-8">
+      <section className="container mx-auto px-6 py-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
             <h2 className="mt-2 max-w-xl font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
-              {t("home.featured.title")}
+              Hand-picked Masterclasses
             </h2>
           </div>
           <Link to="/courses" className="text-sm font-medium text-primary hover:underline">
@@ -144,7 +164,7 @@ function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}
