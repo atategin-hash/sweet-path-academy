@@ -49,7 +49,26 @@ function DashboardPage() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+        {/* Academy-wide progress */}
+        <div className="mt-8 rounded-3xl border border-border/60 bg-card p-5 md:p-6">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">Academy Progress</p>
+              <p className="mt-1 font-serif text-2xl text-foreground md:text-3xl">{avgProgress}% complete</p>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {enrolled.length} {t("dashboard.enrolled").toLowerCase()} · across {courses.length} masterclasses
+            </p>
+          </div>
+          <div className="mt-4 h-2 overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-primary transition-all duration-700"
+              style={{ width: `${avgProgress}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
           <StatCard icon={<BookOpen className="h-5 w-5" />} label={t("dashboard.enrolled")} value={String(enrolled.length)} />
           <StatCard icon={<Trophy className="h-5 w-5" />} label={t("dashboard.progress")} value={`${avgProgress}%`} />
           <StatCard icon={<Flame className="h-5 w-5" />} label={t("dashboard.streak")} value="7" />
@@ -79,8 +98,13 @@ function DashboardPage() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-xs uppercase tracking-wider text-primary">{t(`difficulty.${course.difficulty}`)}</p>
-                    <h3 className="mt-1 font-serif text-xl text-foreground">{tx(course.title)}</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        <Clock className="h-3 w-3" /> Last viewed
+                      </span>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">{t(`difficulty.${course.difficulty}`)}</p>
+                    </div>
+                    <h3 className="mt-2 font-serif text-xl text-foreground">{tx(course.title)}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {t("common.lesson")} {lastLesson} {t("common.of")} {lessons.length} ·{" "}
                       <span className="text-foreground">{tx(lessons[lastLesson - 1]?.title)}</span>
