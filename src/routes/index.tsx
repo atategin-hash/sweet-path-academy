@@ -12,7 +12,7 @@ import { NewsletterSection } from "@/components/newsletter";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
-import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
+import { Star, Sparkles, Award, PlayCircle, MapPin, ChefHat, Infinity as InfinityIcon } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
@@ -68,16 +68,13 @@ function HomePage() {
             <h1 className="mt-6 font-serif text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               {t("home.heroTitle")}
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/80">
-              {t("home.heroLead")}
+            <p className="mt-5 max-w-md text-base text-white/80">
+              Professional pastry, made approachable.
             </p>
-            <div className="mt-8 max-w-xl">
+            <div className="mt-7 max-w-xl">
               <CatalogSearch placeholder={t("home.searchPlaceholder")} />
-              <p className="mt-2 pl-2 text-xs text-white/60">
-                {t("home.searchHint")}
-              </p>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 to="/courses"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
@@ -87,7 +84,7 @@ function HomePage() {
               <Link
                 to="/course/$id"
                 params={{ id: "italian-pastries" }}
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-white/40 px-6 text-sm font-medium text-white transition-colors hover:bg-white/10"
               >
                 <PlayCircle className="h-4 w-4 text-white" /> {t("home.preview")}
               </Link>
@@ -127,19 +124,39 @@ function HomePage() {
         </div>
       </section>
 
-      <RecipeOfTheDay />
+      {/* TRUST BAR */}
+      <section className="border-y border-border/60 bg-background">
+        <div className="container mx-auto grid grid-cols-1 gap-4 px-6 py-5 sm:grid-cols-3 sm:gap-8">
+          {[
+            { Icon: MapPin, label: "London Based" },
+            { Icon: ChefHat, label: "Expert Led" },
+            { Icon: InfinityIcon, label: "Lifetime Access" },
+          ].map(({ Icon, label }) => (
+            <div key={label} className="flex items-center justify-center gap-2.5 text-sm text-muted-foreground">
+              <Icon className="h-4 w-4 text-primary" />
+              <span className="font-medium uppercase tracking-[0.18em] text-foreground text-[11px]">{label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="bg-muted/30">
+        <RecipeOfTheDay />
+      </div>
 
       <FreeMasterclasses />
 
-      <LiveAndRoadmapSection />
+      <div className="bg-muted/30">
+        <LiveAndRoadmapSection />
+      </div>
 
       {/* FEATURED COURSES */}
-      <section className="container mx-auto px-6 py-8">
+      <section className="container mx-auto px-6 py-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
             <h2 className="mt-2 max-w-xl font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
-              {t("home.featured.title")}
+              Hand-picked Masterclasses
             </h2>
           </div>
           <Link to="/courses" className="text-sm font-medium text-primary hover:underline">
@@ -147,7 +164,7 @@ function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}
@@ -160,7 +177,7 @@ function HomePage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
             <h2 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
-              {t("home.testimonials.title")}
+              Loved by Bakers Worldwide
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -231,7 +248,7 @@ function HomePage() {
             </div>
             <Link
               to="/courses"
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-foreground px-7 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
             >
               {t("home.cta.action")}
             </Link>
