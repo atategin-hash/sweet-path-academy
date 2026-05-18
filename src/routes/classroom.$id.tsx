@@ -248,13 +248,13 @@ function ClassroomPage() {
               <Tabs defaultValue="overview" value={undefined} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 bg-white/5">
                   <TabsTrigger value="overview" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <BookOpen className="mr-2 h-4 w-4" /> {t("tabs.overview")}
+                    <BookOpen className="mr-2 h-4 w-4" /> Overview
                   </TabsTrigger>
                   <TabsTrigger value="recipes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <ListChecks className="mr-2 h-4 w-4" /> {t("tabs.recipes")}
+                    <ListChecks className="mr-2 h-4 w-4" /> Ingredients & Tools
                   </TabsTrigger>
                   <TabsTrigger value="discussion" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    <MessageCircle className="mr-2 h-4 w-4" /> {t("tabs.discussion")}
+                    <MessageCircle className="mr-2 h-4 w-4" /> Recipe Notes
                   </TabsTrigger>
                 </TabsList>
 
