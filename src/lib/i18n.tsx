@@ -207,9 +207,9 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "home.cta.title": "Your apron is waiting.",
     "home.cta.lead": "Join thousands of bakers learning a new recipe every week. Start with a single course or go all-in.",
     "home.cta.action": "Explore the catalog",
-    "free.eyebrow": "Free Masterclasses",
-    "free.title": "Free Masterclasses — Start Baking Now",
-    "free.lead": "Stream the full lessons instantly. No sign-up, no credit card — just press play.",
+    "free.eyebrow": "Signature Masterclasses",
+    "free.title": "Signature Masterclasses — Master Every Technique",
+    "free.lead": "Stream professional lessons instantly. Master the art with world-class guidance.",
     "free.badge": "Free",
     "free.watchNow": "Watch now →",
 
