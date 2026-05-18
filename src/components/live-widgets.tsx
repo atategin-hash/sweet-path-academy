@@ -375,29 +375,88 @@ export function LiveSidebar() {
   );
 }
 
-// ---------- Section wrapping trend + roadmap for homepage ----------
-export function LiveAndRoadmapSection() {
+// ---------- Academy Pulse: compact ticker banner ----------
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ArrowRight } from "lucide-react";
+
+export function AcademyPulse() {
+  const preview = useMemo(
+    () => TREND_POOL.find((t) => t.city === "Mexico City") ?? TREND_POOL[0],
+    [],
+  );
+
   return (
     <section className="container mx-auto px-6 py-6">
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <Radio className="h-4 w-4 text-primary" />
-            <p className="text-sm font-medium uppercase tracking-wider text-primary">
-              Live & Active
+      <Sheet>
+        <div className="group relative overflow-hidden rounded-full border border-border/60 bg-gradient-to-r from-card via-background to-card px-5 py-3 shadow-[var(--shadow-soft)]">
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-1/3 opacity-30 blur-2xl"
+            style={{ background: "var(--gradient-warm)" }}
+          />
+          <div className="relative flex flex-wrap items-center gap-x-5 gap-y-3">
+            <div className="flex items-center gap-2 whitespace-nowrap">
+              <Radio className="h-3.5 w-3.5 text-primary" />
+              <span className="text-[10px] font-light uppercase tracking-[0.28em] text-primary">
+                Academy Pulse
+              </span>
+              <LivePulse label="Live" />
+            </div>
+
+            <p className="hidden text-sm font-light tracking-wide text-foreground md:block">
+              Explore this week's global pastry trends &amp; upcoming releases.
             </p>
-            <LivePulse />
+
+            <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-3">
+              <div className="hidden min-w-0 items-center gap-2 rounded-full border border-border/60 bg-background/70 px-3 py-1.5 lg:flex">
+                <span className="text-base leading-none">{preview.flag}</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">
+                  {preview.city}
+                </span>
+                <span className="truncate text-xs text-muted-foreground">
+                  {preview.title}
+                </span>
+              </div>
+              <SheetTrigger className="inline-flex h-9 items-center gap-1.5 rounded-full bg-foreground px-4 text-xs font-medium tracking-wide text-background transition-transform hover:-translate-y-0.5">
+                Open Trends <ArrowRight className="h-3.5 w-3.5" />
+              </SheetTrigger>
+            </div>
           </div>
-          <h2 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
-            What's baking around the world today
-          </h2>
+          <p className="relative mt-2 text-xs font-light tracking-wide text-muted-foreground md:hidden">
+            Explore this week's global pastry trends &amp; upcoming releases.
+          </p>
         </div>
-        <AICurationBadge />
-      </div>
-      <div className="grid gap-6 md:grid-cols-2">
-        <LiveTrendFeed />
-        <ComingSoonRoadmap />
-      </div>
+
+        <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-lg">
+          <SheetHeader>
+            <div className="flex items-center gap-2">
+              <Radio className="h-4 w-4 text-primary" />
+              <SheetTitle className="font-serif text-2xl">Academy Pulse</SheetTitle>
+              <LivePulse label="Live" />
+            </div>
+            <SheetDescription>
+              Insider trends from our chefs worldwide and upcoming course drops.
+            </SheetDescription>
+          </SheetHeader>
+
+          <div className="mt-6 space-y-6">
+            <LiveTrendFeed />
+            <ComingSoonRoadmap />
+            <div className="pt-2">
+              <AICurationBadge />
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </section>
   );
 }
+
+// Back-compat alias
+export const LiveAndRoadmapSection = AcademyPulse;
