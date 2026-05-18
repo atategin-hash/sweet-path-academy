@@ -60,15 +60,16 @@ export function CourseCard({ course }: { course: Course }) {
           </span>
         </div>
         <div className="mt-6 flex items-end justify-between border-t border-border/60 pt-4">
-          {course.free ? (
-            <span className="font-serif text-2xl text-emerald-600">Free</span>
-          ) : (
-            <span className="font-serif text-2xl text-foreground">${course.price}</span>
-          )}
+          <span className="font-serif text-2xl text-foreground">${course.price}</span>
           <span className="text-sm font-medium text-primary group-hover:underline">
-            {course.free ? t("free.watchNow") : `${t("course.view")} →`}
+            {t("course.view")} →
           </span>
         </div>
+      </div>
+    </Link>
+  );
+}
+
       </div>
     </Link>
   );
