@@ -18,6 +18,10 @@ import {
   ChefHat,
   Wrench,
   Award,
+  GraduationCap,
+  FileText,
+  Globe,
+  Film,
 } from "lucide-react";
 
 export const Route = createFileRoute("/course/$id")({
