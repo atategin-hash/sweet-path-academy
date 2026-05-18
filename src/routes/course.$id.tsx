@@ -14,6 +14,10 @@ import {
   ArrowRight,
   Star,
   Layers,
+  Sparkles,
+  ChefHat,
+  Wrench,
+  Award,
 } from "lucide-react";
 
 export const Route = createFileRoute("/course/$id")({
