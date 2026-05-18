@@ -520,7 +520,7 @@ export const courses: Course[] = [
       "Smetana frosting balance and aeration",
       "Architectural eight-layer assembly",
       "Heritage crumb coating and luxury presentation",
-    ],,
+    ],
     modules: [
       {
         id: "med-intro",
