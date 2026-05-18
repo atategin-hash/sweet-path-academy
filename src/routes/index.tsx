@@ -10,6 +10,7 @@ import {
 } from "@/components/live-widgets";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
+import heroBg from "@/assets/hero-bg.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
