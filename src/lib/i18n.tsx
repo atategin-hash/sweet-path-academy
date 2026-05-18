@@ -100,6 +100,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "catalog.try": "Try Bento, Medovik, Cinnamon, or San Sebastian.",
 
     "course.about": "About this course",
+    "course.learn": "What you'll learn",
     "course.curriculum": "Curriculum",
     "course.addToCart": "Add to cart",
     "course.viewInCart": "View in cart",
