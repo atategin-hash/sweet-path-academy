@@ -8,6 +8,7 @@ import {
   LiveAndRoadmapSection,
   DailyProTip,
 } from "@/components/live-widgets";
+import { NewsletterSection } from "@/components/newsletter";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
