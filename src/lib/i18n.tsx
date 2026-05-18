@@ -216,6 +216,21 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
 
 
     "lang.label": "Language",
+
+    "chatbot.title": "Pastry Consultant",
+    "chatbot.subtitle": "Maison Crumb Academy — your guide",
+    "chatbot.welcome": "Welcome to Maison Crumb Academy. How can I assist your culinary journey today?",
+    "chatbot.placeholder": "Ask about courses, certification, pricing…",
+    "chatbot.quick": "Quick questions",
+    "chatbot.q1": "Which course is for me?",
+    "chatbot.q2": "About Certification",
+    "chatbot.q3": "Pricing & Access",
+    "chatbot.q4": "Talk to a Human",
+    "chatbot.a1": "I'd be delighted to guide you. Tell me your goal: bake beautifully at home, launch a boutique café, or scale to industrial production? Most beginners start with our Home Baker tier, while professionals progress to Business or Industrial masterclasses.",
+    "chatbot.a2": "Every Maison Crumb course awards a signed Certificate of Completion, recognised across our partner pastry network. Complete all lessons and the final assessment to receive yours by email within 24 hours.",
+    "chatbot.a3": "All masterclasses include lifetime access, HD video lessons, downloadable recipes and a certificate. Individual courses start from £39, with bundle pricing available at checkout. Every purchase carries a 30-day satisfaction guarantee.",
+    "chatbot.a4": "Of course — our concierge team replies within one business day. Please email hello@maison-crumb.com or use the Contact link in the footer, and a pastry advisor will be in touch.",
+    "chatbot.fallback": "Thank you for your question. For tailored advice, please choose one of the quick options above, or email our concierge team at hello@maison-crumb.com.",
   },
   tr: {
     "nav.home": "Ana Sayfa",
