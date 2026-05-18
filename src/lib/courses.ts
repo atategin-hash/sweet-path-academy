@@ -83,7 +83,7 @@ const avatar = (seed: string) =>
 export const courses: Course[] = [
   {
     id: "italian-pastries",
-    title: "The Art of Italian Pastries",
+    title: "Artisanal Italian Pastries: The Perfect Croissant",
     tagline: "Four days inside Italy's finest pasticcerie",
     description:
       "A curated masterclass inspired by Club Academy's open program. Learn signature recipes from Gino Fabbri, Luca Montersino, Leonardo Di Carlo, and finish with classic French croissants — all from the world's best free video resources, organized into a guided journey.",
