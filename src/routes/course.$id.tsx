@@ -116,38 +116,9 @@ function CoursePage() {
 
               return (
                 <div className="mt-3 flex h-[100px] items-center justify-between gap-4 border-y border-border/50 px-4">
-                  <div className="flex min-w-0 items-center gap-2">
-                    <div className="min-w-0">
-                      <h2 className="truncate font-serif font-light leading-none tracking-[-0.02em] text-foreground" style={{ fontSize: "32px" }}>
-                        {mainTitle}
-                      </h2>
-                      <p className="mt-1 truncate text-muted-foreground" style={{ fontSize: "14px" }}>
-                        {subTitle}
-                      </p>
-                    </div>
-                    <Sheet open={aboutOpen} onOpenChange={setAboutOpen}>
-                      <SheetTrigger asChild>
-                        <button
-                          type="button"
-                          aria-label="More details"
-                          className="ml-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                        >
-                          <Info className="h-3.5 w-3.5" />
-                        </button>
-                      </SheetTrigger>
-                      <SheetContent side="right" className="w-full sm:max-w-md">
-                        <SheetHeader>
-                          <SheetTitle className="font-serif text-2xl font-light">{mainTitle}</SheetTitle>
-                          <SheetDescription className="text-xs uppercase tracking-[0.18em]">
-                            {subTitle}
-                          </SheetDescription>
-                        </SheetHeader>
-                        <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                          {fullDesc}
-                        </p>
-                      </SheetContent>
-                    </Sheet>
-                  </div>
+                  <h2 className="truncate font-serif font-light leading-none tracking-[-0.02em] text-foreground" style={{ fontSize: "32px" }}>
+                    {mainTitle}
+                  </h2>
 
                   {enrolled ? (
                     <Link
@@ -166,7 +137,7 @@ function CoursePage() {
                       className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                     >
                       <ShoppingBag className="h-4 w-4" />
-                      {inCart ? t("course.viewInCart") : "Bake Now"}
+                      {inCart ? t("course.viewInCart") : "Bake this today"}
                     </button>
                   )}
                 </div>
