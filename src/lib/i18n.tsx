@@ -969,8 +969,10 @@ function detectLanguage(): Lang {
   if (typeof window === "undefined") return "en";
   const saved = normalizeLang(window.localStorage.getItem(STORAGE_KEY));
   if (saved) return saved;
-  return normalizeLang(window.navigator.language) ?? "en";
+  // Default to English (GB) regardless of browser locale.
+  return "en";
 }
+
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   // Start with "en" on both server and first client paint to avoid hydration
