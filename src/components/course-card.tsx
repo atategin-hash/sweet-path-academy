@@ -40,16 +40,16 @@ export function CourseCard({ course }: { course: Course }) {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-primary">
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-primary">
           <span>{t(`difficulty.${course.difficulty}`)}</span>
           <span className="h-1 w-1 rounded-full bg-primary/50" />
           <span className="text-muted-foreground">{course.instructor.name}</span>
         </div>
-        <h3 className="mt-3 font-serif text-2xl leading-tight text-foreground">
+        <h3 className="mt-2 font-serif text-xl leading-tight text-foreground md:text-2xl">
           {tx(course.title)}
         </h3>
-        <p className="mt-2 text-sm text-muted-foreground">{tx(course.tagline)}</p>
+        <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">{tx(course.tagline)}</p>
         <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{course.duration}</span>
           <span className="inline-flex items-center gap-1.5"><BookOpen className="h-3.5 w-3.5" />{totalLessons(course)} {t("common.lessons")}</span>
