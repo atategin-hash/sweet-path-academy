@@ -104,77 +104,86 @@ function CoursePage() {
             </div>
 
             {/* ABOUT — compact editorial banner */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
-              <div className="grid items-stretch md:grid-cols-[1.05fr_1fr]">
-                {/* Left: condensed content, vertically centered */}
-                <div className="flex flex-col justify-center px-5 py-5 md:px-7 md:py-6">
-                  <p className="text-[10px] font-light uppercase tracking-[0.24em] text-primary">
-                    {t("course.about")}
-                  </p>
-                  <h2 className="mt-1.5 font-serif text-xl leading-tight text-foreground md:text-2xl">
-                    {tx(course.title)}
-                  </h2>
+            {(() => {
+              const fullTitle = tx(course.title);
+              // Split "Main Title: Subtitle" or "Main Title — Subtitle" into two parts
+              const splitMatch = fullTitle.match(/^(.*?)\s*[:—–-]\s*(.+)$/);
+              const mainTitle = splitMatch ? splitMatch[1] : fullTitle;
+              const subTitle = splitMatch ? splitMatch[2] : tx(course.tagline);
+              const fullDesc = tx(course.description);
+              const firstSentence =
+                fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc;
+              const restOfDesc = fullDesc.slice(firstSentence.length).trim();
 
-                  <p
-                    className={`mt-2.5 text-sm leading-relaxed text-muted-foreground ${
-                      aboutOpen ? "" : "line-clamp-3"
-                    }`}
-                  >
-                    {tx(course.description)}
-                  </p>
+              return (
+                <div className="mt-6 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
+                  <div className="grid items-stretch md:grid-cols-[1.05fr_1fr]">
+                    {/* Left: condensed content, vertically centered */}
+                    <div className="flex flex-col justify-center px-5 py-4 md:px-7 md:py-5">
+                      <p className="text-[10px] font-light uppercase tracking-[0.24em] text-primary">
+                        {subTitle}
+                      </p>
+                      <h2 className="mt-1 font-serif text-xl leading-tight text-foreground md:text-2xl">
+                        {mainTitle}
+                      </h2>
 
-                  <button
-                    type="button"
-                    onClick={() => setAboutOpen((v) => !v)}
-                    className="mt-2 inline-flex w-fit items-center gap-1.5 text-[11px] font-light uppercase tracking-[0.18em] text-primary/80 transition-colors hover:text-primary"
-                    aria-expanded={aboutOpen}
-                  >
-                    {aboutOpen ? (
-                      <>
-                        <Minus className="h-3 w-3" /> Read less
-                      </>
-                    ) : (
-                      <>
-                        <Plus className="h-3 w-3" /> Read more
-                      </>
-                    )}
-                  </button>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {firstSentence}
+                        {restOfDesc && aboutOpen && (
+                          <span className="text-muted-foreground"> {restOfDesc}</span>
+                        )}
+                        {restOfDesc && (
+                          <>
+                            {" "}
+                            <button
+                              type="button"
+                              onClick={() => setAboutOpen((v) => !v)}
+                              className="inline text-[11px] font-light uppercase tracking-[0.14em] text-primary/80 transition-colors hover:text-primary"
+                              aria-expanded={aboutOpen}
+                            >
+                              {aboutOpen ? "Read less" : "Read more"}
+                            </button>
+                          </>
+                        )}
+                      </p>
 
-                  <div className="mt-4">
-                    {enrolled ? (
-                      <Link
-                        to="/classroom/$id"
-                        params={{ id: course.id }}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                      >
-                        <PlayCircle className="h-4 w-4" /> {t("course.continue")}
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          if (!inCart) addToCart(course.id);
-                          openDrawer();
-                        }}
-                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                      >
-                        <ShoppingBag className="h-4 w-4" />
-                        {inCart ? t("course.viewInCart") : t("course.addToCart")}
-                      </button>
-                    )}
+                      <div className="mt-3">
+                        {enrolled ? (
+                          <Link
+                            to="/classroom/$id"
+                            params={{ id: course.id }}
+                            className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                          >
+                            <PlayCircle className="h-4 w-4" /> {t("course.continue")}
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              if (!inCart) addToCart(course.id);
+                              openDrawer();
+                            }}
+                            className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                          >
+                            <ShoppingBag className="h-4 w-4" />
+                            {inCart ? t("course.viewInCart") : "Take this class"}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Right: hero image filling the column */}
+                    <div className="relative min-h-[200px] md:min-h-full">
+                      <img
+                        src={aboutImage}
+                        alt={mainTitle}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
                 </div>
-
-                {/* Right: hero image filling the column */}
-                <div className="relative min-h-[220px] md:min-h-full">
-                  <img
-                    src={aboutImage}
-                    alt={tx(course.title)}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
+              );
+            })()}
 
             {/* AT A GLANCE */}
             <div className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border/60 bg-card/40 p-5 sm:grid-cols-4">
