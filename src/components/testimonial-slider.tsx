@@ -66,13 +66,13 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
         <blockquote className="mt-3 line-clamp-2 font-serif text-base leading-snug text-foreground">
           “{tm.quote}”
         </blockquote>
-        <figcaption className="mt-3 flex items-center justify-between border-t border-border/50 pt-3 text-xs">
+        <figcaption className="mt-3 flex flex-col items-start gap-0.5 border-t border-border/50 pt-3 text-xs">
           <span className="font-medium text-foreground">{tm.name}</span>
           <span className="text-muted-foreground">{tm.role}</span>
         </figcaption>
       </figure>
 
-      <div className="mt-4 flex items-center justify-center gap-3">
+      <div className="mt-2 flex items-center justify-center gap-3">
         <button
           onClick={() => go(-1)}
           aria-label="Previous"
