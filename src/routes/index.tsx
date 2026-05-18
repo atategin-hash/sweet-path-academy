@@ -9,6 +9,7 @@ import {
   DailyProTip,
 } from "@/components/live-widgets";
 import { NewsletterSection } from "@/components/newsletter";
+import { TestimonialSlider } from "@/components/testimonial-slider";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
