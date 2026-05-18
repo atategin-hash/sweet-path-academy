@@ -103,50 +103,49 @@ function CoursePage() {
               </Link>
             </div>
 
-            {/* ABOUT — editorial two-column block */}
-            <div className="mt-10 overflow-hidden rounded-3xl border border-border/50 bg-card/40">
-              <div className="grid items-stretch md:grid-cols-2">
-                {/* Left: condensed content */}
-                <div className="flex flex-col justify-center p-6 md:p-9">
-                  <p className="text-[11px] font-light uppercase tracking-[0.24em] text-primary">
+            {/* ABOUT — compact editorial banner */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
+              <div className="grid items-stretch md:grid-cols-[1.05fr_1fr]">
+                {/* Left: condensed content, vertically centered */}
+                <div className="flex flex-col justify-center px-5 py-5 md:px-7 md:py-6">
+                  <p className="text-[10px] font-light uppercase tracking-[0.24em] text-primary">
                     {t("course.about")}
                   </p>
-                  <h2 className="mt-2 font-serif text-2xl leading-tight text-foreground md:text-3xl">
+                  <h2 className="mt-1.5 font-serif text-xl leading-tight text-foreground md:text-2xl">
                     {tx(course.title)}
                   </h2>
-                  <p className="mt-2 font-serif text-sm italic text-muted-foreground md:text-base">
-                    {tx(course.tagline)}
+
+                  <p
+                    className={`mt-2.5 text-sm leading-relaxed text-muted-foreground ${
+                      aboutOpen ? "" : "line-clamp-3"
+                    }`}
+                  >
+                    {tx(course.description)}
                   </p>
 
-                  {course.learningOutcomes && course.learningOutcomes.length > 0 && (
-                    <ul className="mt-6 space-y-3">
-                      {course.learningOutcomes.slice(0, 3).map((outcome: string, idx: number) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm text-foreground/85">
-                          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
-                            <CheckCircle2 className="h-3.5 w-3.5" strokeWidth={2} />
-                          </span>
-                          <span className="leading-relaxed">{outcome}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() => setAboutOpen((v) => !v)}
+                    className="mt-2 inline-flex w-fit items-center gap-1.5 text-[11px] font-light uppercase tracking-[0.18em] text-primary/80 transition-colors hover:text-primary"
+                    aria-expanded={aboutOpen}
+                  >
+                    {aboutOpen ? (
+                      <>
+                        <Minus className="h-3 w-3" /> Read less
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="h-3 w-3" /> Read more
+                      </>
+                    )}
+                  </button>
 
-                  <p className="mt-6 border-l border-border/60 pl-4 font-serif text-sm italic leading-relaxed text-muted-foreground">
-                    {(() => {
-                      const desc = tx(course.description);
-                      const sentences = desc.match(/[^.!?]+[.!?]+/g);
-                      return sentences && sentences.length > 1
-                        ? sentences[sentences.length - 1].trim()
-                        : desc;
-                    })()}
-                  </p>
-
-                  <div className="mt-7">
+                  <div className="mt-4">
                     {enrolled ? (
                       <Link
                         to="/classroom/$id"
                         params={{ id: course.id }}
-                        className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-7 text-xs font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                       >
                         <PlayCircle className="h-4 w-4" /> {t("course.continue")}
                       </Link>
@@ -156,24 +155,23 @@ function CoursePage() {
                           if (!inCart) addToCart(course.id);
                           openDrawer();
                         }}
-                        className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-7 text-xs font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-primary px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                       >
                         <ShoppingBag className="h-4 w-4" />
-                        {inCart ? t("course.viewInCart") : t("course.enrollNow") || t("course.addToCart")}
+                        {inCart ? t("course.viewInCart") : t("course.addToCart")}
                       </button>
                     )}
                   </div>
                 </div>
 
-                {/* Right: atmospheric image */}
-                <div className="relative min-h-[280px] md:min-h-full">
+                {/* Right: hero image filling the column */}
+                <div className="relative min-h-[220px] md:min-h-full">
                   <img
-                    src={course.image}
+                    src={aboutImage}
                     alt={tx(course.title)}
                     className="absolute inset-0 h-full w-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-foreground/10 to-transparent" aria-hidden="true" />
                 </div>
               </div>
             </div>
