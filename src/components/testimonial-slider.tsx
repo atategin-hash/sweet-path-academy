@@ -72,7 +72,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
         </figcaption>
       </figure>
 
-      <div className="mt-2 flex items-center justify-center gap-3">
+      <div className="mt-1 flex items-center justify-center gap-3">
         <button
           onClick={() => go(-1)}
           aria-label="Previous"
