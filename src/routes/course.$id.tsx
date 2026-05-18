@@ -25,7 +25,9 @@ import {
   Film,
   Plus,
   Minus,
+  Info,
 } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 
 export const Route = createFileRoute("/course/$id")({
   loader: ({ params }): { course: Course } => {
