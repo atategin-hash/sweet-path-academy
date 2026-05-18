@@ -286,7 +286,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "Sepete ekle",
     "course.viewInCart": "Sepette görüntüle",
     "course.continue": "Öğrenmeye devam et",
-    "course.preview": "Ücretsiz önizleme",
+    "course.preview": "Önizleme izle",
     "course.playPreview": "Önizlemeyi oynat",
     "course.all": "Tüm kurslar",
     "course.view": "Kursu gör",
