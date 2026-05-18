@@ -50,7 +50,7 @@ export function CourseCard({ course }: { course: Course }) {
           {tx(course.title)}
         </h3>
         <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">{tx(course.tagline)}</p>
-        <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />{course.duration}</span>
           <span className="inline-flex items-center gap-1.5"><BookOpen className="h-3.5 w-3.5" />{totalLessons(course)} {t("common.lessons")}</span>
           <span className="inline-flex items-center gap-1.5">
@@ -59,8 +59,8 @@ export function CourseCard({ course }: { course: Course }) {
             <span>({course.reviews})</span>
           </span>
         </div>
-        <div className="mt-6 flex items-end justify-between border-t border-border/60 pt-4">
-          <span className="font-serif text-2xl text-foreground">${course.price}</span>
+        <div className="mt-4 flex items-end justify-between border-t border-border/60 pt-3">
+          <span className="font-serif text-xl text-foreground md:text-2xl">${course.price}</span>
           <span className="text-sm font-medium text-primary group-hover:underline">
             {t("course.view")} →
           </span>
