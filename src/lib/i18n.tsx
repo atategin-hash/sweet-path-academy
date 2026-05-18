@@ -216,6 +216,21 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
 
 
     "lang.label": "Language",
+
+    "chatbot.title": "Pastry Consultant",
+    "chatbot.subtitle": "Maison Crumb Academy — your guide",
+    "chatbot.welcome": "Welcome to Maison Crumb Academy. How can I assist your culinary journey today?",
+    "chatbot.placeholder": "Ask about courses, certification, pricing…",
+    "chatbot.quick": "Quick questions",
+    "chatbot.q1": "Which course is for me?",
+    "chatbot.q2": "About Certification",
+    "chatbot.q3": "Pricing & Access",
+    "chatbot.q4": "Talk to a Human",
+    "chatbot.a1": "I'd be delighted to guide you. Tell me your goal: bake beautifully at home, launch a boutique café, or scale to industrial production? Most beginners start with our Home Baker tier, while professionals progress to Business or Industrial masterclasses.",
+    "chatbot.a2": "Every Maison Crumb course awards a signed Certificate of Completion, recognised across our partner pastry network. Complete all lessons and the final assessment to receive yours by email within 24 hours.",
+    "chatbot.a3": "All masterclasses include lifetime access, HD video lessons, downloadable recipes and a certificate. Individual courses start from £39, with bundle pricing available at checkout. Every purchase carries a 30-day satisfaction guarantee.",
+    "chatbot.a4": "Of course — our concierge team replies within one business day. Please email hello@maison-crumb.com or use the Contact link in the footer, and a pastry advisor will be in touch.",
+    "chatbot.fallback": "Thank you for your question. For tailored advice, please choose one of the quick options above, or email our concierge team at hello@maison-crumb.com.",
   },
   tr: {
     "nav.home": "Ana Sayfa",
@@ -399,6 +414,21 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "free.watchNow": "Şimdi izle →",
 
     "lang.label": "Dil",
+
+    "chatbot.title": "Pasta Danışmanı",
+    "chatbot.subtitle": "Maison Crumb Akademi — rehberiniz",
+    "chatbot.welcome": "Maison Crumb Akademi'ye hoş geldiniz. Mutfak yolculuğunuzda size nasıl yardımcı olabilirim?",
+    "chatbot.placeholder": "Kurslar, sertifika, fiyatlandırma…",
+    "chatbot.quick": "Hızlı sorular",
+    "chatbot.q1": "Bana hangi kurs uygun?",
+    "chatbot.q2": "Sertifika hakkında",
+    "chatbot.q3": "Fiyatlandırma ve erişim",
+    "chatbot.q4": "Bir uzmanla görüş",
+    "chatbot.a1": "Size memnuniyetle yol göstereyim. Hedefiniz nedir: evde zarif pastalar mı, butik bir kafe açmak mı, yoksa endüstriyel üretime mi geçmek? Yeni başlayanlar için Ev Pastacısı seviyesini, profesyoneller için İşletme ve Endüstriyel masterclass'ları öneririz.",
+    "chatbot.a2": "Her Maison Crumb kursu, imzalı bir Tamamlama Sertifikası sunar. Tüm dersleri ve final değerlendirmesini bitirdiğinizde sertifikanız 24 saat içinde e-posta ile iletilir.",
+    "chatbot.a3": "Tüm masterclass'lar ömür boyu erişim, HD video dersler, indirilebilir reçeteler ve sertifika içerir. Kurslar £39'dan başlar, sepette paket indirimleri mevcuttur. Her satın alma 30 gün memnuniyet garantili.",
+    "chatbot.a4": "Elbette — danışman ekibimiz bir iş günü içinde yanıt verir. Lütfen hello@maison-crumb.com adresine yazın veya alttaki İletişim bağlantısını kullanın.",
+    "chatbot.fallback": "Sorunuz için teşekkürler. Kişisel rehberlik için yukarıdaki hızlı seçeneklerden birini seçin ya da hello@maison-crumb.com adresine yazın.",
   },
   ru: {
     "nav.home": "Главная",
@@ -582,6 +612,21 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "free.watchNow": "Смотреть →",
 
     "lang.label": "Язык",
+
+    "chatbot.title": "Кондитерский консультант",
+    "chatbot.subtitle": "Академия Maison Crumb — ваш гид",
+    "chatbot.welcome": "Добро пожаловать в Академию Maison Crumb. Чем я могу помочь вашему кулинарному пути сегодня?",
+    "chatbot.placeholder": "Курсы, сертификация, цены…",
+    "chatbot.quick": "Быстрые вопросы",
+    "chatbot.q1": "Какой курс мне подходит?",
+    "chatbot.q2": "О сертификации",
+    "chatbot.q3": "Цены и доступ",
+    "chatbot.q4": "Связаться с человеком",
+    "chatbot.a1": "С удовольствием помогу. Какая ваша цель: красивая выпечка дома, открытие бутик-кафе или промышленное производство? Начинающим мы рекомендуем уровень «Домашний пекарь», профессионалам — мастер-классы «Бизнес» и «Промышленный».",
+    "chatbot.a2": "Каждый курс Maison Crumb включает именной сертификат о прохождении. Завершите все уроки и финальный тест — сертификат придёт на e-mail в течение 24 часов.",
+    "chatbot.a3": "Все мастер-классы включают пожизненный доступ, HD-уроки, скачиваемые рецепты и сертификат. Курсы — от £39, на оформлении доступны пакетные скидки. Гарантия возврата 30 дней на каждую покупку.",
+    "chatbot.a4": "Конечно — наша команда отвечает в течение одного рабочего дня. Напишите на hello@maison-crumb.com или используйте ссылку «Контакты» в подвале сайта.",
+    "chatbot.fallback": "Спасибо за вопрос. Для персональной консультации выберите один из быстрых вариантов выше или напишите на hello@maison-crumb.com.",
   },
 
   fr: {
