@@ -173,7 +173,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-muted/20 pt-10 pb-5">
+      <section className="bg-muted/20 pt-10 pb-0">
         <div className="container mx-auto px-6">
           <div className="mx-auto mb-6 max-w-2xl text-center">
             <p className="text-[11px] font-light uppercase tracking-[0.24em] text-primary">
