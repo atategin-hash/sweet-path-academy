@@ -469,7 +469,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "В корзину",
     "course.viewInCart": "Открыть корзину",
     "course.continue": "Продолжить обучение",
-    "course.preview": "Бесплатный просмотр",
+    "course.preview": "Посмотреть превью",
     "course.playPreview": "Смотреть превью",
     "course.all": "Все курсы",
     "course.view": "Смотреть курс",
