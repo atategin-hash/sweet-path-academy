@@ -98,8 +98,13 @@ function DashboardPage() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
-                    <p className="text-xs uppercase tracking-wider text-primary">{t(`difficulty.${course.difficulty}`)}</p>
-                    <h3 className="mt-1 font-serif text-xl text-foreground">{tx(course.title)}</h3>
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        <Clock className="h-3 w-3" /> Last viewed
+                      </span>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground">{t(`difficulty.${course.difficulty}`)}</p>
+                    </div>
+                    <h3 className="mt-2 font-serif text-xl text-foreground">{tx(course.title)}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {t("common.lesson")} {lastLesson} {t("common.of")} {lessons.length} ·{" "}
                       <span className="text-foreground">{tx(lessons[lastLesson - 1]?.title)}</span>
