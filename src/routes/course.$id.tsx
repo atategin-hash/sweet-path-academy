@@ -113,84 +113,71 @@ function CoursePage() {
               const fullDesc = tx(course.description);
               const isMedovik = course.id === "medovik";
               const leadSentence = isMedovik
-                ? "An artisanal study of the legendary Medovik, where heritage meets modern precision."
+                ? "Master the legendary 8-layer honey cake with modern precision."
                 : (fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc);
               const restOfDesc = isMedovik
                 ? fullDesc
                 : fullDesc.slice(leadSentence.length).trim();
-              const toggleLabel = isMedovik ? "Discover the process" : "Read more";
-              const toggleLabelOpen = isMedovik ? "Hide the process" : "Read less";
 
               return (
-                <div className="mt-4 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
-                  <div className="grid items-center md:grid-cols-[1.05fr_1fr]">
-                    {/* Left: ultra-condensed content */}
-                    <div className="flex flex-col justify-center px-5 py-4 md:px-8 md:py-5">
-                      <p className="text-[10px] font-light uppercase tracking-[0.28em] text-primary">
-                        {subTitle}
-                      </p>
-                      <h2 className="mt-1.5 font-serif text-2xl font-light leading-[1.05] tracking-[-0.02em] text-foreground md:text-[2rem]">
-                        {mainTitle}
-                      </h2>
+                <div className="mt-4 rounded-2xl border border-border/50 bg-card/40 px-6 py-6 md:px-10 md:py-8">
+                  <div className="mx-auto max-w-2xl text-center">
+                    <p className="text-[10px] font-light uppercase tracking-[0.3em] text-primary">
+                      {subTitle}
+                    </p>
+                    <h2 className="mt-2 font-serif text-3xl font-light leading-[1.05] tracking-[-0.025em] text-foreground md:text-[2.25rem]">
+                      {mainTitle}
+                    </h2>
 
-                      <p className="mt-2.5 max-w-prose text-sm leading-relaxed text-muted-foreground">
-                        {leadSentence}
-                      </p>
+                    <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                      {leadSentence}
+                    </p>
 
-                      {restOfDesc && (
-                        <div className="mt-1.5">
-                          <button
-                            type="button"
-                            onClick={() => setAboutOpen((v) => !v)}
-                            className="text-xs font-normal text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
-                            aria-expanded={aboutOpen}
-                          >
-                            {aboutOpen ? toggleLabelOpen : toggleLabel}
-                          </button>
-                          {aboutOpen && (
-                            <p className="mt-2 max-w-prose text-sm leading-relaxed text-muted-foreground">
-                              {restOfDesc}
-                            </p>
-                          )}
-                        </div>
-                      )}
-
-                      <div className="mt-3">
-                        {enrolled ? (
-                          <Link
-                            to="/classroom/$id"
-                            params={{ id: course.id }}
-                            className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                          >
-                            <PlayCircle className="h-4 w-4" /> {t("course.continue")}
-                          </Link>
-                        ) : (
-                          <button
-                            onClick={() => {
-                              if (!inCart) addToCart(course.id);
-                              openDrawer();
-                            }}
-                            className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                          >
-                            <ShoppingBag className="h-4 w-4" />
-                            {inCart ? t("course.viewInCart") : "Bake this today"}
-                          </button>
+                    {restOfDesc && (
+                      <div className="mt-2">
+                        <button
+                          type="button"
+                          onClick={() => setAboutOpen((v) => !v)}
+                          className="inline-flex items-center gap-1.5 text-[11px] font-light uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:text-foreground"
+                          aria-expanded={aboutOpen}
+                        >
+                          {aboutOpen ? <Minus className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
+                          {aboutOpen ? "Hide details" : "Show details"}
+                        </button>
+                        {aboutOpen && (
+                          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                            {restOfDesc}
+                          </p>
                         )}
                       </div>
-                    </div>
+                    )}
 
-                    {/* Right: hero image filling the column */}
-                    <div className="relative min-h-[180px] md:min-h-full md:self-stretch">
-                      <img
-                        src={aboutImage}
-                        alt={mainTitle}
-                        className="absolute inset-0 h-full w-full object-cover"
-                        loading="lazy"
-                      />
+                    <div className="mt-4">
+                      {enrolled ? (
+                        <Link
+                          to="/classroom/$id"
+                          params={{ id: course.id }}
+                          className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                        >
+                          <PlayCircle className="h-4 w-4" /> {t("course.continue")}
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            if (!inCart) addToCart(course.id);
+                            openDrawer();
+                          }}
+                          className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                        >
+                          <ShoppingBag className="h-4 w-4" />
+                          {inCart ? t("course.viewInCart") : "Bake this today"}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
               );
+
 
             })()}
 
