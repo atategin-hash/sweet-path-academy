@@ -32,11 +32,11 @@ function DashboardPage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      <section className="container mx-auto px-6 py-12 md:py-10">
+      <section className="container mx-auto px-6 py-8 md:py-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("dashboard.eyebrow")}</p>
-            <h1 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
+            <h1 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("dashboard.title")}
             </h1>
             <p className="mt-2 text-muted-foreground">{t("dashboard.subtitle")}</p>

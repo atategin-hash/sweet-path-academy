@@ -60,7 +60,7 @@ function HomePage() {
       >
         {/* dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/60" />
-        <div className="container relative z-10 mx-auto grid gap-12 px-6 py-12 md:grid-cols-2 md:items-center md:py-10">
+        <div className="container relative z-10 mx-auto grid gap-12 px-6 py-8 md:grid-cols-2 md:items-center md:py-6">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white">
               <Sparkles className="h-3.5 w-3.5" /> {t("home.eyebrow")}
@@ -134,11 +134,11 @@ function HomePage() {
       <LiveAndRoadmapSection />
 
       {/* FEATURED COURSES */}
-      <section className="container mx-auto px-6 py-12">
+      <section className="container mx-auto px-6 py-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
-            <h2 className="mt-2 max-w-xl font-serif text-4xl text-foreground md:text-5xl">
+            <h2 className="mt-2 max-w-xl font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("home.featured.title")}
             </h2>
           </div>
@@ -155,11 +155,11 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-muted/40 py-12">
+      <section className="bg-muted/40 py-8">
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
-            <h2 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
+            <h2 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("home.testimonials.title")}
             </h2>
           </div>
@@ -187,9 +187,9 @@ function HomePage() {
       <NewsletterSection />
 
       {/* CTA */}
-      <section className="container mx-auto px-6 py-10">
+      <section className="container mx-auto px-6 py-6">
         <div
-          className="relative overflow-hidden rounded-[2rem] px-8 py-8 md:px-12 md:py-10"
+          className="relative overflow-hidden rounded-[2rem] px-8 py-8 md:px-12 md:py-6"
           style={{ background: "var(--gradient-warm)" }}
         >
           {/* Subtle grain texture */}

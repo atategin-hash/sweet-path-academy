@@ -17,7 +17,7 @@ function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <section className="container mx-auto max-w-3xl px-6 py-12">
+      <section className="container mx-auto max-w-3xl px-6 py-8">
         <p className="text-sm font-medium uppercase tracking-wider text-primary">Our story</p>
         <h1 className="mt-2 font-serif text-5xl leading-tight text-foreground md:text-6xl">
           A pastry school without walls.

@@ -42,7 +42,7 @@ function CourseNotFound() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <div className="container mx-auto px-6 py-14 text-center">
+      <div className="container mx-auto px-6 py-8 text-center">
         <h1 className="font-serif text-4xl">{t("course.notFound")}</h1>
         <Link to="/courses" className="mt-6 inline-block text-primary hover:underline">← {t("course.backCatalog")}</Link>
       </div>
@@ -63,7 +63,7 @@ function CoursePage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      <section className="container mx-auto px-6 py-12 md:py-10">
+      <section className="container mx-auto px-6 py-8 md:py-6">
         <Link to="/courses" className="text-sm text-muted-foreground hover:text-foreground">
           ← {t("course.all")}
         </Link>
@@ -90,13 +90,13 @@ function CoursePage() {
             </div>
 
             <div className="mt-10">
-              <h2 className="font-serif text-3xl text-foreground">{t("course.about")}</h2>
+              <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.about")}</h2>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
             </div>
 
             {course.learningOutcomes && course.learningOutcomes.length > 0 && (
               <div className="mt-12">
-                <h2 className="font-serif text-3xl text-foreground">{t("course.learn")}</h2>
+                <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.learn")}</h2>
                 <ul className="mt-5 space-y-3">
                   {course.learningOutcomes.map((outcome: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-3 text-muted-foreground">
@@ -110,7 +110,7 @@ function CoursePage() {
 
             <div className="mt-12">
               <div className="flex flex-wrap items-end justify-between gap-2">
-                <h2 className="font-serif text-3xl text-foreground">{t("course.curriculum")}</h2>
+                <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.curriculum")}</h2>
                 <span className="text-sm text-muted-foreground">
                   {course.modules.length} {t("common.modules")} · {lessonCount} {t("common.lessons")} · {course.duration}
                 </span>
