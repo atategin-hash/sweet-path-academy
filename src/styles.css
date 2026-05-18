@@ -22,6 +22,19 @@
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  /* Editorial scale: heading sizes scaled ~80% from Tailwind defaults */
+  --text-2xl: 1.2rem;
+  --text-2xl--line-height: 1.25;
+  --text-3xl: 1.5rem;
+  --text-3xl--line-height: 1.2;
+  --text-4xl: 1.8rem;
+  --text-4xl--line-height: 1.15;
+  --text-5xl: 2.4rem;
+  --text-5xl--line-height: 1.1;
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 1.05;
+  --text-7xl: 3.6rem;
+  --text-7xl--line-height: 1.05;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
