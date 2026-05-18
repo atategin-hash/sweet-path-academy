@@ -64,7 +64,7 @@ function CheckoutPage() {
     return (
       <div className="min-h-screen bg-background">
         <SiteHeader />
-        <div className="container mx-auto px-6 py-24 text-center">
+        <div className="container mx-auto px-6 py-14 text-center">
           <h1 className="font-serif text-4xl text-foreground">Your cart is empty</h1>
           <p className="mt-3 text-muted-foreground">Add a course to begin checkout.</p>
           <Link
