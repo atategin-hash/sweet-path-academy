@@ -390,9 +390,9 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "home.cta.title": "Önlüğünüz sizi bekliyor.",
     "home.cta.lead": "Her hafta yeni bir tarif öğrenen binlerce pastacıya katılın. Tek kursla başlayın ya da tüm akademiye geçin.",
     "home.cta.action": "Kataloğu keşfet",
-    "free.eyebrow": "Ücretsiz Uzmanlık Dersleri",
-    "free.title": "Ücretsiz Masterclass'lar — Hemen Pişirmeye Başla",
-    "free.lead": "Tam dersleri anında izleyin. Kayıt yok, kredi kartı yok — sadece oynat.",
+    "free.eyebrow": "İmza Masterclass'ları",
+    "free.title": "İmza Masterclass'ları — Her Tekniği Ustalaşın",
+    "free.lead": "Profesyonel dersleri anında izleyin. Dünya standartlarında rehberlikle sanatı ustalıkla yapın.",
     "free.badge": "Ücretsiz",
     "free.watchNow": "Şimdi izle →",
 
