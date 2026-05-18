@@ -177,7 +177,7 @@ function HomePage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
             <h2 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
-              {t("home.testimonials.title")}
+              Loved by Bakers Worldwide
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
