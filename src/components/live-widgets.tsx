@@ -91,9 +91,9 @@ export function RecipeOfTheDay() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-3 py-1.5 text-xs font-light tracking-wide text-muted-foreground">
                 <Clock className="h-3.5 w-3.5 text-primary" />
-                Refreshes in {fmt(h)}:{fmt(m)}:{fmt(s)}
+                Refresh in {fmt(h)}:{fmt(m)}:{fmt(s)}
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-muted-foreground">
                 <Calendar className="h-3.5 w-3.5 text-primary" />
