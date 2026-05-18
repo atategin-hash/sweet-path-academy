@@ -16,7 +16,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setI((v) => (v + 1) % items.length), 6000);
+    const id = setInterval(() => setI((v) => (v + 1) % items.length), 5000);
     return () => clearInterval(id);
   }, [items.length, paused]);
 
