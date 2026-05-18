@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { getCourse, totalLessons, type Course } from "@/lib/courses";
 import { useStore } from "@/lib/store";
 import { CourseFAQ } from "@/components/course-faq";
 import { useI18n } from "@/lib/i18n";
+import medovikSlice from "@/assets/medovik-slice.jpg";
 import {
   Clock,
   BookOpen,
@@ -22,6 +24,8 @@ import {
   FileText,
   Globe,
   Film,
+  Plus,
+  Minus,
 } from "lucide-react";
 
 export const Route = createFileRoute("/course/$id")({
