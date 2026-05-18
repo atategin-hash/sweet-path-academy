@@ -104,7 +104,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "Add to cart",
     "course.viewInCart": "View in cart",
     "course.continue": "Continue learning",
-    "course.preview": "Watch free preview",
+    "course.preview": "Watch a preview",
     "course.playPreview": "Play preview",
     "course.all": "All courses",
     "course.view": "View course",
