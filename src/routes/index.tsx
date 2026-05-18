@@ -60,12 +60,12 @@ function HomePage() {
       >
         {/* dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/60" />
-        <div className="container relative z-10 mx-auto grid gap-12 px-6 py-20 md:grid-cols-2 md:items-center md:py-28">
+        <div className="container relative z-10 mx-auto grid gap-12 px-6 py-12 md:grid-cols-2 md:items-center md:py-10">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white">
               <Sparkles className="h-3.5 w-3.5" /> {t("home.eyebrow")}
             </span>
-            <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="mt-6 font-serif text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               {t("home.heroTitle")}
             </h1>
             <p className="mt-6 max-w-lg text-lg text-white/80">
@@ -134,7 +134,7 @@ function HomePage() {
       <LiveAndRoadmapSection />
 
       {/* FEATURED COURSES */}
-      <section className="container mx-auto px-6 py-20">
+      <section className="container mx-auto px-6 py-12">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
@@ -155,7 +155,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-muted/40 py-20">
+      <section className="bg-muted/40 py-12">
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>

@@ -42,7 +42,7 @@ function CourseNotFound() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <div className="container mx-auto px-6 py-24 text-center">
+      <div className="container mx-auto px-6 py-14 text-center">
         <h1 className="font-serif text-4xl">{t("course.notFound")}</h1>
         <Link to="/courses" className="mt-6 inline-block text-primary hover:underline">← {t("course.backCatalog")}</Link>
       </div>
@@ -63,7 +63,7 @@ function CoursePage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      <section className="container mx-auto px-6 py-12 md:py-16">
+      <section className="container mx-auto px-6 py-12 md:py-10">
         <Link to="/courses" className="text-sm text-muted-foreground hover:text-foreground">
           ← {t("course.all")}
         </Link>
@@ -173,7 +173,7 @@ function CoursePage() {
                   <span>({course.reviews})</span>
                 </span>
               </div>
-              <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground">
+              <h1 className="mt-3 font-serif text-3xl leading-tight text-foreground md:text-4xl">
                 {tx(course.title)}
               </h1>
               <p className="mt-3 text-muted-foreground">{tx(course.tagline)}</p>

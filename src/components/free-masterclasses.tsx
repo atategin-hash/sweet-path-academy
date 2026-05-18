@@ -9,7 +9,7 @@ export function FreeMasterclasses() {
   if (featured.length === 0) return null;
 
   return (
-    <section className="border-y border-border/40 bg-muted/20 py-20">
+    <section className="border-y border-border/40 bg-muted/20 py-12">
       <div className="container mx-auto px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>

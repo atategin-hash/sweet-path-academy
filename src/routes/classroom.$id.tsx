@@ -67,7 +67,7 @@ function ClassroomNotFound() {
   const { t } = useI18n();
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-6 py-24 text-center">
+      <div className="container mx-auto px-6 py-14 text-center">
         <h1 className="font-serif text-4xl">{t("classroom.notFound")}</h1>
         <Link to="/dashboard" className="mt-6 inline-block text-primary hover:underline">
           ← {t("classroom.backDashboard")}

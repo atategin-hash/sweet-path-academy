@@ -32,7 +32,7 @@ function DashboardPage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      <section className="container mx-auto px-6 py-12 md:py-16">
+      <section className="container mx-auto px-6 py-12 md:py-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("dashboard.eyebrow")}</p>
