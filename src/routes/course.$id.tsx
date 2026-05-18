@@ -120,6 +120,24 @@ function CoursePage() {
                 </span>
               </div>
 
+              {/* 4-phase curriculum overview */}
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { Icon: Sparkles, title: "Introduction", desc: "Heritage context and studio set-up." },
+                  { Icon: ChefHat, title: "Core Technique", desc: "The defining craft of the discipline." },
+                  { Icon: Wrench, title: "Assembly", desc: "Architectural build and structure." },
+                  { Icon: Award, title: "Finishing", desc: "Luxury presentation and signature." },
+                ].map(({ Icon, title, desc }) => (
+                  <div key={title} className="rounded-2xl border border-border/60 bg-card/50 p-4">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-primary">
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </span>
+                    <p className="mt-3 font-serif text-base text-foreground">{title}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
               <div className="mt-6 space-y-4">
                 {course.modules.map((mod: Course["modules"][number], mIdx: number) => (
                   <details
