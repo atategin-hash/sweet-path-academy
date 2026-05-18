@@ -5,15 +5,15 @@ import { useI18n } from "@/lib/i18n";
 
 export function FreeMasterclasses() {
   const { t, tx } = useI18n();
-  const free = courses.filter((c) => c.free);
-  if (free.length === 0) return null;
+  const featured = courses.filter((c) => c.free);
+  if (featured.length === 0) return null;
 
   return (
-    <section className="border-y border-emerald-500/15 bg-gradient-to-b from-emerald-50/60 via-background to-background py-20 dark:from-emerald-950/10">
+    <section className="border-y border-border/40 bg-muted/20 py-20">
       <div className="container mx-auto px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
               <Sparkles className="h-3.5 w-3.5" /> {t("free.eyebrow")}
             </p>
             <h2 className="mt-3 max-w-xl font-serif text-4xl text-foreground md:text-5xl">
@@ -26,10 +26,10 @@ export function FreeMasterclasses() {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {free.map((c) => (
+          {featured.map((c) => (
             <Link
               key={c.id}
-              to="/classroom/$id"
+              to="/course/$id"
               params={{ id: c.id }}
               className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-warm)]"
             >
@@ -52,7 +52,7 @@ export function FreeMasterclasses() {
               </div>
               <div className="flex items-center justify-between p-5">
                 <span className="text-sm text-muted-foreground">{c.instructor.name}</span>
-                <span className="text-sm font-semibold text-emerald-600">{t("free.watchNow")}</span>
+                <span className="text-sm font-semibold text-primary">{t("course.view")} →</span>
               </div>
             </Link>
           ))}
@@ -61,3 +61,4 @@ export function FreeMasterclasses() {
     </section>
   );
 }
+

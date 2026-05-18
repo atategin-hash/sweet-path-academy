@@ -104,7 +104,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "Add to cart",
     "course.viewInCart": "View in cart",
     "course.continue": "Continue learning",
-    "course.preview": "Watch free preview",
+    "course.preview": "Watch a preview",
     "course.playPreview": "Play preview",
     "course.all": "All courses",
     "course.view": "View course",
@@ -189,7 +189,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "updates.yesterday": "Yesterday",
     "updates.daysAgo": "2 days ago",
 
-    "home.eyebrow": "Curated free masterclasses",
+    "home.eyebrow": "Signature pastry masterclasses",
     "home.heroTitle": "Master the Art of Global Pastry",
     "home.heroLead": "Unlock professional techniques and modern recipes curated from the world's finest pastry masters. Maison Crumb: Your international journey begins.",
     "home.searchPlaceholder": "Type a cake name — Bento, Medovik, Croissant…",
@@ -210,8 +210,9 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "free.eyebrow": "Signature Masterclasses",
     "free.title": "Signature Masterclasses — Master Every Technique",
     "free.lead": "Stream professional lessons instantly. Master the art with world-class guidance.",
-    "free.badge": "Free",
-    "free.watchNow": "Watch now →",
+    "free.badge": "Featured",
+    "free.watchNow": "View Course →",
+
 
     "lang.label": "Language",
   },
@@ -285,7 +286,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "Sepete ekle",
     "course.viewInCart": "Sepette görüntüle",
     "course.continue": "Öğrenmeye devam et",
-    "course.preview": "Ücretsiz önizleme",
+    "course.preview": "Önizleme izle",
     "course.playPreview": "Önizlemeyi oynat",
     "course.all": "Tüm kurslar",
     "course.view": "Kursu gör",
@@ -468,7 +469,7 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "course.addToCart": "В корзину",
     "course.viewInCart": "Открыть корзину",
     "course.continue": "Продолжить обучение",
-    "course.preview": "Бесплатный просмотр",
+    "course.preview": "Посмотреть превью",
     "course.playPreview": "Смотреть превью",
     "course.all": "Все курсы",
     "course.view": "Смотреть курс",
@@ -969,8 +970,10 @@ function detectLanguage(): Lang {
   if (typeof window === "undefined") return "en";
   const saved = normalizeLang(window.localStorage.getItem(STORAGE_KEY));
   if (saved) return saved;
-  return normalizeLang(window.navigator.language) ?? "en";
+  // Default to English (GB) regardless of browser locale.
+  return "en";
 }
+
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   // Start with "en" on both server and first client paint to avoid hydration
@@ -984,9 +987,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (typeof document === "undefined") return;
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === "en" ? "en-GB" : lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
   }, [lang]);
+
 
   const setLang = useCallback((nextLang: Lang) => {
     const normalized = normalizeLang(nextLang) ?? DEFAULT_LANG;

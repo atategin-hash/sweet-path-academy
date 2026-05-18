@@ -109,8 +109,9 @@ export function NextStepTeaser({
             <Crown className="h-4 w-4" /> Unlock Premium — 50% OFF
           </Link>
           <button onClick={onClose} className="text-xs text-white/50 hover:text-white">
-            Keep watching free lessons
+            Keep watching this lesson
           </button>
+
         </div>
       </div>
     </div>
