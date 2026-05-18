@@ -116,18 +116,18 @@ function CoursePage() {
               const restOfDesc = fullDesc.slice(firstSentence.length).trim();
 
               return (
-                <div className="mt-6 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
-                  <div className="grid items-stretch md:grid-cols-[1.05fr_1fr]">
+                <div className="mt-5 overflow-hidden rounded-2xl border border-border/50 bg-card/40">
+                  <div className="grid items-center md:grid-cols-[1.05fr_1fr]">
                     {/* Left: condensed content, vertically centered */}
-                    <div className="flex flex-col justify-center px-5 py-4 md:px-7 md:py-5">
-                      <p className="text-[10px] font-light uppercase tracking-[0.24em] text-primary">
+                    <div className="flex flex-col justify-center px-5 py-4 md:px-8 md:py-5">
+                      <p className="text-[10px] font-light uppercase tracking-[0.28em] text-primary">
                         {subTitle}
                       </p>
-                      <h2 className="mt-1 font-serif text-xl leading-tight text-foreground md:text-2xl">
+                      <h2 className="mt-1.5 font-serif text-2xl font-light leading-[1.05] tracking-[-0.02em] text-foreground md:text-[2rem]">
                         {mainTitle}
                       </h2>
 
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground">
                         {firstSentence}
                         {restOfDesc && aboutOpen && (
                           <span className="text-muted-foreground"> {restOfDesc}</span>
@@ -138,7 +138,7 @@ function CoursePage() {
                             <button
                               type="button"
                               onClick={() => setAboutOpen((v) => !v)}
-                              className="inline text-[11px] font-light uppercase tracking-[0.14em] text-primary/80 transition-colors hover:text-primary"
+                              className="inline text-xs font-normal text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
                               aria-expanded={aboutOpen}
                             >
                               {aboutOpen ? "Read less" : "Read more"}
@@ -147,7 +147,7 @@ function CoursePage() {
                         )}
                       </p>
 
-                      <div className="mt-3">
+                      <div className="mt-4">
                         {enrolled ? (
                           <Link
                             to="/classroom/$id"
@@ -165,14 +165,14 @@ function CoursePage() {
                             className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                           >
                             <ShoppingBag className="h-4 w-4" />
-                            {inCart ? t("course.viewInCart") : "Take this class"}
+                            {inCart ? t("course.viewInCart") : "Bake this today"}
                           </button>
                         )}
                       </div>
                     </div>
 
                     {/* Right: hero image filling the column */}
-                    <div className="relative min-h-[200px] md:min-h-full">
+                    <div className="relative min-h-[200px] md:min-h-[260px] md:h-full">
                       <img
                         src={aboutImage}
                         alt={mainTitle}
@@ -182,6 +182,7 @@ function CoursePage() {
                     </div>
                   </div>
                 </div>
+
               );
             })()}
 
