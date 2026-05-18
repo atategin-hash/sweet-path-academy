@@ -65,7 +65,7 @@ function HomePage() {
             <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white">
               <Sparkles className="h-3.5 w-3.5" /> {t("home.eyebrow")}
             </span>
-            <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
+            <h1 className="mt-6 font-serif text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               {t("home.heroTitle")}
             </h1>
             <p className="mt-6 max-w-lg text-lg text-white/80">
