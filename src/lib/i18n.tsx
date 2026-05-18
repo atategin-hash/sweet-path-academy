@@ -986,9 +986,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (typeof document === "undefined") return;
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === "en" ? "en-GB" : lang;
     document.documentElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
   }, [lang]);
+
 
   const setLang = useCallback((nextLang: Lang) => {
     const normalized = normalizeLang(nextLang) ?? DEFAULT_LANG;
