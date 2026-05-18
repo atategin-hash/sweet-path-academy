@@ -138,7 +138,7 @@ function HomePage() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.featured.eyebrow")}</p>
-            <h2 className="mt-2 max-w-xl font-serif text-4xl text-foreground md:text-5xl">
+            <h2 className="mt-2 max-w-xl font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("home.featured.title")}
             </h2>
           </div>
@@ -159,7 +159,7 @@ function HomePage() {
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("home.testimonials.eyebrow")}</p>
-            <h2 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
+            <h2 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("home.testimonials.title")}
             </h2>
           </div>

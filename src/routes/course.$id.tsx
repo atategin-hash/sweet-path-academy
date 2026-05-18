@@ -90,13 +90,13 @@ function CoursePage() {
             </div>
 
             <div className="mt-10">
-              <h2 className="font-serif text-3xl text-foreground">{t("course.about")}</h2>
+              <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.about")}</h2>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
             </div>
 
             {course.learningOutcomes && course.learningOutcomes.length > 0 && (
               <div className="mt-12">
-                <h2 className="font-serif text-3xl text-foreground">{t("course.learn")}</h2>
+                <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.learn")}</h2>
                 <ul className="mt-5 space-y-3">
                   {course.learningOutcomes.map((outcome: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-3 text-muted-foreground">
@@ -110,7 +110,7 @@ function CoursePage() {
 
             <div className="mt-12">
               <div className="flex flex-wrap items-end justify-between gap-2">
-                <h2 className="font-serif text-3xl text-foreground">{t("course.curriculum")}</h2>
+                <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.curriculum")}</h2>
                 <span className="text-sm text-muted-foreground">
                   {course.modules.length} {t("common.modules")} · {lessonCount} {t("common.lessons")} · {course.duration}
                 </span>

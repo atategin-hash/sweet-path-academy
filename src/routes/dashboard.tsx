@@ -36,7 +36,7 @@ function DashboardPage() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("dashboard.eyebrow")}</p>
-            <h1 className="mt-2 font-serif text-4xl text-foreground md:text-5xl">
+            <h1 className="mt-2 font-serif text-2xl text-foreground md:text-3xl md:text-5xl">
               {t("dashboard.title")}
             </h1>
             <p className="mt-2 text-muted-foreground">{t("dashboard.subtitle")}</p>
