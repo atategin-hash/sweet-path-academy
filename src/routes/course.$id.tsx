@@ -5,7 +5,6 @@ import { getCourse, totalLessons, type Course } from "@/lib/courses";
 import { useStore } from "@/lib/store";
 import { CourseFAQ } from "@/components/course-faq";
 import { useI18n } from "@/lib/i18n";
-import medovikSlice from "@/assets/medovik-slice.jpg";
 import {
   Clock,
   BookOpen,
@@ -71,7 +70,6 @@ function CoursePage() {
   const enrolled = isEnrolled(course.id);
   const features = ["course.feature.hd", "course.feature.recipes", "course.feature.qa", "course.feature.certificate"];
   const [aboutOpen, setAboutOpen] = useState(false);
-  const aboutImage = course.id === "medovik" ? medovikSlice : course.image;
 
   return (
     <div className="min-h-screen bg-background">
@@ -105,61 +103,44 @@ function CoursePage() {
 
             {/* ABOUT — compact editorial banner */}
             {(() => {
-              const fullTitle = tx(course.title);
+              const isMedovik = course.id === "medovik";
+              const fullTitle = isMedovik ? "Medovik Excellence" : tx(course.title);
               // Split "Main Title: Subtitle" or "Main Title — Subtitle" into two parts
               const splitMatch = fullTitle.match(/^(.*?)\s*[:—–-]\s*(.+)$/);
-              const mainTitle = splitMatch ? splitMatch[1] : fullTitle;
+              const mainTitle = isMedovik ? "Medovik Excellence" : splitMatch ? splitMatch[1] : fullTitle;
               const subTitle = splitMatch ? splitMatch[2] : tx(course.tagline);
               const fullDesc = tx(course.description);
-              const isMedovik = course.id === "medovik";
               const leadSentence = isMedovik
-                ? "Master the legendary 8-layer honey cake with modern precision."
+                ? "Master the 8-layer honey cake."
                 : (fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc);
               const restOfDesc = isMedovik
                 ? fullDesc
                 : fullDesc.slice(leadSentence.length).trim();
 
               return (
-                <div className="mt-4 rounded-2xl border border-border/50 bg-card/40 px-6 py-6 md:px-10 md:py-8">
+                <div className="mt-3 border-y border-border/50 bg-card/20 px-0 py-3">
                   <div className="mx-auto max-w-2xl text-center">
-                    <p className="text-[10px] font-light uppercase tracking-[0.3em] text-primary">
-                      {subTitle}
-                    </p>
-                    <h2 className="mt-2 font-serif text-3xl font-light leading-[1.05] tracking-[-0.025em] text-foreground md:text-[2.25rem]">
+                    {!isMedovik && (
+                      <p className="text-[10px] font-light uppercase tracking-[0.3em] text-primary">
+                        {subTitle}
+                      </p>
+                    )}
+                    <h2 className="font-serif text-2xl font-light leading-none tracking-[-0.025em] text-foreground md:text-3xl">
                       {mainTitle}
                     </h2>
 
-                    <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                    <p className="mx-auto mt-1 max-w-xl text-sm leading-snug text-muted-foreground">
                       {leadSentence}
                     </p>
 
-                    {restOfDesc && (
-                      <div className="mt-2">
-                        <button
-                          type="button"
-                          onClick={() => setAboutOpen((v) => !v)}
-                          className="inline-flex items-center gap-1.5 text-[11px] font-light uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:text-foreground"
-                          aria-expanded={aboutOpen}
-                        >
-                          {aboutOpen ? <Minus className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
-                          {aboutOpen ? "Hide details" : "Show details"}
-                        </button>
-                        {aboutOpen && (
-                          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                            {restOfDesc}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    <div className="mt-4">
+                    <div className="mt-2">
                       {enrolled ? (
                         <Link
                           to="/classroom/$id"
                           params={{ id: course.id }}
-                          className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                          className="inline-flex h-8 items-center justify-center gap-2 rounded-full bg-primary px-4 text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                         >
-                          <PlayCircle className="h-4 w-4" /> {t("course.continue")}
+                          <PlayCircle className="h-3.5 w-3.5" /> {t("course.continue")}
                         </Link>
                       ) : (
                         <button
@@ -167,13 +148,32 @@ function CoursePage() {
                             if (!inCart) addToCart(course.id);
                             openDrawer();
                           }}
-                          className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                          className="inline-flex h-8 items-center justify-center gap-2 rounded-full bg-primary px-4 text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
                         >
-                          <ShoppingBag className="h-4 w-4" />
+                          <ShoppingBag className="h-3.5 w-3.5" />
                           {inCart ? t("course.viewInCart") : "Bake this today"}
                         </button>
                       )}
                     </div>
+
+                    {restOfDesc && (
+                      <div className="mt-1.5">
+                        <button
+                          type="button"
+                          onClick={() => setAboutOpen((v) => !v)}
+                          className="inline-flex items-center gap-1 text-[10px] font-light uppercase tracking-[0.16em] text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
+                          aria-expanded={aboutOpen}
+                        >
+                          {aboutOpen ? <Minus className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
+                          {aboutOpen ? "Hide Details" : "Show Details"}
+                        </button>
+                        {aboutOpen && (
+                          <p className="mx-auto mt-2 max-w-xl text-sm leading-snug text-muted-foreground">
+                            {restOfDesc}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               );
