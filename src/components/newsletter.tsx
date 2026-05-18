@@ -22,11 +22,11 @@ export function NewsletterSection() {
     >
       {/* Subtle marble background */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.18]"
+        className="absolute inset-0 bg-cover bg-center opacity-[0.10] md:opacity-[0.18]"
         style={{ backgroundImage: `url(${newsletterBg})` }}
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/85 to-background md:from-background/80 md:via-background/60" aria-hidden="true" />
 
       <div className="container relative mx-auto max-w-6xl px-6 py-8 md:py-8">
         {/* Horizontal layout */}

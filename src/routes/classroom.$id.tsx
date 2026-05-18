@@ -283,7 +283,7 @@ function ClassroomPage() {
                     className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white placeholder:text-white/40 focus:border-primary focus:outline-none"
                   />
                   <div className="flex justify-end">
-                    <button className="inline-flex h-10 items-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground">
+                    <button className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground transition-transform hover:-translate-y-0.5">
                       {t("classroom.postComment")}
                     </button>
                   </div>
