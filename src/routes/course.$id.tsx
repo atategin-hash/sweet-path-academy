@@ -77,7 +77,7 @@ function CoursePage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      <section className="container mx-auto px-6 py-8 md:py-6">
+      <section className="container mx-auto px-6 py-6 md:py-4">
         <Link to="/courses" className="text-sm text-muted-foreground hover:text-foreground">
           ← {t("course.all")}
         </Link>
