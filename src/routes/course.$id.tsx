@@ -14,6 +14,10 @@ import {
   ArrowRight,
   Star,
   Layers,
+  Sparkles,
+  ChefHat,
+  Wrench,
+  Award,
 } from "lucide-react";
 
 export const Route = createFileRoute("/course/$id")({
@@ -114,6 +118,24 @@ function CoursePage() {
                 <span className="text-sm text-muted-foreground">
                   {course.modules.length} {t("common.modules")} · {lessonCount} {t("common.lessons")} · {course.duration}
                 </span>
+              </div>
+
+              {/* 4-phase curriculum overview */}
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { Icon: Sparkles, title: "Introduction", desc: "Heritage context and studio set-up." },
+                  { Icon: ChefHat, title: "Core Technique", desc: "The defining craft of the discipline." },
+                  { Icon: Wrench, title: "Assembly", desc: "Architectural build and structure." },
+                  { Icon: Award, title: "Finishing", desc: "Luxury presentation and signature." },
+                ].map(({ Icon, title, desc }) => (
+                  <div key={title} className="rounded-2xl border border-border/60 bg-card/50 p-4">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-primary">
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </span>
+                    <p className="mt-3 font-serif text-base text-foreground">{title}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{desc}</p>
+                  </div>
+                ))}
               </div>
 
               <div className="mt-6 space-y-4">
@@ -234,6 +256,15 @@ function CoursePage() {
                     <p className="text-sm text-muted-foreground">{course.instructor.title}</p>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-4">
+                <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  <Award className="h-3.5 w-3.5" /> Expert Guidance
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                  Learn from industry veterans with years of experience in luxury pastry shops.
+                </p>
               </div>
 
               <ul className="mt-8 space-y-2 border-t border-border/60 pt-6 text-sm text-muted-foreground">
