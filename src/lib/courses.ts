@@ -73,6 +73,7 @@ export type Course = {
   reviews: number;
   instructor: Instructor;
   modules: Module[];
+  learningOutcomes?: string[];
 };
 
 const yt = (id: string) => `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`;
@@ -476,14 +477,14 @@ export const courses: Course[] = [
     title: "Medovik Excellence: The Art of Layered Honey Cake",
     tagline: "Eight delicate honey layers, silky sour-cream filling",
     description:
-      "The viral honey cake everyone is recreating. Master the elastic honey dough, paper-thin layers, and the tangy sour-cream-and-condensed-milk filling that makes Medovik unforgettable at home.",
+      "Master the legendary Russian Honey Cake with our comprehensive Medovik masterclass. Discover the secrets behind the perfectly thin, honey-infused layers and the signature sour cream frosting. From temperature control to professional assembly, we guide you through every step to achieve bakery-quality results.",
     image: chocolate,
     difficulty: "Intermediate",
     tier: "home",
     trending: true,
     free: true,
     keywords: ["medovik", "honey cake", "russian", "sour cream", "trending"],
-    duration: "1h 15m",
+    duration: "3h 45m",
     price: 39,
     rating: 4.92,
     reviews: 530,
@@ -492,16 +493,34 @@ export const courses: Course[] = [
       title: "Pastry chef · Moscow",
       avatar: avatar("Natasha Medovik"),
     },
+    learningOutcomes: [
+      "The chemistry of honey-based dough for the perfect texture.",
+      "Advanced rolling and baking techniques for paper-thin layers.",
+      "Creating the classic 'Smetana' frosting with a modern balance.",
+      "Professional coating and decoration styles for a luxury aesthetic.",
+    ],
     modules: [
       {
-        id: "med-1",
-        title: "Module 1 · The honey layers",
+        id: "med-intro",
+        title: "Introduction",
         lessons: [
           {
-            id: "medovik-layers",
-            title: "Medovik honey layers from scratch",
+            id: "med-welcome",
+            title: "Welcome to Medovik Excellence",
             videoUrl: yt("VeiH4ToK_5Y"),
-            duration: "11:30",
+            duration: "8:15",
+          },
+        ],
+      },
+      {
+        id: "med-dough",
+        title: "Dough Preparation",
+        lessons: [
+          {
+            id: "med-honey-dough",
+            title: "The honey dough — chemistry and technique",
+            videoUrl: yt("VeiH4ToK_5Y"),
+            duration: "22:40",
             recipe: {
               servings: "One 8-layer 20 cm cake",
               time: "2h",
@@ -525,6 +544,30 @@ export const courses: Course[] = [
               ],
               chefNotes: ["The cake must rest 12 hours — the layers soften into pillows."],
             },
+          },
+        ],
+      },
+      {
+        id: "med-baking",
+        title: "Baking the Layers",
+        lessons: [
+          {
+            id: "med-bake-layers",
+            title: "Rolling and baking paper-thin layers",
+            videoUrl: yt("VeiH4ToK_5Y"),
+            duration: "18:30",
+          },
+        ],
+      },
+      {
+        id: "med-assembly",
+        title: "Final Assembly",
+        lessons: [
+          {
+            id: "med-finish",
+            title: "Frosting, coating and luxury presentation",
+            videoUrl: yt("VeiH4ToK_5Y"),
+            duration: "14:20",
           },
         ],
       },
