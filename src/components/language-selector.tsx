@@ -32,7 +32,7 @@ export function LanguageSelector({ variant = "light" }: { variant?: "light" | "d
           {t("lang.label")}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {LANGUAGES.map((l) => (
+        {available.map((l) => (
           <DropdownMenuItem
             key={l.code}
             onSelect={() => setLang(l.code as Lang)}
