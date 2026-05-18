@@ -248,7 +248,7 @@ function HomePage() {
             </div>
             <Link
               to="/courses"
-              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-foreground px-7 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
+              className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
             >
               {t("home.cta.action")}
             </Link>
