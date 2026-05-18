@@ -94,6 +94,20 @@ function CoursePage() {
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
             </div>
 
+            {course.learningOutcomes && course.learningOutcomes.length > 0 && (
+              <div className="mt-12">
+                <h2 className="font-serif text-3xl text-foreground">{t("course.learn")}</h2>
+                <ul className="mt-5 space-y-3">
+                  {course.learningOutcomes.map((outcome, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-muted-foreground">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      <span className="text-base leading-relaxed">{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="mt-12">
               <div className="flex flex-wrap items-end justify-between gap-2">
                 <h2 className="font-serif text-3xl text-foreground">{t("course.curriculum")}</h2>

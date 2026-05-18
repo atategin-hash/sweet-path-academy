@@ -73,6 +73,7 @@ export type Course = {
   reviews: number;
   instructor: Instructor;
   modules: Module[];
+  learningOutcomes?: string[];
 };
 
 const yt = (id: string) => `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`;
