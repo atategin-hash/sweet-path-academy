@@ -357,7 +357,7 @@ export const courses: Course[] = [
   },
   {
     id: "bakery-foundations",
-    title: "Foundation of Bakery & Bread",
+    title: "The Sourdough Secret: Artisan Bread Masterclass",
     tagline: "From mise en place to your first laminated rolls",
     description:
       "A friendly first-step program for anyone walking into a kitchen for real. Set up like a pro, demystify yeast, then bake the cinnamon rolls everyone asks for.",
@@ -473,7 +473,7 @@ export const courses: Course[] = [
   },
   {
     id: "medovik",
-    title: "Classic Medovik — Russian Honey Cake",
+    title: "Medovik Excellence: The Art of Layered Honey Cake",
     tagline: "Eight delicate honey layers, silky sour-cream filling",
     description:
       "The viral honey cake everyone is recreating. Master the elastic honey dough, paper-thin layers, and the tangy sour-cream-and-condensed-milk filling that makes Medovik unforgettable at home.",
