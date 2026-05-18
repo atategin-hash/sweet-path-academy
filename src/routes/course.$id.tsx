@@ -99,12 +99,32 @@ function CoursePage() {
 
             <div className="mt-10">
               <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.about")}</h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
+              <p className="mt-4 line-clamp-3 text-lg leading-relaxed text-muted-foreground">{tx(course.description)}</p>
+            </div>
+
+            {/* AT A GLANCE */}
+            <div className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border/60 bg-card/40 p-5 sm:grid-cols-4">
+              {[
+                { Icon: Clock, label: "Duration", value: course.duration },
+                { Icon: GraduationCap, label: "Level", value: t(`difficulty.${course.difficulty}`) },
+                { Icon: FileText, label: "Includes", value: "Digital Workbook" },
+                { Icon: Globe, label: "Language", value: "English (CC)" },
+              ].map(({ Icon, label, value }) => (
+                <div key={label} className="flex items-start gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-primary">
+                    <Icon className="h-4 w-4" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{label}</p>
+                    <p className="mt-0.5 text-sm font-medium text-foreground">{value}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {course.learningOutcomes && course.learningOutcomes.length > 0 && (
               <div className="mt-12">
-                <h2 className="font-serif text-2xl text-foreground md:text-3xl">{t("course.learn")}</h2>
+                <h2 className="font-serif text-2xl text-foreground md:text-3xl">Key Techniques</h2>
                 <ul className="mt-5 space-y-3">
                   {course.learningOutcomes.map((outcome: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-3 text-muted-foreground">
@@ -115,6 +135,29 @@ function CoursePage() {
                 </ul>
               </div>
             )}
+
+            {/* COURSE TRAILER PLACEHOLDER */}
+            <div className="mt-12">
+              <Link
+                to="/classroom/$id"
+                params={{ id: course.id }}
+                className="group relative block overflow-hidden rounded-3xl border border-border/60"
+              >
+                <div
+                  className="relative aspect-[16/7] w-full bg-cover bg-center"
+                  style={{ backgroundImage: `url(${course.image})` }}
+                >
+                  <div className="absolute inset-0 bg-foreground/55 transition-colors group-hover:bg-foreground/45" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[var(--shadow-warm)] transition-transform group-hover:scale-105">
+                      <Film className="h-7 w-7" />
+                    </span>
+                    <p className="mt-4 text-[10px] font-light uppercase tracking-[0.3em] text-white/80">Course Trailer</p>
+                    <p className="mt-1 font-serif text-xl text-white md:text-2xl">Watch the 90-second preview</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
 
             <div className="mt-12">
               <div className="flex flex-wrap items-end justify-between gap-2">
