@@ -68,16 +68,13 @@ function HomePage() {
             <h1 className="mt-6 font-serif text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               {t("home.heroTitle")}
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/80">
-              {t("home.heroLead")}
+            <p className="mt-5 max-w-md text-base text-white/80">
+              Professional pastry, made approachable.
             </p>
-            <div className="mt-8 max-w-xl">
+            <div className="mt-7 max-w-xl">
               <CatalogSearch placeholder={t("home.searchPlaceholder")} />
-              <p className="mt-2 pl-2 text-xs text-white/60">
-                {t("home.searchHint")}
-              </p>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 to="/courses"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-sm font-medium text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
@@ -87,7 +84,7 @@ function HomePage() {
               <Link
                 to="/course/$id"
                 params={{ id: "italian-pastries" }}
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-white/40 px-6 text-sm font-medium text-white transition-colors hover:bg-white/10"
               >
                 <PlayCircle className="h-4 w-4 text-white" /> {t("home.preview")}
               </Link>
