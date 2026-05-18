@@ -101,84 +101,74 @@ function CoursePage() {
               </Link>
             </div>
 
-            {/* ABOUT — compact editorial banner */}
+            {/* ABOUT — minimal hero strip */}
             {(() => {
               const isMedovik = course.id === "medovik";
               const fullTitle = isMedovik ? "Medovik Excellence" : tx(course.title);
-              // Split "Main Title: Subtitle" or "Main Title — Subtitle" into two parts
               const splitMatch = fullTitle.match(/^(.*?)\s*[:—–-]\s*(.+)$/);
               const mainTitle = isMedovik ? "Medovik Excellence" : splitMatch ? splitMatch[1] : fullTitle;
-              const subTitle = splitMatch ? splitMatch[2] : tx(course.tagline);
+              const subTitle = isMedovik
+                ? "Master the 8-layer honey cake"
+                : (splitMatch ? splitMatch[2] : tx(course.tagline));
               const fullDesc = tx(course.description);
-              const leadSentence = isMedovik
-                ? "Master the 8-layer honey cake."
-                : (fullDesc.match(/^[^.!?]+[.!?]/)?.[0]?.trim() ?? fullDesc);
-              const restOfDesc = isMedovik
-                ? fullDesc
-                : fullDesc.slice(leadSentence.length).trim();
 
               return (
-                <div className="mt-3 border-y border-border/50 bg-card/20 px-0 py-3">
-                  <div className="mx-auto max-w-2xl text-center">
-                    {!isMedovik && (
-                      <p className="text-[10px] font-light uppercase tracking-[0.3em] text-primary">
+                <div className="mt-3 flex h-[100px] items-center justify-between gap-4 border-y border-border/50 px-4">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <div className="min-w-0">
+                      <h2 className="truncate font-serif font-light leading-none tracking-[-0.02em] text-foreground" style={{ fontSize: "32px" }}>
+                        {mainTitle}
+                      </h2>
+                      <p className="mt-1 truncate text-muted-foreground" style={{ fontSize: "14px" }}>
                         {subTitle}
                       </p>
-                    )}
-                    <h2 className="font-serif text-2xl font-light leading-none tracking-[-0.025em] text-foreground md:text-3xl">
-                      {mainTitle}
-                    </h2>
-
-                    <p className="mx-auto mt-1 max-w-xl text-sm leading-snug text-muted-foreground">
-                      {leadSentence}
-                    </p>
-
-                    <div className="mt-2">
-                      {enrolled ? (
-                        <Link
-                          to="/classroom/$id"
-                          params={{ id: course.id }}
-                          className="inline-flex h-8 items-center justify-center gap-2 rounded-full bg-primary px-4 text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                        >
-                          <PlayCircle className="h-3.5 w-3.5" /> {t("course.continue")}
-                        </Link>
-                      ) : (
-                        <button
-                          onClick={() => {
-                            if (!inCart) addToCart(course.id);
-                            openDrawer();
-                          }}
-                          className="inline-flex h-8 items-center justify-center gap-2 rounded-full bg-primary px-4 text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
-                        >
-                          <ShoppingBag className="h-3.5 w-3.5" />
-                          {inCart ? t("course.viewInCart") : "Bake this today"}
-                        </button>
-                      )}
                     </div>
-
-                    {restOfDesc && (
-                      <div className="mt-1.5">
+                    <Sheet open={aboutOpen} onOpenChange={setAboutOpen}>
+                      <SheetTrigger asChild>
                         <button
                           type="button"
-                          onClick={() => setAboutOpen((v) => !v)}
-                          className="inline-flex items-center gap-1 text-[10px] font-light uppercase tracking-[0.16em] text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground"
-                          aria-expanded={aboutOpen}
+                          aria-label="More details"
+                          className="ml-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                         >
-                          {aboutOpen ? <Minus className="h-3 w-3" /> : <Plus className="h-3 w-3" />}
-                          {aboutOpen ? "Hide Details" : "Show Details"}
+                          <Info className="h-3.5 w-3.5" />
                         </button>
-                        {aboutOpen && (
-                          <p className="mx-auto mt-2 max-w-xl text-sm leading-snug text-muted-foreground">
-                            {restOfDesc}
-                          </p>
-                        )}
-                      </div>
-                    )}
+                      </SheetTrigger>
+                      <SheetContent side="right" className="w-full sm:max-w-md">
+                        <SheetHeader>
+                          <SheetTitle className="font-serif text-2xl font-light">{mainTitle}</SheetTitle>
+                          <SheetDescription className="text-xs uppercase tracking-[0.18em]">
+                            {subTitle}
+                          </SheetDescription>
+                        </SheetHeader>
+                        <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                          {fullDesc}
+                        </p>
+                      </SheetContent>
+                    </Sheet>
                   </div>
+
+                  {enrolled ? (
+                    <Link
+                      to="/classroom/$id"
+                      params={{ id: course.id }}
+                      className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                    >
+                      <PlayCircle className="h-4 w-4" /> {t("course.continue")}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        if (!inCart) addToCart(course.id);
+                        openDrawer();
+                      }}
+                      className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary px-5 text-[11px] font-medium uppercase tracking-[0.16em] text-primary-foreground shadow-[var(--shadow-warm)] transition-transform hover:-translate-y-0.5"
+                    >
+                      <ShoppingBag className="h-4 w-4" />
+                      {inCart ? t("course.viewInCart") : "Bake Now"}
+                    </button>
+                  )}
                 </div>
               );
-
-
             })()}
 
             {/* AT A GLANCE */}
