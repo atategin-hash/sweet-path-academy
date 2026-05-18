@@ -10,6 +10,7 @@ import {
 } from "@/components/live-widgets";
 import { courses } from "@/lib/courses";
 import heroImg from "@/assets/hero-cake.jpg";
+import heroBg from "@/assets/hero-bg.jpg";
 import { Star, Sparkles, Award, PlayCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
@@ -52,21 +53,26 @@ function HomePage() {
       <SiteHeader />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="container mx-auto grid gap-12 px-6 py-16 md:grid-cols-2 md:items-center md:py-24">
-          <div className="relative z-10">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+      <section
+        className="relative overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      >
+        {/* dark overlay for text readability */}
+        <div className="absolute inset-0 bg-foreground/60" />
+        <div className="container relative z-10 mx-auto grid gap-12 px-6 py-20 md:grid-cols-2 md:items-center md:py-28">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-medium text-white">
               <Sparkles className="h-3.5 w-3.5" /> {t("home.eyebrow")}
             </span>
-            <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-              {t("home.heroTitle1")} <em className="italic text-primary">{t("home.heroTitleEm")}</em>{t("home.heroTitle2")}
+            <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl">
+              {t("home.heroTitle")}
             </h1>
-            <p className="mt-6 max-w-lg text-lg text-muted-foreground">
+            <p className="mt-6 max-w-lg text-lg text-white/80">
               {t("home.heroLead")}
             </p>
             <div className="mt-8 max-w-xl">
               <CatalogSearch placeholder={t("home.searchPlaceholder")} />
-              <p className="mt-2 pl-2 text-xs text-muted-foreground">
+              <p className="mt-2 pl-2 text-xs text-white/60">
                 {t("home.searchHint")}
               </p>
             </div>
@@ -80,23 +86,23 @@ function HomePage() {
               <Link
                 to="/course/$id"
                 params={{ id: "italian-pastries" }}
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
               >
-                <PlayCircle className="h-4 w-4 text-primary" /> {t("home.preview")}
+                <PlayCircle className="h-4 w-4 text-white" /> {t("home.preview")}
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
+            <div className="mt-10 flex items-center gap-6 text-sm text-white/70">
               <div className="flex items-center gap-1.5">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
-                <span className="ml-2 font-medium text-foreground">4.9</span>
+                <span className="ml-2 font-medium text-white">4.9</span>
               </div>
               <span>{t("home.ratingFrom")}</span>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden md:block">
             <div className="absolute -inset-6 -z-10 rounded-[2.5rem]" style={{ background: "var(--gradient-warm)" }} />
             <div className="relative overflow-hidden rounded-[2rem] shadow-[var(--shadow-warm)]">
               <img
