@@ -173,7 +173,7 @@ function CoursePage() {
                   <span>({course.reviews})</span>
                 </span>
               </div>
-              <h1 className="mt-3 font-serif text-4xl leading-tight text-foreground">
+              <h1 className="mt-3 font-serif text-3xl leading-tight text-foreground md:text-4xl">
                 {tx(course.title)}
               </h1>
               <p className="mt-3 text-muted-foreground">{tx(course.tagline)}</p>
