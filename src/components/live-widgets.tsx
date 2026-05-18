@@ -69,7 +69,7 @@ export function RecipeOfTheDay() {
   const { h, m, s } = useCountdownToMidnight();
 
   return (
-    <section className="container mx-auto px-6 py-10">
+    <section className="container mx-auto px-6 py-6">
       <div className="relative overflow-hidden rounded-[2.5rem] border border-primary/20 bg-gradient-to-br from-[oklch(0.97_0.02_70)] via-card to-[oklch(0.95_0.04_55)] p-8 shadow-[var(--shadow-warm)] md:p-12">
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-40 blur-3xl"
@@ -378,7 +378,7 @@ export function LiveSidebar() {
 // ---------- Section wrapping trend + roadmap for homepage ----------
 export function LiveAndRoadmapSection() {
   return (
-    <section className="container mx-auto px-6 py-10">
+    <section className="container mx-auto px-6 py-6">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">

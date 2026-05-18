@@ -110,7 +110,7 @@ export function SiteFooter() {
   const { t } = useI18n();
   return (
     <footer className="border-t border-border/40 bg-background">
-      <div className="container mx-auto px-6 py-10 md:py-12">
+      <div className="container mx-auto px-6 py-6 md:py-8">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">

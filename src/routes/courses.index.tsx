@@ -55,7 +55,7 @@ function CoursesPage() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <section className="container mx-auto px-6 py-10 md:py-12">
+      <section className="container mx-auto px-6 py-6 md:py-8">
         <p className="text-sm font-medium uppercase tracking-wider text-primary">{t("catalog.eyebrow")}</p>
         <h1 className="mt-2 max-w-2xl font-serif text-5xl text-foreground md:text-6xl">
           {t("catalog.title")}

@@ -28,7 +28,7 @@ export function NewsletterSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" aria-hidden="true" />
 
-      <div className="container relative mx-auto max-w-6xl px-6 py-12 md:py-14">
+      <div className="container relative mx-auto max-w-6xl px-6 py-8 md:py-8">
         {/* Horizontal layout */}
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
           {/* Left: heading + description */}

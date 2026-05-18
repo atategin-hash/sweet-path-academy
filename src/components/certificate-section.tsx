@@ -350,7 +350,7 @@ export function CertificateSection({
 
 function ReviewingView() {
   return (
-    <div className="mt-8 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] py-10 text-center">
+    <div className="mt-8 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.02] py-6 text-center">
       <div className="relative">
         <div className="absolute inset-0 animate-ping rounded-full bg-primary/30" />
         <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-primary/20 ring-1 ring-primary/40">
