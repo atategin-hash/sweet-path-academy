@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSelector } from "@/components/language-selector";
+import { LegalLink } from "@/components/LegalLink";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
