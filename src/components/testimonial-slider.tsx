@@ -31,7 +31,7 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
     >
       <figure
         key={i}
-        className="animate-fade-in rounded-2xl border border-border/50 bg-card px-6 py-5 shadow-[0_10px_30px_-12px_oklch(0.27_0.008_50/0.18)] ring-1 ring-foreground/[0.03]"
+        className="animate-fade-in rounded-2xl border border-border/50 bg-card px-6 py-5 pb-4 shadow-[0_10px_30px_-12px_oklch(0.27_0.008_50/0.18)] ring-1 ring-foreground/[0.03]"
       >
         <div className="flex items-center justify-between">
           <div className="flex gap-0.5">
@@ -66,13 +66,13 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
         <blockquote className="mt-3 line-clamp-2 font-serif text-base leading-snug text-foreground">
           “{tm.quote}”
         </blockquote>
-        <figcaption className="mt-3 flex items-center justify-between border-t border-border/50 pt-3 text-xs">
+        <figcaption className="mt-3 flex flex-col items-start gap-0.5 border-t border-border/50 pt-3 text-xs">
           <span className="font-medium text-foreground">{tm.name}</span>
           <span className="text-muted-foreground">{tm.role}</span>
         </figcaption>
       </figure>
 
-      <div className="mt-4 flex items-center justify-center gap-3">
+      <div className="mt-2 flex items-center justify-center gap-3">
         <button
           onClick={() => go(-1)}
           aria-label="Previous"
