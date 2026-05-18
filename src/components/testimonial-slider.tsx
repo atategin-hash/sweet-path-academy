@@ -86,8 +86,8 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
               key={k}
               onClick={() => setI(k)}
               aria-label={`Go to testimonial ${k + 1}`}
-              className={`h-1.5 rounded-full transition-all ${
-                k === i ? "w-5 bg-primary" : "w-1.5 bg-border"
+              className={`h-1 rounded-full transition-all ${
+                k === i ? "w-4 bg-foreground" : "w-1 bg-foreground/25 hover:bg-foreground/50"
               }`}
             />
           ))}
