@@ -132,7 +132,7 @@ export function RecipeOfTheDay() {
             </div>
             <div className="absolute -bottom-5 left-6 right-6 rounded-2xl border border-border/60 bg-card/95 p-4 shadow-[var(--shadow-soft)] backdrop-blur">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-medium uppercase tracking-wider text-primary">
+                <span className="text-[10px] font-light uppercase tracking-[0.22em] text-primary/80">
                   Today's Pick · #{dayIndex()}
                 </span>
                 <span className="text-muted-foreground">
