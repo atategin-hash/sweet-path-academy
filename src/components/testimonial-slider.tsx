@@ -66,9 +66,9 @@ export function TestimonialSlider({ items }: { items: Testimonial[] }) {
         <blockquote className="mt-3 line-clamp-2 font-serif text-base leading-snug text-foreground">
           “{tm.quote}”
         </blockquote>
-        <figcaption className="mt-3 flex flex-col items-start gap-0.5 border-t border-border/50 pt-3 text-xs">
-          <span className="font-medium text-foreground">{tm.name}</span>
-          <span className="text-muted-foreground">{tm.role}</span>
+        <figcaption className="mt-2 flex flex-col items-start gap-0">
+          <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-foreground">{tm.name}</span>
+          <span className="text-[10px] font-light text-muted-foreground">{tm.role}</span>
         </figcaption>
       </figure>
 
