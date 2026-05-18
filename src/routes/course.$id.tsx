@@ -98,7 +98,7 @@ function CoursePage() {
               <div className="mt-12">
                 <h2 className="font-serif text-3xl text-foreground">{t("course.learn")}</h2>
                 <ul className="mt-5 space-y-3">
-                  {course.learningOutcomes.map((outcome, idx) => (
+                  {course.learningOutcomes.map((outcome: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-3 text-muted-foreground">
                       <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                       <span className="text-base leading-relaxed">{outcome}</span>
