@@ -414,6 +414,21 @@ const DICTIONARIES: Partial<Record<Lang, Dict>> & { en: Dict } = {
     "free.watchNow": "Şimdi izle →",
 
     "lang.label": "Dil",
+
+    "chatbot.title": "Pasta Danışmanı",
+    "chatbot.subtitle": "Maison Crumb Akademi — rehberiniz",
+    "chatbot.welcome": "Maison Crumb Akademi'ye hoş geldiniz. Mutfak yolculuğunuzda size nasıl yardımcı olabilirim?",
+    "chatbot.placeholder": "Kurslar, sertifika, fiyatlandırma…",
+    "chatbot.quick": "Hızlı sorular",
+    "chatbot.q1": "Bana hangi kurs uygun?",
+    "chatbot.q2": "Sertifika hakkında",
+    "chatbot.q3": "Fiyatlandırma ve erişim",
+    "chatbot.q4": "Bir uzmanla görüş",
+    "chatbot.a1": "Size memnuniyetle yol göstereyim. Hedefiniz nedir: evde zarif pastalar mı, butik bir kafe açmak mı, yoksa endüstriyel üretime mi geçmek? Yeni başlayanlar için Ev Pastacısı seviyesini, profesyoneller için İşletme ve Endüstriyel masterclass'ları öneririz.",
+    "chatbot.a2": "Her Maison Crumb kursu, imzalı bir Tamamlama Sertifikası sunar. Tüm dersleri ve final değerlendirmesini bitirdiğinizde sertifikanız 24 saat içinde e-posta ile iletilir.",
+    "chatbot.a3": "Tüm masterclass'lar ömür boyu erişim, HD video dersler, indirilebilir reçeteler ve sertifika içerir. Kurslar £39'dan başlar, sepette paket indirimleri mevcuttur. Her satın alma 30 gün memnuniyet garantili.",
+    "chatbot.a4": "Elbette — danışman ekibimiz bir iş günü içinde yanıt verir. Lütfen hello@maison-crumb.com adresine yazın veya alttaki İletişim bağlantısını kullanın.",
+    "chatbot.fallback": "Sorunuz için teşekkürler. Kişisel rehberlik için yukarıdaki hızlı seçeneklerden birini seçin ya da hello@maison-crumb.com adresine yazın.",
   },
   ru: {
     "nav.home": "Главная",
