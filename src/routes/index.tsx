@@ -185,7 +185,7 @@ function HomePage() {
                 Loved by Bakers Worldwide
               </h2>
               <div className="mt-3 md:mt-5">
-                <TestimonialSlider items={testimonials} />
+                <p className="text-sm text-muted-foreground">Student reviews coming soon.</p>
               </div>
             </div>
             {/* Right: Newsletter (vertical stack) */}
