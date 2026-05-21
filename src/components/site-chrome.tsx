@@ -152,12 +152,9 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/30">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-1.5 px-6 py-4 text-center md:flex-row md:text-left">
+        <div className="container mx-auto flex flex-col items-center justify-center gap-1.5 px-6 py-4 text-center">
           <p className="text-xs text-muted-foreground/70">
-            © 2026 Maison Crumb Ltd. All rights reserved. Registered in England and Wales.
-          </p>
-          <p className="text-xs text-muted-foreground/50">
-            Company Number: [Pending Approval]
+            © 2026 Maison Crumb Ltd. All rights reserved. Company No. 09094616 — Registered in England and Wales.
           </p>
         </div>
       </div>
