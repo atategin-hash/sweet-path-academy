@@ -136,7 +136,7 @@ export function SiteFooter() {
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground">{t("footer.contact")}</p>
             <ul className="mt-3 space-y-2 text-xs text-muted-foreground">
               <li>hello@maisoncrumb.com</li>
-              <li>Paris · Tokyo · New York</li>
+              <li>London, United Kingdom</li>
             </ul>
           </div>
 
